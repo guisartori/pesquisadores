@@ -1,2 +1,2 @@
 # pesquisadores
-projeto de rede social de pesquisadores
+Projeto Universitário - Rede Sociais para Pesquisadores - PROJETO DO WORKANA

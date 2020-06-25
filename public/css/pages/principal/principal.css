@@ -1,0 +1,103 @@
+.user-info{
+    cursor: pointer !important;
+}
+
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+.lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    width: 13px;
+    background: #c6daaf;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+    left: 6px;
+    animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+    left: 26px;
+    animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+    left: 45px;
+    animation-delay: 0;
+}
+@keyframes lds-facebook {
+    0% {
+        top: 6px;
+        height: 51px;
+    }
+    50%, 100% {
+        top: 19px;
+        height: 26px;
+    }
+}
+
+.suggestions-list {
+    float: left;
+    width: 100%;
+    padding: 13px 0 0px 0;
+}
+
+.suggestions-list:last-child {
+    float: left;
+    width: 100%;
+    padding: 13px 0 30px 0;
+}
+
+.view-more {
+    float: left;
+    width: 100%;
+    text-align: center;
+    padding-top: 0.5em !important;
+    text-transform: uppercase !important;
+}
+
+.sgt-text {
+    text-align: left !important;
+}
+
+.user-info img {
+    border-radius: 50% !important;
+    width: 30px !important;
+}
+
+.badge-notificacoes{
+    position: absolute;
+    top: 3px;
+    right: 5px;
+}
+
+.badge-notificacoes-quantidade{
+    color: #fff;
+    background-color: #ffc107 !important;
+    padding-bottom: 1em !important;
+    line-height: 0.59 !important;
+}
+
+.invisivel{
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.post-project h3 {
+    float: left;
+    width: 100%;
+    background-color: #636f56 !important;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 20px 0;
+}
+
+.post-project-fields form ul li button.active {
+    background-color: #79965a !important;
+    color: #fff;
+}

@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "db": {
+      "host": "remotemysql.com",
+      "username": "xuzhvu3ZzJ",
+      "password": "neVSzrJgAW",
+      "name": "xuzhvu3ZzJ",
+      "driver": "mysql"
+  },
+  "api": {
+    "token": "123456"
+  },
+  "info": {
+    "title": "Projeto Pesquisadores",
+    "phone": "(81) 9 99899-4052"
+  }
+}

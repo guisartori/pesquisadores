@@ -1,0 +1,47 @@
+.disabled{
+    background-color: #e1837c !important;
+    cursor: no-drop !important;
+}
+
+.invisivel{
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.sign-in{
+    background-color: #728062;
+}
+
+.sign_in_sec form button {
+    background-color: #8b87aa;
+}
+
+.sign-control li.current a {
+    background-color: #8b87aa;
+}
+
+.sign_in_sec h3:before {
+    background-color: #d2ccff;
+}
+
+.signin-popup:before,.signin-popup:after {
+    background-color: transparent !important;
+}
+
+.signin-pop {
+    /*background-color: #c2e29d;*/
+    border-radius: 90px;
+}
+
+.fgt-sec input[type="checkbox"] + label span:before {
+    background-color: #aeabc3;
+}
+
+#countryList li:hover {
+    background-color: #c6daaf !important;
+}
+
+.checky-sec.st2 .fgt-sec input[type="checkbox"] + label span {
+    margin-top: 3px;
+    background-color: white;
+}

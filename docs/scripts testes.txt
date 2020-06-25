@@ -1,0 +1,38 @@
+SELECT * FROM usuario u WHERE NOT u.id = 13 AND NOT EXISTS (SELECT * FROM lista_amigos amigos WHERE u.id = amigos.id_solicitante AND u.id = 13)
+
+SELECT usuario.id, usuario.titulo, lista_amigos.id_solicitante, lista_amigos.nome_solicitante FROM usuario, lista_amigos WHERE usuario.id = lista_amigos.id_solicitante AND lista_amigos.id_requisitado = 13
+
+
+select * from usuario WHERE usuario.id NOT IN (SELECT id_solicitante
+FROM amizade where id_requisitado = 15)
+AND usuario.id NOT IN (SELECT amizade.id_requisitado 
+FROM amizade where amizade.id_solicitante = 15) 
+AND usuario.id != 15
+
+
+
+
+
+select * from usuario WHERE usuario.id NOT IN (SELECT id_solicitante
+FROM lista_amigos where id_requisitado = 13)
+AND usuario.id NOT IN (SELECT lista_amigos.id_requisitado 
+FROM lista_amigos where lista_amigos.id_solicitante = 13) 
+AND usuario.id != 13
+
+
+
+SELECT id,id_solicitante,id_requisitado FROM amizade WHERE
+id_solicitante = 38 AND
+id_requisitado IN( SELECT nome_requisitado FROM amizade WHERE id_requisitado = 38 OR id_solicitante = 55 ) AND id_requisitado != 38 or
+id_solicitante = 55 AND
+id_requisitado IN( SELECT id_solicitante FROM amizade WHERE id_solicitante = 55 OR id_requisitado = 38 ) AND id_requisitado != 55
+
+
+
+SELECT id,id_solicitante,id_requisitado FROM amizade WHERE
+id_solicitante = 38 AND
+id_requisitado IN( SELECT nome_requisitado FROM amizade WHERE id_requisitado = 38 OR id_solicitante = 32 ) AND id_requisitado != 38 or
+id_solicitante = 32 AND
+id_requisitado IN( SELECT id_solicitante FROM amizade WHERE id_solicitante = 32 OR id_requisitado = 38 ) AND id_requisitado != 32
+
+trocar 32 pelo visitante

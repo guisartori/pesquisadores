@@ -1,0 +1,5 @@
+select * from amizade where
+id_solicitante = '$para' and
+id_requisitado in( select id_requisitado from amizade where id_solicitante = '$de' or id_requisitado = '$de' GROUP BY id_solicitante) and id_requisitado != '$de' or
+id_solicitante = '$para' and
+id_requisitado in( select id_solicitante from amizade where id_solicitante = '$de' or id_requisitado = '$de' GROUP BY id_solicitante) and id_requisitado != '$de'
