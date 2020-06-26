@@ -26,7 +26,7 @@ class DB
         $this->host         = "127.0.0.1";
 
         // $this->name         = (!empty($oConfigDb->name))        ? $oConfigDb->name      : "";
-        $this->name         = "pesquisadores";
+        $this->name         = "projeto_pesquisadores";
         // $this->username     = (!empty($oConfigDb->username))    ? $oConfigDb->username  : "";
         $this->username     = "root";
         // $this->password    = (!empty($oConfigDb->password))   ? $oConfigDb->password : "";
@@ -63,7 +63,7 @@ class DB
         }
     }
 
-    public function insert($table, $cols ,  $values) {
+    public function insert($table, $cols, $values) {
 
         $stmt = "INSERT INTO $table ( $cols ) VALUES ( $values ) ";
 

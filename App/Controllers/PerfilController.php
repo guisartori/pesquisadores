@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use App\Lib\Auth;
 use App\Models\Usuario;
+use App\Models\Post;
+use App\Models\Experiencia;
+use App\Models\Formacao;
+use App\Models\Habilidade;
 
 class PerfilController extends Controller {
     private $app;
@@ -43,12 +47,14 @@ class PerfilController extends Controller {
 
     public function editar() {
 
+        $idUsuario =  \App\Lib\Auth::usuario()->id;
+
         self::setViewParam('nameController',$this->app->getNameController());
 
-        $oListaExperiencia = Usuario::listarExperiencia();
-        $oListaEducacao = Usuario::listarEducacao();
-        $oListaLocalizacao = Usuario::listarLocalizacao();
-        $oListaHabilidades = Usuario::listarHabilidades();
+        $oListaExperiencia = Experiencia::todos($idUsuario);
+        $oListaEducacao = Formacao::todos($idUsuario);
+        // $oListaLocalizacao = Usuario::listarLocalizacao();
+        $oListaHabilidades = Habilidade::todos($idUsuario);
 
         self::setViewParam('aListaExperiencia',$oListaExperiencia);
         self::setViewParam('aListaEducacao',$oListaEducacao);
@@ -275,7 +281,7 @@ class PerfilController extends Controller {
     }
 
     public function salvarVaga() {
-        if($oUser = Usuario::salvarVaga($_POST)){
+        if($oUser = Post::novo($_POST)){
 
             header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
             $this->render('perfil/editar');

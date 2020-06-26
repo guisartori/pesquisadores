@@ -349,28 +349,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="user-profile-ov">
-                                        <h3><a href="#" title="" class="lct-box-open">Localização</a> <a href="#" title="" class="lct-box-open"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a> <a href="#" title=""><i class="fa fa-plus-square"></i></a></h3>
-                                        <?php
-                                        if(!count($aViewVar['aListaLocalizacao'])){
-                                            ?>
-                                            <div class="alert alert-danger" role="alert">Nenhuma localizacao cadastrada!</div>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <?php
-                                            foreach($aViewVar['aListaLocalizacao'] as $aLocalizacao) {
-                                                ?>
-                                                <h4><?php echo $aLocalizacao['titulo']; ?> <a data-id-localizacao="<?php echo $aLocalizacao['id']; ?>" title=""><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a></h4>
-                                                <p><?php echo $aLocalizacao['texto']; ?></p>
-
-                                                <?php
-                                            }
-                                            ?>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
+                                    
                                     <div class="user-profile-ov">
                                         <h3><a href="#" title="" class="skills-open">Habilidades</a> <a href="#" title="" class="skills-open"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a> <a href="#"><i class="fa fa-plus-square"></i></a></h3>
                                         <ul>

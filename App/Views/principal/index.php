@@ -199,10 +199,11 @@
                                         <div class="post-bar content-vaga" data-id-vaga="<?php echo $aListaVaga['id']; ?>" data-id-usuario-vaga="<?php echo $aListaVaga['id_usuario']; ?>" data-titulo-vaga="<?php echo $aListaVaga['titulo']; ?>">
                                             <div class="post_topbar">
                                                 <div class="usy-dt">
+                                                <!-- TODO: COLOCAR A FOTO DE PERFIL DO USUÁRIO -->
                                                     <img src="http://via.placeholder.com/50x50" alt="">
                                                     <div class="usy-name">
-                                                        <h3><?php echo $aListaVaga['nomeUsuario']; ?></h3>
-                                                        <span><img src="/public/images/clock.png" alt=""><?php echo $aListaVaga['datah']; ?></span>
+                                                        <h3><?php echo $aListaVaga['nome']; ?></h3>
+                                                        <span><img src="/public/images/clock.png" alt=""><?php echo $aListaVaga['data_hora']; ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="ed-opts">
@@ -216,14 +217,15 @@
                                             </div>
                                             <div class="epi-sec">
                                                 <ul class="descp">
-                                                    <li><img src="/public/images/icon8.png" alt=""><span><?php echo $aListaVaga['categoria']; ?></span></li>
+                                                    <!-- TODO COLOCAR PUBLICAÇÃO OU POSTAGEM -->
+                                                    <!-- <li><img src="/public/images/icon8.png" alt=""><span><?php echo $aListaVaga['categoria']; ?></span></li> -->
                                                     <li><img src="/public/images/icon9.png" alt=""><span>Brasil</span></li>
                                                 </ul>
 
                                             </div>
                                             <div class="job_descp">
                                                 <h3><?php echo $aListaVaga['titulo']; ?></h3>
-                                                <p><?php echo $aListaVaga['descricao']; ?></p>
+                                                <p><?php echo $aListaVaga['texto']; ?></p>
                                             </div>
                                             <div class="job-status-bar">
                                                 <ul class="like-com">
@@ -383,13 +385,12 @@
             <div class="post-project-fields">
                 <form method="post" action="/perfil/salvarVaga">
                     <input type="hidden" name="id_usuario" value="<?php echo \App\Lib\Auth::usuario()->id; ?>">
-                    <input type="hidden" name="nomeUsuario" value="<?php echo \App\Lib\Auth::usuario()->usuario; ?>">
                     <div class="row">
                         <div class="col-lg-12">
                             <input type="text" name="titulo" placeholder="Título">
                         </div>
                         <div class="col-lg-12">
-                            <textarea name="descricao" placeholder="Descrição"></textarea>
+                            <textarea name="texto" placeholder="O que você está pensando?"></textarea>
                         </div>
                         <div class="col-lg-12">
                             <ul>

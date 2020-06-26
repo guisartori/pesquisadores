@@ -1,0 +1,78 @@
+############################ BANCO ############################
+CREATE DATABASE projeto_pesquisadores;
+############################ BANCO ############################
+
+
+
+
+
+########################### TABELAS ###########################
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(200),
+    email VARCHAR(200),
+    senha VARCHAR(200),
+    data_nascimento DATE,
+    cidade VARCHAR(200),
+    estado VARCHAR(50),
+    profissao VARCHAR(200),
+    inicio_trabalho VARCHAR(4),
+    nivel_instrucao VARCHAR(200),
+    foto_perfil VARCHAR(200) NULL,
+    foto_capa VARCHAR(200) NULL,
+    visao_geral TEXT NULL,
+    tipo TINYINT
+)
+
+CREATE TABLE experiencias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200),
+    texto TEXT,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+)
+
+CREATE TABLE posts (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200),
+    data_hora DATETIME,
+    texto TEXT,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+)
+
+CREATE TABLE formacoes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200),
+    texto TEXT,
+    ano_inicio VARCHAR(4),
+    ano_fim VARCHAR(4),
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+)
+
+CREATE TABLE habilidades (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(200),
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+)
+
+CREATE TABLE curtidas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_post INT,
+    id_usuario INT,
+    FOREIGN KEY (id_post) REFERENCES posts(id),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+)
+
+CREATE TABLE comentarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    texto TEXT,
+    data_hora DATETIME,
+    id_post INT,
+    id_usuario INT,
+    FOREIGN KEY (id_post) REFERENCES posts(id),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+)
+########################### TABELAS ###########################

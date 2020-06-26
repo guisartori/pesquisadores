@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Post;
 
 class PrincipalController extends Controller {
     private $app;
@@ -17,7 +18,7 @@ class PrincipalController extends Controller {
 
         self::setViewParam('nameController',$this->app->getNameController());
 
-        $oListaVaga = Usuario::listarVagas();
+        $oListaVaga = Post::feed();
         self::setViewParam('aListaVagas',$oListaVaga);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
@@ -33,7 +34,9 @@ class PrincipalController extends Controller {
     public function getSugestoes() {
         if(isset($_POST['idProprio'])) {
             $idLogado = $_POST['idProprio'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT * FROM usuario WHERE usuario.id NOT IN (SELECT id_solicitante
                 FROM amizade WHERE id_requisitado = '$idLogado')
                 AND usuario.id NOT IN (SELECT amizade.id_requisitado 
@@ -61,7 +64,9 @@ class PrincipalController extends Controller {
     }
 
     public function getDadosAmizade() {
-        $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+        // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+        //TODO: COLOCAR CONEXÃO PADRÃO 
+        $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
         $idSolicitante = $_POST['idSolicitante'];
         $idRequisitado = $_POST['idRequisitado'];
@@ -74,7 +79,9 @@ class PrincipalController extends Controller {
     public function getFotoPerfil() {
         if(isset($_POST['idUser'])) {
             $idLogado = $_POST['idUser'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT * FROM fotoPerfil WHERE id_usuario = '$idLogado' ORDER BY id DESC LIMIT 1");
 
             if (mysqli_num_rows($result) > 0) {
@@ -95,7 +102,9 @@ class PrincipalController extends Controller {
     public function getSolicitacoesAmizades() {
         if(isset($_POST['idUser'])) {
             $idLogado = $_POST['idUser'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT COUNT(*) FROM amizade WHERE id_requisitado = '$idLogado' AND status = 0 LIMIT 999");
 
             if (mysqli_num_rows($result) > 0) {
@@ -129,7 +138,9 @@ class PrincipalController extends Controller {
     public function listagemSolicitacoesAmizade() {
         if(isset($_POST['idProprio'])) {
             $idLogado = $_POST['idProprio'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT * FROM amizade WHERE id_requisitado = '$idLogado' AND status = 0");
 
             while($row = mysqli_fetch_assoc($result)) {
@@ -158,7 +169,9 @@ class PrincipalController extends Controller {
 
     public function processaAceitacaoAmizade() {
         if(isset($_POST['idAceitado']) && isset($_POST['idLogado'])) {
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $idAceitado = $_POST['idAceitado'];
             $nomeAceitado = $_POST['nomeAceitado'];
@@ -173,7 +186,9 @@ class PrincipalController extends Controller {
 
     public function atualizaStatusAceitacaoAmizade() {
         if(isset($_POST['idAceitado']) && isset($_POST['idLogado'])) {
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $idAceitado = $_POST['idAceitado'];
             $idLogado = $_POST['idLogado'];
@@ -184,7 +199,9 @@ class PrincipalController extends Controller {
 
     public function atualizaStatusNegacaoAmizade() {
         if(isset($_POST['idAceitado']) && isset($_POST['idLogado'])) {
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $idAceitado = $_POST['idAceitado'];
             $idLogado = $_POST['idLogado'];
@@ -197,7 +214,9 @@ class PrincipalController extends Controller {
     public function refreshListagemAmigos() {
         if(isset($_POST['idProprio'])) {
             $idLogado = $_POST['idProprio'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT * FROM lista_amigos WHERE id_requisitado = '$idLogado'");
 
             while($row = mysqli_fetch_assoc($result)) {
@@ -244,7 +263,9 @@ class PrincipalController extends Controller {
     public function getDeveriaConhecer() {
         if(isset($_POST['idProprio'])) {
             $idLogado = $_POST['idProprio'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT * FROM usuario WHERE usuario.id NOT IN (SELECT id_solicitante
                 FROM lista_amigos WHERE id_requisitado = '$idLogado')
                 AND usuario.id NOT IN (SELECT lista_amigos.id_requisitado 
@@ -276,7 +297,9 @@ class PrincipalController extends Controller {
             $de = $_POST['de'];
             $para = $_POST['para'];
 
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $result = mysqli_query($conn, "SELECT * FROM amizade WHERE id_solicitante = '$de' AND id_requisitado = '$para' ORDER BY id DESC LIMIT 1");
 
@@ -298,7 +321,9 @@ class PrincipalController extends Controller {
         if(isset($_POST['de']) && isset($_POST['para'])) {
             $de = $_POST['de'];
             $para = $_POST['para'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "select * from amizade where id_solicitante = '$para' and id_requisitado in( select id_requisitado from amizade where id_solicitante = '$de' or id_requisitado = '$de' GROUP BY id_solicitante) and id_requisitado != '$de' or id_solicitante = '$para' and id_requisitado in( select id_solicitante from amizade where id_solicitante = '$de' or id_requisitado = '$de' GROUP BY id_solicitante) and id_requisitado != '$de' LIMIT 10");
 
             if (mysqli_num_rows($result) > 0) {
@@ -320,7 +345,9 @@ class PrincipalController extends Controller {
     public function getTotalSeguidoresUsuarioLogado() {
         if(isset($_POST['perfil'])) {
 
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $result = mysqli_query($conn, "SELECT COUNT(id_solicitante) AS totalSeguindo FROM amizade WHERE status = '0'");
 
@@ -341,7 +368,9 @@ class PrincipalController extends Controller {
     public function getTotalSeguidoresVoltaUsuarioLogado() {
         if(isset($_POST['perfil'])) {
 
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $result = mysqli_query($conn, "SELECT COUNT(id_solicitante) AS totalSeguindo FROM amizade WHERE status = '1'");
 
@@ -364,7 +393,9 @@ class PrincipalController extends Controller {
             $idUser = $_POST['idUser'];
             $idPublicacao = $_POST['idPublicacao'];
 
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             $result = mysqli_query($conn, "SELECT * FROM curtidas WHERE id_publicacao = '".$idPublicacao."' AND id_user = '".$idUser."'");
 
@@ -391,7 +422,9 @@ class PrincipalController extends Controller {
             $comentario = $_POST['comentario'];
             $dataHora = date('Y-m-d H:i:s');
 
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
 
             mysqli_query($conn, "INSERT INTO comentarios (id_postagem, id_usuario, comentario, dataHora) VALUES ('$idPublicacao', '$idUser', '$comentario', '$dataHora')");
 
@@ -405,7 +438,9 @@ class PrincipalController extends Controller {
     public function comentarios() {
         if(isset($_POST['idPublicacao'])) {
             $idPublicacao = $_POST['idPublicacao'];
-            $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
+            //TODO: COLOCAR CONEXÃO PADRÃO 
+            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
             $result = mysqli_query($conn, "SELECT vaga.*, comentarios.comentario
                         FROM comentarios
                         INNER JOIN vaga ON vaga.id = comentarios.id_postagem");
