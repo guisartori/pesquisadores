@@ -50,13 +50,13 @@ class PrincipalController extends Controller {
             //TODO: COLOCAR CONEXÃO PADRÃO 
             $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
             $result = mysqli_query($conn, "SELECT * 
-            FROM usuarios u 
-            WHERE u.id NOT IN 
-              (SELECT id_seguindo 
-              FROM seguidores s 
-              WHERE s.id_seguidor != '".$idUsuario."')
-            AND u.id != '".$idUsuario."'
-            LIMIT 6");
+                                            FROM usuarios u 
+                                            WHERE u.id NOT IN 
+                                                (SELECT s.id_seguindo 
+                                                FROM seguidores s 
+                                                WHERE s.id_seguidor = '".$idUsuario."') 
+                                            AND u.id != '".$idUsuario."'
+                                            LIMIT 10");
 
             while($row = mysqli_fetch_assoc($result)) {
                 $row["listagem"] = "
@@ -282,13 +282,13 @@ class PrincipalController extends Controller {
             $idLogado = $_POST['idProprio'];
             $idUsuario =  \App\Lib\Auth::usuario()->id;
             $query = "SELECT * 
-                      FROM usuarios u 
-                      WHERE u.id NOT IN 
-                        (SELECT id_seguindo 
-                        FROM seguidores s 
-                        WHERE s.id_seguidor != '".$idUsuario."')
-                      AND u.id != '".$idUsuario."'
-                      LIMIT 10";
+                        FROM usuarios u 
+                        WHERE u.id NOT IN 
+                            (SELECT s.id_seguindo 
+                            FROM seguidores s 
+                            WHERE s.id_seguidor = '".$idUsuario."') 
+                        AND u.id != '".$idUsuario."'
+                        LIMIT 10";
             // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
             //TODO: COLOCAR CONEXÃO PADRÃO 
             $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
