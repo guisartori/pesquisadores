@@ -16,9 +16,11 @@ class PrincipalController extends Controller {
 
     public function index() {
 
+        $idUsuario =  \App\Lib\Auth::usuario()->id;
+
         self::setViewParam('nameController',$this->app->getNameController());
 
-        $oListaVaga = Post::feed();
+        $oListaVaga = Post::feed($idUsuario);
         self::setViewParam('aListaVagas',$oListaVaga);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
@@ -32,27 +34,32 @@ class PrincipalController extends Controller {
     }
 
     public function getSugestoes() {
+
+        $idUsuario =  \App\Lib\Auth::usuario()->id;
         if(isset($_POST['idProprio'])) {
             $idLogado = $_POST['idProprio'];
             // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
             //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-            $result = mysqli_query($conn, "SELECT * FROM usuario WHERE usuario.id NOT IN (SELECT id_solicitante
-                FROM amizade WHERE id_requisitado = '$idLogado')
-                AND usuario.id NOT IN (SELECT amizade.id_requisitado 
-                FROM amizade WHERE amizade.id_solicitante = '$idLogado') 
-                AND usuario.id != '$idLogado' LIMIT 6");
+            $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
+            $result = mysqli_query($conn, "SELECT * 
+            FROM usuarios u 
+            WHERE u.id NOT IN 
+              (SELECT id_seguindo 
+              FROM seguidores s 
+              WHERE s.id_seguidor != '".$idUsuario."')
+            AND u.id != '".$idUsuario."'
+            LIMIT 6");
 
             while($row = mysqli_fetch_assoc($result)) {
                 $row["listagem"] = "
                     <div class='suggestions-list' data-id-user-list='".$row['id']."'>
                         <div class='suggestion-usd'>
-                            <img src='http://via.placeholder.com/35x35' alt='".$row['titulo']."'>
+                            <img src='http://via.placeholder.com/35x35' alt='".$row['nome']."'>
                             <div class='sgt-text' style='white-space: nowrap;width: 150px;overflow: hidden;text-overflow: ellipsis;'>
-                                <h4 class='text-capitalize' style='text-align: left !important;'>".$row['titulo']."</h4>
+                                <h4 class='text-capitalize' style='text-align: left !important;'>".$row['nome']."</h4>
                                 <span class='profissao-sidebar text-capitalize'>".$row['profissao']."</span>
                             </div>
-                            <span class='add-amigo' data-id-usuario='".$row['id']."' data-nome-usuario='".$row['titulo']."'><i class='la la-plus'></i></span>
+                            <span class='add-amigo' data-id-usuario='".$row['id']."' data-nome-usuario='".$row['nome']."'><i class='la la-plus'></i></span>
                         </div>
                     </div>  
                     ";
@@ -216,8 +223,10 @@ class PrincipalController extends Controller {
             $idLogado = $_POST['idProprio'];
             // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
             //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-            $result = mysqli_query($conn, "SELECT * FROM lista_amigos WHERE id_requisitado = '$idLogado'");
+            $idUsuario =  \App\Lib\Auth::usuario()->id;
+            $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
+            $query = "SELECT * FROM usuarios u LEFT JOIN seguidores s ON s.id_seguidor = '".$idUsuario."' WHERE u.id != '".$idUsuario."'";
+            $result = mysqli_query($conn, $query);
 
             while($row = mysqli_fetch_assoc($result)) {
                 $row["listagem"] = '
@@ -225,10 +234,10 @@ class PrincipalController extends Controller {
                     <div class="company_profile_info">
                         <div class="company-up-info card-item-amigos">
                             <img src="/public/uploads/fotoPerfil/profile-default.png" alt="Foto do Usuário Solicitante">
-                            <h3>'.$row['nome_solicitante'].'</h3>
-                            <h4>Profissão</h4>
+                            <h3>'.$row['nome'].'</h3>
+                            <h4>'.$row['profissao'].'</h4>
                         </div>
-                        <a href="/principal/amigo/'.$row["id_solicitante"].'" data-id-search="'.$row["id_solicitante"].'" title="" class="view-more-pro">Ver Perfil</a>
+                        <a href="/principal/amigo/'.$row["id_seguindo"].'" data-id-search="'.$row["id_seguindo"].'" title="" class="view-more-pro">Ver Perfil</a>
                     </div>
                 </div>    
                 ';
@@ -263,23 +272,28 @@ class PrincipalController extends Controller {
     public function getDeveriaConhecer() {
         if(isset($_POST['idProprio'])) {
             $idLogado = $_POST['idProprio'];
+            $idUsuario =  \App\Lib\Auth::usuario()->id;
+            $query = "SELECT * 
+                      FROM usuarios u 
+                      WHERE u.id NOT IN 
+                        (SELECT id_seguindo 
+                        FROM seguidores s 
+                        WHERE s.id_seguidor != '".$idUsuario."')
+                      AND u.id != '".$idUsuario."'
+                      LIMIT 10";
             // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
             //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-            $result = mysqli_query($conn, "SELECT * FROM usuario WHERE usuario.id NOT IN (SELECT id_solicitante
-                FROM lista_amigos WHERE id_requisitado = '$idLogado')
-                AND usuario.id NOT IN (SELECT lista_amigos.id_requisitado 
-                FROM lista_amigos WHERE lista_amigos.id_solicitante = '$idLogado') 
-                AND usuario.id != '$idLogado' LIMIT 10");
+            $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
+            $result = mysqli_query($conn, $query);
 
             while($row = mysqli_fetch_assoc($result)) {
                 $row["listagem"] = '
                     <div class="user-profy">
                         <img src="/public/uploads/fotoPerfil/profile-default.png" alt="" style="width: 57px;height: 57px;">
-                        <h3>'.$row['titulo'].'</h3>
+                        <h3>'.$row['nome'].'</h3>
                         <span>'.$row['profissao'].'</span>
                         <ul>
-                            <li><a title="Adicionar Amigo" data-id-usuario="'.$row['id'].'" data-nome-usuario="'.$row['titulo'].'"  class="add-amigo btn btn-block btn-success" style="background-color: #8b87aa;border: 1px solid #6153ce;height: 35px;padding-top: 0.22em;padding-left: 1em;padding-right: 1em;font-size: 15px;cursor: pointer;border-radius: 50px;"><i class="la la-plus"></i> Seguir</a></li>
+                            <li><a title="Adicionar Amigo" data-id-usuario="'.$row['id'].'" data-nome-usuario="'.$row['nome'].'"  class="add-amigo btn btn-block btn-success" style="background-color: #8b87aa;border: 1px solid #6153ce;height: 35px;padding-top: 0.22em;padding-left: 1em;padding-right: 1em;font-size: 15px;cursor: pointer;border-radius: 50px;"><i class="la la-plus"></i> Seguir</a></li>
                         </ul>
                         <a href="/principal/amigo/'.$row['id'].'" title="">Visualizar Perfil</a>
                     </div>  

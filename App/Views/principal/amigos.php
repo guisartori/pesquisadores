@@ -136,16 +136,7 @@
                         </div>
                         <div class="col-lg-9 col-md-8 no-pd">
                             <div class="main-ws-sec">
-                                <div class="post-topbar">
-                                    <h3>Novos Seguidores</h3>
-                                </div>
-                                <div class="posts-section">
-                                    <div class="post-bar">
-                                        <div class="companies-list">
-                                            <div id="content-solicitacoes-amizade" class="row">
-
-                                            </div>
-                                        </div>
+                                
 
                                     </div>
                                     <div class="post-topbar">

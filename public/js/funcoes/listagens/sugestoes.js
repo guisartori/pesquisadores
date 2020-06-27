@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-        var idLogado = $('#id-logado').val();
+    var idLogado = $('#id-logado').val();
 
     $.ajax({
         url:"/principal/getDeveriaConhecer/",
@@ -11,15 +11,15 @@ $(document).ready(function () {
         }
     });
 
-            //obtem a lista de usuarios do bd e exibe em sugestoes
-            $.ajax({
-                url:"/principal/getSugestoes/",
-                method:"POST",
-                data:{idProprio: idLogado},
-                success:function(s){
-                    $('#content-sugestoes').html(s);
-                }
-            });
+    //obtem a lista de usuarios do bd e exibe em sugestoes
+    $.ajax({
+        url:"/principal/getSugestoes/",
+        method:"POST",
+        data:{idProprio: idLogado},
+        success:function(s){
+            $('#content-sugestoes').html(s);
+        }
+    });
 
     //ao clicar em add amigo - SUGESTOES
 
