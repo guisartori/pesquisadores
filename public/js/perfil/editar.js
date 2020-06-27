@@ -23,16 +23,6 @@ var getInfosPerfil = function () {
     });
 }
 
-var getVisaoGeral = function() {
-    $.ajax({
-        url: '/perfil/getVisao',
-        method: 'POST',
-        data: {idUser: idUsuario},
-        success: function (v) {
-            $('#content-visao-geral').text(v.visao);
-        }
-    });
-}
 
 $(document).ready(function () {
     getInfosPerfil();
@@ -153,7 +143,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: '/perfil/inserirVisaoGeral',
                     method: 'POST',
-                    data: {idUser: idUsuario, textar: $('#edit-visao-geral').val()},
+                    data: {idUser: idUs, textar: $('#edit-visao-geral').val()},
                     success: function (e) {
                         Swal.fire({
                             position: 'top-end',

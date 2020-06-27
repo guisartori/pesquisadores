@@ -19,20 +19,21 @@ class PerfilController extends Controller {
     }
 
     public function index() {
+        $idUsuario =  \App\Lib\Auth::usuario()->id;
 
         self::setViewParam('nameController',$this->app->getNameController());
 
-        $oListaVaga = Usuario::listarVagas();
+        $oListaVaga = Post::todos($idUsuario);
         self::setViewParam('aListaVagas',$oListaVaga);
 
-        $oListaExperiencia = Usuario::listarExperiencia();
-        $oListaEducacao = Usuario::listarEducacao();
-        $oListaLocalizacao = Usuario::listarLocalizacao();
-        $oListaHabilidades = Usuario::listarHabilidades();
+        $oListaExperiencia = Experiencia::todos($idUsuario);
+        $oListaEducacao = Formacao::todos($idUsuario);
+        // $oListaLocalizacao = Usuario::listarLocalizacao();
+        $oListaHabilidades = Habilidade::todos($idUsuario);
 
         self::setViewParam('aListaExperiencia',$oListaExperiencia);
         self::setViewParam('aListaEducacao',$oListaEducacao);
-        self::setViewParam('aListaLocalizacao',$oListaLocalizacao);
+        // self::setViewParam('aListaLocalizacao',$oListaLocalizacao);
         self::setViewParam('aListaHabilidades',$oListaHabilidades);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
@@ -48,17 +49,19 @@ class PerfilController extends Controller {
     public function editar() {
 
         $idUsuario =  \App\Lib\Auth::usuario()->id;
-
         self::setViewParam('nameController',$this->app->getNameController());
 
+
+        $oUsuario = Usuario::mostrar($idUsuario)[0];
         $oListaExperiencia = Experiencia::todos($idUsuario);
         $oListaEducacao = Formacao::todos($idUsuario);
         // $oListaLocalizacao = Usuario::listarLocalizacao();
         $oListaHabilidades = Habilidade::todos($idUsuario);
 
+        self::setViewParam('aUsuario',$oUsuario);
         self::setViewParam('aListaExperiencia',$oListaExperiencia);
         self::setViewParam('aListaEducacao',$oListaEducacao);
-        self::setViewParam('aListaLocalizacao',$oListaLocalizacao);
+        // self::setViewParam('aListaLocalizacao',$oListaLocalizacao);
         self::setViewParam('aListaHabilidades',$oListaHabilidades);
 
 

@@ -299,7 +299,7 @@
                                 <div class="product-feed-tab" id="info-dd">
                                     <div class="user-profile-ov">
                                         <h3><a href="#" title="" class="overview-open link-visao-geral">Visão Geral</a> <a href="#" title="" class="overview-open link-visao-geral"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a></h3>
-                                        <p id="content-visao-geral">Escreva uma visão geral sobre você...</p>
+                                        <p id="content-visao-geral"><?php echo $aViewVar['aUsuario']['visao_geral']; ?></p>
                                     </div>
                                     <div class="user-profile-ov st2">
                                         <h3><a href="#" title="" class="exp-bx-open">Experiência</a><a href="#" title="" class="exp-bx-open"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a> <a href="#" title="" class="exp-bx-open"><i class="fa fa-plus-square"></i></a></h3>
@@ -1068,8 +1068,8 @@
 
     <div class="overview-box" id="overview-box">
         <div class="overview-edit">
-            <h3>Ver tudo</h3>
-            <span>5000 caracteres restantes</span>
+            <h3>Visão geral</h3>
+            <!-- <span>5000 caracteres restantes</span> -->
             <form>
                 <textarea id="edit-visao-geral"></textarea>
                 <button id="btn-salvar-visao-geral" type="button" class="save">Salvar</button>

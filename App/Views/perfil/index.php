@@ -280,28 +280,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="user-profile-ov">
-                                        <h3>Localização</h3>
-                                        <?php
-                                        if(!count($aViewVar['aListaLocalizacao'])){
-                                            ?>
-                                            <div class="alert alert-danger" role="alert">Nenhuma localizacao cadastrada!</div>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <?php
-                                            foreach($aViewVar['aListaLocalizacao'] as $aLocalizacao) {
-                                                ?>
-                                                <h4><?php echo $aLocalizacao['titulo']; ?></h4>
-                                                <p><?php echo $aLocalizacao['texto']; ?></p>
-
-                                                <?php
-                                            }
-                                            ?>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
+                                    
                                     <div class="user-profile-ov">
                                         <h3>Habilidades</h3>
                                         <ul>
@@ -365,9 +344,6 @@
             </div>
         </div>
     </main>
-
-
-
 
     <div class="overview-box" id="create-portfolio">
         <div class="overview-edit">
