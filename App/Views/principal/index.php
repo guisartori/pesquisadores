@@ -144,11 +144,11 @@
                                     <ul class="user-fw-status">
                                         <li>
                                             <h4>Seguindo</h4>
-                                            <span class="qtdSeguidoresUser">0</span>
+                                            <span class="qtdSeguidoresUser"><?php echo $aViewVar['totalSeguindo'] ?></span>
                                         </li>
                                         <li>
                                             <h4>Seguidores</h4>
-                                            <span class="seguindoVolta">0</span>
+                                            <span class="seguindoVolta"><?php echo $aViewVar['totalSeguidores'] ?></span>
                                         </li>
                                         <li>
                                             <a href="/perfil/" title="">Ver Perfil</a>

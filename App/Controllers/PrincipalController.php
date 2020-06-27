@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Usuario;
 use App\Models\Post;
+use App\Models\Seguidor;
 
 class PrincipalController extends Controller {
     private $app;
@@ -20,8 +21,14 @@ class PrincipalController extends Controller {
 
         self::setViewParam('nameController',$this->app->getNameController());
 
-        $oListaVaga = Post::feed($idUsuario);
-        self::setViewParam('aListaVagas',$oListaVaga);
+        $posts = Post::feed($idUsuario);
+        $seguidores = Seguidor::getTotalSeguidores($idUsuario);
+        $seguindo = Seguidor::getTotalSeguindo($idUsuario);
+
+        self::setViewParam('aListaVagas',$posts);
+        self::setViewParam('totalSeguidores',$seguidores[0]["total"]);
+        self::setViewParam('totalSeguindo',$seguindo[0]["total"]);
+
 
         self::setViewCss('/public/css/pages/principal/principal.css');
 
@@ -29,6 +36,7 @@ class PrincipalController extends Controller {
         self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
         self::setViewJs('/public/js/funcoes/curtidasEcomentarios.js');
 
+        // echo json_encode($posts);
         $this->render('principal/index');
 
     }
@@ -353,52 +361,6 @@ class PrincipalController extends Controller {
             } else {
 
             }
-        }
-    }
-
-    public function getTotalSeguidoresUsuarioLogado() {
-        if(isset($_POST['perfil'])) {
-
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-            $result = mysqli_query($conn, "SELECT COUNT(id_solicitante) AS totalSeguindo FROM amizade WHERE status = '0'");
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    header('Content-Type: application/json');
-                    echo json_encode(array('seguidores'=> $row['totalSeguindo']));
-                }
-            } else {
-                header('Content-Type: application/json');
-                echo json_encode(array('seguidores'=> '0'));
-            }
-        } else {
-            $this->render('error/usuario');
-        }
-    }
-
-    public function getTotalSeguidoresVoltaUsuarioLogado() {
-        if(isset($_POST['perfil'])) {
-
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-            $result = mysqli_query($conn, "SELECT COUNT(id_solicitante) AS totalSeguindo FROM amizade WHERE status = '1'");
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    header('Content-Type: application/json');
-                    echo json_encode(array('seguidoresVolta'=> $row['totalSeguindo']));
-                }
-            } else {
-                header('Content-Type: application/json');
-                echo json_encode(array('seguidoresVolta'=> '0'));
-            }
-        } else {
-            $this->render('error/usuario');
         }
     }
 

@@ -75,4 +75,12 @@ CREATE TABLE comentarios (
     FOREIGN KEY (id_post) REFERENCES posts(id),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 )
+
+CREATE TABLE seguidores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_seguidor INT,
+    id_seguindo INT,
+    FOREIGN KEY (id_seguidor) REFERENCES usuarios(id),
+    FOREIGN KEY (id_seguindo) REFERENCES usuarios(id)
+)
 ########################### TABELAS ###########################

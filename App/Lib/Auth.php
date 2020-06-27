@@ -38,7 +38,7 @@ class Auth
 
         $oU = new \stdClass();
         $oU->id         = $oUsuario['id'];
-        $oU->usuario    = $oUsuario['titulo'];
+        $oU->usuario    = $oUsuario['nome'];
         $oU->perfil     = $oUsuario['perfil'];
         $oU->profissao     = $oUsuario['profissao'];
 

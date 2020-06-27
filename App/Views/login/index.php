@@ -71,7 +71,7 @@
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="titulo" placeholder="Nome Completo" required>
+                                                        <input type="text" name="nome" placeholder="Nome Completo" required>
                                                         <i class="la la-user"></i>
                                                     </div>
                                                     <div class="sn-field">

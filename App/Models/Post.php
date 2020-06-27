@@ -35,14 +35,15 @@ class Post
     public static function feed($idUsuario) {
         $db = new DB();
 
-        //TODO: FAZER APARECER A POSTAGEM APENAS DE QUEM PUBLICOU E DE SEUS AMIGOS. ORDENAR POR DATA
         try {
             $query = $db->query(
-                "SELECT * FROM usuarios u 
-                 LEFT JOIN seguidores s ON u.id = s.id_seguidor 
-                 LEFT JOIN usuarios uu ON s.id_seguindo = uu.id
-                 LEFT JOIN posts p ON p.id_usuario = u.id OR p.id_usuario = uu.id
-                 WHERE u.id = '".$idUsuario."'
+                "SELECT * FROM posts p
+                 LEFT JOIN usuarios u ON u.id = p.id_usuario
+                 WHERE p.id_usuario IN 
+                    (SELECT s.id_seguindo 
+                     FROM seguidores s 
+                     WHERE s.id_seguidor = '".$idUsuario."') 
+                 OR p.id_usuario = '".$idUsuario."'
                  ORDER BY data_hora DESC"
             );
             return $query->fetchAll();

@@ -138,31 +138,30 @@ $(document).ready(function () {
 
 
     //contagem de seguidores na tabela amizade
-    $.ajax({
-        url:"/principal/getTotalSeguidoresUsuarioLogado/",
-        method:"POST",
-        data:{perfil: idLogadoFoto},
-        success:function(n){
-            var qtdSeguidores = n.seguidores;
+    // $.ajax({
+    //     url:"/seguidor/getSeguidores/",
+    //     method:"GET",
+    //     success:function(n){
+    //         var qtdSeguidores = n.seguidores;
+    //         console.log('teste')
+    //         if(qtdSeguidores > 0) {
+    //             $('.qtdSeguidoresUser').text(qtdSeguidores);
+    //         }
+    //     }
+    // });
 
-            if(qtdSeguidores > 0) {
-                $('.qtdSeguidoresUser').text(qtdSeguidores);
-            }
-        }
-    });
+    // $.ajax({
+    //     url:"/principal/getTotalSeguidoresVoltaUsuarioLogado/",
+    //     method:"POST",
+    //     data:{perfil: idLogadoFoto},
+    //     success:function(n){
+    //         var qtdSeguidoresVolta = n.seguidoresVolta;
 
-    $.ajax({
-        url:"/principal/getTotalSeguidoresVoltaUsuarioLogado/",
-        method:"POST",
-        data:{perfil: idLogadoFoto},
-        success:function(n){
-            var qtdSeguidoresVolta = n.seguidoresVolta;
-
-            if(qtdSeguidoresVolta > 0) {
-                $('.seguindoVolta').text(qtdSeguidoresVolta);
-            }
-        }
-    });
+    //         if(qtdSeguidoresVolta > 0) {
+    //             $('.seguindoVolta').text(qtdSeguidoresVolta);
+    //         }
+    //     }
+    // });
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
