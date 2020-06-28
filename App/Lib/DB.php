@@ -84,9 +84,9 @@ class DB
         return;
     }
 
-    public function update($table, $values) {
+    public function update($table, $values, $where) {
 
-        $stmt = "UPDATE $table SET $values ";
+        $stmt = "UPDATE $table SET $values WHERE $where";
 
         $insert = $this->query( $stmt );
 

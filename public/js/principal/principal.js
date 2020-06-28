@@ -1,12 +1,13 @@
 $(document).ready(function () {
     var idLogadoFoto = $('#id-logado').val();
 
-    var excluirVaga = function(idVaga, idUsuario) {
+    var excluirPost = function(idPost) {
         $.ajax({
-           url: '/perfil/excluirVaga',
+           url: '/post/excluir',
            method: 'POST',
-           data: {idVaga: idVaga, idUser: idUsuario},
+           data: {id_post: idPost},
            success: function (d) {
+            console.log(d)
                Swal.fire({
                    position: 'center',
                    icon: 'success',
@@ -15,17 +16,17 @@ $(document).ready(function () {
                    timer: 1500
                });
                setTimeout(function () {
-                   window.location.href = "https://app-pesquisadores.herokuapp.com/principal/";
-               },1600);
+                   window.location.reload();
+               },1500);
            }
         });
     };
 
-    var editarVaga = function(idVaga, idUsuario, titulo, categoria, habilidade, preco, integral, descricao) {
+    var editarVaga = function(idPost, titulo, texto) {
         $.ajax({
-            url: '/perfil/editarVaga',
+            url: '/post/editar',
             method: 'POST',
-            data: {idVaga: idVaga, idUser: idUsuario, titulo: titulo, categoria: categoria, habilidade: habilidade, preco: preco, integral: integral, descricao: descricao},
+            data: {id: idPost, titulo: titulo, texto: texto},
             success: function (d) {
                 Swal.fire({
                     icon: 'success',
@@ -35,42 +36,30 @@ $(document).ready(function () {
                     timer: 1500,
                 })
                 setTimeout(function () {
-                    window.location.href = "https://app-pesquisadores.herokuapp.com/principal/";
+                    window.location.reload()
+                    // window.location.href = "https://app-pesquisadores.herokuapp.com/principal/";
                 },1600);
             }
         });
     };
 
-    $('.li-editar-vaga').on('click', function () {
-       var idVaga = $(this).attr('data-id-vaga');
-       var idUsuario = $(this).attr('data-id-usuario-vaga');
-       var titulo = $(this).attr('data-titulo-vaga');
-       var categoria = $(this).attr('data-categoria-vaga');
-       var habilidade = $(this).attr('data-habilidade-vaga');
-       var preco = $(this).attr('data-preco-vaga');
-       var integral = $(this).attr('data-integral-vaga');
-       var descricao = $(this).attr('data-descricao-vaga');
+    $('.li-editar-post').on('click', function () {
+       var idPost = $(this).attr('data-id-post');
+       var titulo = $(this).attr('data-titulo-post');
+       var texto = $(this).attr('data-texto-post');
 
        $('#modal-editar-vaga').on('show.bs.modal', function (event) {
             $('#titulo-publicacao-editar').text(titulo);
 
             $('.titulo-editar-vaga').val(titulo);
-            $('.categoria-editar-vaga').val(categoria);
-            $('.habilidade-editar-vaga').val(habilidade);
-            $('.preco-editar-vaga').val(preco);
-            $('.integral-editar-vaga').val(integral);
-            $('.descricao-editar-vaga').val(descricao);
+            $('.descricao-editar-vaga').val(texto);
 
             $('#btn-editar-vaga').on('click', function () {
                 var tituloEdit = $('.titulo-editar-vaga').val();
-                var categoriaEdit = $('.categoria-editar-vaga').val();
-                var habilidadeEdit = $('.habilidade-editar-vaga').val();
-                var precoEdit = $('.preco-editar-vaga').val();
-                var integralEdit = $('.integral-editar-vaga').val();
-                var descricaoEdit = $('.descricao-editar-vaga').val();
+                var textoEdit = $('.descricao-editar-vaga').val();
 
                 setTimeout(function () {
-                    editarVaga(idVaga, idUsuario, tituloEdit, categoriaEdit, habilidadeEdit, precoEdit, integralEdit, descricaoEdit);
+                    editarVaga(idPost, tituloEdit, textoEdit);
                 },150);
                 $('#modal-editar-vaga').modal('hide');
             });
@@ -80,16 +69,13 @@ $(document).ready(function () {
 
     });
 
-    $('.li-excluir-vaga').on('click', function () {
-       var idVaga = $(this).attr('data-id-vaga');
-       var idUsuario = $(this).attr('data-id-usuario-vaga');
-       var titulo = $(this).attr('data-titulo-vaga');
+    $('.li-excluir-post').on('click', function () {
+       var idPost = $(this).attr('data-id-post');
 
         $('#modal-confirmacao-exluir-vaga').on('show.bs.modal', function (event) {
-            $('#tituloPostagemVaga').text(titulo);
 
             $('#excluirPostagem').on('click', function () {
-                excluirVaga(idVaga, idUsuario);
+                excluirPost(idPost);
                 $('#modal-confirmacao-exluir-vaga').modal('hide');
             });
         });

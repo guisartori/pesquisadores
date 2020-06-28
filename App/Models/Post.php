@@ -37,7 +37,8 @@ class Post
 
         try {
             $query = $db->query(
-                "SELECT * FROM posts p
+                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario
+                 FROM posts p
                  LEFT JOIN usuarios u ON u.id = p.id_usuario
                  WHERE p.id_usuario IN 
                     (SELECT s.id_seguindo 
@@ -61,7 +62,7 @@ class Post
         try {
 
             $query = $db->query(
-                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome 
+                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario
                     FROM posts p LEFT JOIN usuarios u ON u.id = p.id_usuario 
                     WHERE p.id_usuario = '".$idUsuario."'
                     ORDER BY data_hora DESC"
@@ -72,6 +73,29 @@ class Post
             echo $e->getMessage();
         }
 
+    }
+
+    public static function excluir($idPost){
+        $db = new DB();
+
+        try {
+            $db->delete('posts', "id = '".$idPost."'" );
+            return "id = '".$idPost."'";
+        } catch (Exception $e){
+            echo $e->getMessage();
+            return $e->getMessage();
+        }
+    }
+
+    public static function editar($idPost, $titulo, $texto){
+        $db = new DB();
+
+        try{
+            $db->update('posts', "titulo = '".$titulo."', texto = '".$texto."'", "id = '".$idPost."'");
+            return true;
+        } catch (Exception $e){
+            return json_encode($e->getMessage());
+        }
     }
 
 }

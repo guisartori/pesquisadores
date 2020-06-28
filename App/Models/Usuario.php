@@ -93,6 +93,7 @@ class Usuario
 
     }
 
+    //TODO: ACERTAR MÉTODO
     public static function atualizar($data)
     {
         try {

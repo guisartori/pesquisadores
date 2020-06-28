@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $('.curtir-postagem').on('click', function () {
         var idPublicacao = $(this).attr('data-id-postagem');
         var idUser = $('#id-logado').val();

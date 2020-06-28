@@ -40,13 +40,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger text-light">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmação de Exclusão de Postagem</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tem certeza?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="cursor: pointer !important;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Você tem certeza que deseja excluir a postagem <strong>"<span id="tituloPostagemVaga" class="text-danger text-uppercase"></span>"</strong>?
+                <strong>Realmente deseja excluir o post?</strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal" style="cursor: pointer !important;">Cancelar exclusão</button>

@@ -1,3 +1,7 @@
+<?php 
+    $idUsuarioLogado = \App\Lib\Auth::usuario()->id;
+
+?>
 <div class="post-bar content-vaga" data-id-vaga="<?php echo $post['id']; ?>" data-id-usuario-vaga="<?php echo $post['id_usuario']; ?>" data-titulo-vaga="<?php echo $post['titulo']; ?>">
     <div class="post_topbar">
         <div class="usy-dt">
@@ -8,19 +12,18 @@
                 <span><img src="/public/images/clock.png" alt=""><?php echo $post['data_hora']; ?></span>
             </div>
         </div>
-        <div class="ed-opts">
+        <div class="ed-opts" style="<?php echo $idUsuarioLogado == $post['id_usuario'] ? '' : 'display:none'; ?>">
             <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
             <ul class="ed-options">
-            <!-- TODO COLOCAR AQUI AS FUNCIONALIDADES DE CURTIR EDITAR ETC -->
-                <li class="li-editar-vaga" data-id-vaga="<?php echo $post['id']; ?>" data-id-usuario-vaga="<?php echo $post['id_usuario']; ?>" data-titulo-vaga="<?php echo $post['titulo']; ?>" data-categoria-vaga="<?php echo $post['categoria']; ?>" data-habilidade-vaga="<?php echo $post['habilidade']; ?>" data-preco-vaga="<?php echo $post['preco']; ?>" data-integral-vaga="<?php echo $post['integral']; ?>" data-descricao-vaga="<?php echo $post['descricao']; ?>"><a href="#" title="">Editar esta postagem</a></li>
-                <li class="li-excluir-vaga" data-id-vaga="<?php echo $post['id']; ?>" data-id-usuario-vaga="<?php echo $post['id_usuario']; ?>" data-titulo-vaga="<?php echo $post['titulo']; ?>"><a href="#" title="">Excluir postagem</a></li>
+                <li class="li-editar-post" data-id-post="<?php echo $post['id']; ?>" data-titulo-post="<?php echo $post['titulo']; ?>" data-texto-post="<?php echo $post['texto']; ?>"><a href="#" title="">Editar esta postagem</a></li>
+                <li class="li-excluir-post" data-id-post="<?php echo $post['id']; ?>" ><a href="#" title="">Excluir postagem</a></li>
             </ul>
         </div>
     </div>
     <div class="epi-sec">
         <ul class="descp">
             <!-- TODO COLOCAR PUBLICAÇÃO OU POSTAGEM -->
-            <li><img src="/public/images/icon8.png" alt=""><span><?php echo $post['categoria']; ?></span></li>
+            <li><img src="/public/images/icon8.png" alt=""><span><?php echo $post['categoria']; ?>Post</span></li>
             <li><img src="/public/images/icon9.png" alt=""><span>Brasil</span></li>
         </ul>
 
@@ -40,11 +43,9 @@
                 <a href="javascript:void(0)" title="CLIQUE PARA COMENTAR" data-id-postagem="<?php echo $post['id']; ?>" class="comentar"><i class="la la-comments-o"></i>Fazer Comentário</a>
             </li>
             <li>
-                <a href="javascript:void(0)" title="VER COMENTARIOS" data-id-postagem="<?php echo $post['id']; ?>" class="comentarios"><i class="la la-envelope-o"></i>Ver Comentário</a>
+                <a href="javascript:void(0)" title="VER COMENTARIOS" data-id-post="<?php echo $post['id']; ?>" class="comentarios"><i class="la la-envelope-o"></i>Ver Comentário</a>
             </li>
         </ul>
-        <a><i class="la la-eye"></i>Visualizações 0</a>
-        <br>
         <form action="/principal/comentar" method="post" class="mr-3 d-none form-comentario" form-id="<?php echo $post['id']; ?>">
             <input type="hidden" name="id_postagem" value="<?php echo $post['id']; ?>">
             <input type="hidden" name="id_usuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
