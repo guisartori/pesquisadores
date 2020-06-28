@@ -46,13 +46,13 @@
                 <a href="javascript:void(0)" title="VER COMENTARIOS" data-id-post="<?php echo $post['id']; ?>" class="comentarios"><i class="la la-envelope-o"></i>Ver Comentário</a>
             </li>
         </ul>
-        <form action="/principal/comentar" method="post" class="mr-3 d-none form-comentario" form-id="<?php echo $post['id']; ?>">
-            <input type="hidden" name="id_postagem" value="<?php echo $post['id']; ?>">
+        <form action="/comentario/novo" method="post" class="mr-3 d-none form-comentario" form-id="<?php echo $post['id']; ?>">
+            <input type="hidden" name="id_post" value="<?php echo $post['id']; ?>">
             <input type="hidden" name="id_usuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
             <div class="form-group">
-                <textarea name="comentario" class="form-control" rows="3"></textarea>
+                <textarea name="texto" class="form-control" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-sm btn-primary float-right" style="background-color: #8b87aa;border-color: transparent;box-shadow: 0 8px 16px -8px black;">Postar Comentário</button>
+            <button type="submit" class="btn btn-sm btn-primary float-right" style="background-color: #8b87aa;border-color: transparent;box-shadow: 0 8px 16px -8px black;">Comentar</button>
         </form>
     </div>
 </div>

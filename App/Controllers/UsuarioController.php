@@ -14,16 +14,14 @@ class UsuarioController extends Controller
 {
     private $app;
 
-    public function __construct($app)
-    {
+    public function __construct($app) {
         $this->app = $app;
 
         self::setViewParam('nameController',$this->app->getNameController());
 
     }
 
-    public function perfil()
-    {
+    public function perfil() {
         
         $idPerfil = $this->app->getParams()[0];
 
@@ -46,8 +44,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function cadastrar()
-    {
+    public function cadastrar() {
 
         self::setViewJs('/public/js/jquery.maskMoney.min.js');
         self::setViewJs('/public/js/jquery-ui.js');
@@ -60,8 +57,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function atualizar()
-    {
+    public function atualizar(){
 
         Usuario::atualizar($_POST);
 
@@ -69,8 +65,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function editar()
-    {
+    public function editar(){
 
         self::setViewJs('/public/js/jquery.maskMoney.min.js');
         self::setViewJs('/public/js/jquery-ui.js');
@@ -84,8 +79,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function excluir($param)
-    {
+    public function excluir($param){
         $id = $param[0];
 
         Usuario::excluir($id);

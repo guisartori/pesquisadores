@@ -57,18 +57,17 @@ $(document).ready(function () {
     //COMENTARIO
     $('.comentar').on('click', function () {
         var idPublicacao = $(this).attr('data-id-postagem');
-        var idUser = $('#id-logado').val();
 
         $('.form-comentario[form-id="'+idPublicacao+'"]').removeClass('d-none');
 
     });
 
     $('.comentarios').on('click', function () {
-        var idPublicacao = $(this).attr('data-id-postagem');
+        var idPost = $(this).attr('data-id-post');
         $.ajax({
-            url:"/principal/comentarios/",
+            url:"/comentario/todos/",
             method:"POST",
-            data:{idPublicacao: idPublicacao},
+            data:{id_post: idPost},
             success:function(n){
                 $('#modal-comentarios').modal('show');
                 $('.content-coments').html(n);

@@ -7,8 +7,7 @@ use App\Lib\Util;
 
 class Usuario
 {
-    public static function logar($data)
-    {
+    public static function logar($data) {
         $db = new DB();
 
         $email    = $data['email'];
@@ -94,8 +93,7 @@ class Usuario
     }
 
     //TODO: ACERTAR MÉTODO
-    public static function atualizar($data)
-    {
+    public static function atualizar($data)  {
         try {
             $db = new DB();
 
@@ -115,8 +113,7 @@ class Usuario
 
     }
 
-    public static function excluir($id)
-    {
+    public static function excluir($id) {
         try {
             $db = new DB();
 
@@ -125,60 +122,6 @@ class Usuario
         }catch (Exception $e){
             exit($e->getMessage());
 
-        }
-
-    }
-
-
-    //TODO POSSIVELMENTE REMOVER
-    public static function salvarLocalizacao($data)  {
-        try {
-
-            $db = new DB();
-
-            $titulo = $data['titulo'];
-            $texto = $data['texto'];
-            $idUsuario    = $data['id_usuario'];
-
-            $db->insert('localizacao',
-                "id_usuario,titulo,texto",
-                "'".$idUsuario."','".$titulo."','".$texto."'"
-            );
-
-            header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-
-        }catch (\Exception $e){
-            echo $e->getMessage();
-
-        }
-    }
-
-
-    public static function listarLocalizacao($id=null) {
-        $db = new DB();
-
-        $idUsuario =  \App\Lib\Auth::usuario()->id;
-
-        try {
-
-            if($id) {
-                // Faz a consulta
-                $query = $db->query(
-                    "SELECT * FROM localizacao WHERE id_usuario = '".$id."' ORDER BY id DESC"
-                );
-
-                return $query->fetch();
-            }else{
-                // Faz a consulta
-                $query = $db->query(
-                    "SELECT * FROM localizacao WHERE id_usuario = '".$idUsuario."' ORDER BY id DESC"
-                );
-
-                return $query->fetchAll();
-
-            }
-        }catch (Exception $e){
-            echo $e->getMessage();
         }
 
     }
