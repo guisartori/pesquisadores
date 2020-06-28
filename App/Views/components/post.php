@@ -35,7 +35,7 @@
     <div class="job-status-bar">
         <ul class="like-com">
             <li>
-                <a href="javascript:void(0)" class="curtir-postagem" data-id-postagem="<?php echo $post['id']; ?>"><i class="la la-heart"></i>Curtir Postagem</a>
+                <a href="javascript:void(0)" class="curtir-postagem <?php echo (App\Lib\Util::taCurtido($post['id'], $idUsuarioLogado)) ? 'text-danger' : ''; ?>" data-id-postagem="<?php echo $post['id']; ?>"><i class="la la-heart"></i>Curtir Postagem</a>
                 <!-- <img src="/public/images/liked-img.png" alt=""> -->
 
             </li>

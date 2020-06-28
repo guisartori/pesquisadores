@@ -93,8 +93,7 @@ class DB
         return;
     }
 
-    public function delete($table, $where)
-    {
+    public function delete($table, $where) {
         return $this->query("DELETE FROM $table WHERE $where" );
     }
 

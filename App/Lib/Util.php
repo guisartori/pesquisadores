@@ -2,19 +2,18 @@
 
 namespace App\Lib;
 
+use App\Models\Curtida;
 
 class Util
 {
-    public static function hash($senha,$revert=false)
-    {
+    public static function hash($senha,$revert=false){
         if($revert){
             return base64_decode($senha);
         }else{
             return base64_encode($senha);
         }
     }
-    public static function redirect($view)
-    {
+    public static function redirect($view) {
         header('Location: /' . $view);
     }
     public static function convertDate($dt,$format){
@@ -39,8 +38,7 @@ class Util
 
     }
 
-    public static function formatMoney($valor,$lang, $simbolo = false)
-    {
+    public static function formatMoney($valor,$lang, $simbolo = false){
         if($lang == "pt") {
             if($simbolo) {
                 $simbolo = "R$";
@@ -58,5 +56,10 @@ class Util
                 return str_replace(",", ".",str_replace(".", "",$valor));
             }
         }
+    }
+
+    public static function taCurtido($idPost, $idUsuario){
+        $response = Curtida::check($idPost, $idUsuario);
+        return $response;
     }
 }
