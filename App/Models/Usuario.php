@@ -93,23 +93,6 @@ class Usuario
 
     }
 
-    public static function listar() {
-        $db = new DB();
-
-        try {
-
-            $query = $db->query(
-                'SELECT * FROM usuarios ORDER BY id'
-            );
-
-            return $query->fetchAll();
-
-        }catch (Exception $e){
-            echo $e->getMessage();
-        }
-
-    }
-
     public static function atualizar($data)
     {
         try {

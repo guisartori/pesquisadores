@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Models\Usuario;
 use App\Models\Post;
 use App\Models\Seguidor;
+use App\Models\Experiencia;
+use App\Models\Formacao;
+use App\Models\Habilidade;
 
 class PrincipalController extends Controller {
     private $app;
@@ -257,22 +260,23 @@ class PrincipalController extends Controller {
     }
 
     public function amigo(){
-        self::setViewParam('aAmigo',Usuario::listar($this->app->getParams()[0]));
-        self::setViewParam('aFoto',Usuario::listarFoto($this->app->getParams()[0]));
-        self::setViewParam('aCapa',Usuario::listarCapa($this->app->getParams()[0]));
-        self::setViewParam('aVisao',Usuario::listarVisaoG($this->app->getParams()[0]));
-        self::setViewParam('aListaExperiencia',Usuario::listarExperiencia($this->app->getParams()[0]));
-        self::setViewParam('aListaEducacao',Usuario::listarEducacao($this->app->getParams()[0]));
-        self::setViewParam('aListaLocalizacao',Usuario::listarLocalizacao($this->app->getParams()[0]));
-        self::setViewParam('aListaHabilidades',Usuario::listarHabilidades($this->app->getParams()[0]));
-        self::setViewParam('aListaVagas',Usuario::listarVagas($this->app->getParams()[0]));
 
+        $idPerfil = $this->app->getParams()[0];
+
+        self::setViewParam('aAmigo', Usuario::mostrar($idPerfil));
+        self::setViewParam('aListaExperiencia', Experiencia::todos($idPerfil));
+        self::setViewParam('aListaEducacao', Formacao::todos($idPerfil));
+        // self::setViewParam('aListaLocalizacao',Usuario::listarLocalizacao($this->app->getParams()[0]));
+        self::setViewParam('aListaHabilidades', Habilidade::todos($idPerfil));
+        self::setViewParam('aListaVagas', Post::todos($idPerfil));
 
         self::setViewCss('/public/css/pages/principal/principal.css');
 
         self::setViewJs('/public/js/principal/principal.js');
         self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
         self::setViewJs('/public/js/perfil/perfil-amigo.js');
+
+        // echo var_dump();
 
         $this->render('principal/amigo');
     }

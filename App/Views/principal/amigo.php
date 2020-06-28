@@ -3,7 +3,7 @@
 <input id="idUsuario" type="hidden" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
 <input type="hidden" id="id-logado" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
 <input type="hidden" id="nome-logado" value="<?php  echo \App\Lib\Auth::usuario()->usuario; ?>">
-<input type="hidden" id="id-do-amigo" value="<?php echo $aViewVar['aAmigo']['id']; ?>">
+<input type="hidden" id="id-do-amigo" value="<?php echo $aViewVar['aAmigo'][0]['id']; ?>">
 
 <div class="wrapper">
     <header>
@@ -73,7 +73,7 @@
 
 
     <section class="cover-sec">
-        <img id="img-capa" src="/public/uploads/capa/<?php echo $aViewVar['aCapa']['profile_image']; ?>" alt="CAPA DO PERFIL DO USUÁRIO" title="CAPA DO PERFIL DO USUÁRIO" style="width: 1600px !important; max-width: 1600px !important; height: 400px !important; max-height: 400px !important;">
+        <img id="img-capa" src="http://via.placeholder.com/1600x400" alt="CAPA DO PERFIL DO USUÁRIO" title="CAPA DO PERFIL DO USUÁRIO" style="width: 1600px !important; max-width: 1600px !important; height: 400px !important; max-height: 400px !important;">
     </section>
 
 
@@ -86,7 +86,7 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="/public/uploads/fotoPerfil/<?php echo $aViewVar['aFoto']['img']; ?>" alt="" style="width: 170px !important; max-width: 170px !important; height: 170px !important; max-height: 170px !important;">
+                                        <img src="http://via.placeholder.com/170x170" alt="" style="width: 170px !important; max-width: 170px !important; height: 170px !important; max-height: 170px !important;">
                                     </div>
                                     <div class="user_pro_status">
 
@@ -122,10 +122,10 @@
                         <div class="col-lg-9">
                             <div class="main-ws-sec">
                                 <div class="user-tab-sec">
-                                    <h3><?php echo $aViewVar['aAmigo']['titulo']; ?></h3>
+                                    <h3><?php echo $aViewVar['aAmigo'][0]['nome']; ?></h3>
                                     <p>  </p>
                                     <div class="star-descp">
-                                        <span><?php echo $aViewVar['aAmigo']['profissao']; ?></span>
+                                        <span><?php echo $aViewVar['aAmigo'][0]['profissao']; ?></span>
 
                                     </div>
                                     <div class="tab-feed">
@@ -143,16 +143,16 @@
                                                 </a>
                                             </li>
                                             <li data-tab="feed-dd">
-                                                <a class="recomendarPerfil" data-id-perfil="<?php echo $aViewVar['aAmigo']['id']; ?>" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
+                                                <a class="recomendarPerfil" data-id-perfil="<?php echo $aViewVar['aAmigo'][0]['id']; ?>" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
                                                     <span id="qtd-likes" class="badge badge-pill badge-danger" style="position: absolute;color: #FFFFFF;font-size: 14px;line-height: 0.98;padding-top: 0.4em;padding-bottom: 0.4em;margin-left: 74px;margin-top: -9px;">0</span>
                                                     <i class="la la-thumbs-o-up" style="font-size: 34px;"></i>
                                                     <span data-toggle="tooltip" data-placement="bottom" title="RECOMENDAR USUÁRIO">Recomendar</span>
                                                 </a>
                                             </li>
                                             <li id="li-do-amigo" data-tab="feed-dd">
-                                                <a data-id-usuario="<?php echo $aViewVar['aAmigo']['id']; ?>" data-nome-usuario="<?php echo $aViewVar['aAmigo']['titulo']; ?>" class="add-amigo-perfil" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
+                                                <a data-id-usuario="<?php echo $aViewVar['aAmigo'][0]['id']; ?>" data-nome-usuario="<?php echo $aViewVar['aAmigo'][0]['nome']; ?>" class="add-amigo-perfil" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
                                                     <i class="la la-user-plus" style="font-size: 34px;"></i>
-                                                    <span>Seguir <i><?php echo $aViewVar['aAmigo']['titulo']; ?></i></span>
+                                                    <span>Seguir <i><?php echo $aViewVar['aAmigo'][0]['nome']; ?></i></span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -176,8 +176,8 @@
                                                         <div class="usy-dt">
                                                             <img src="http://via.placeholder.com/50x50" alt="">
                                                             <div class="usy-name">
-                                                                <h3><?php echo $aListaVaga['nomeUsuario']; ?></h3>
-                                                                <span><img src="/public/images/clock.png" alt=""><?php echo $aListaVaga['datah']; ?></span>
+                                                                <h3><?php echo $aListaVaga['nome']; ?></h3>
+                                                                <span><img src="/public/images/clock.png" alt=""><?php echo $aListaVaga['data_hora']; ?></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,7 +190,7 @@
                                                     </div>
                                                     <div class="job_descp">
                                                         <h3><?php echo $aListaVaga['titulo']; ?></h3>
-                                                        <p><?php echo $aListaVaga['descricao']; ?></p>
+                                                        <p><?php echo $aListaVaga['texto']; ?></p>
                                                         </div>
                                                     <div class="job-status-bar">
                                                         <ul class="like-com">
@@ -231,7 +231,7 @@
                                 <div class="product-feed-tab" id="info-dd">
                                     <div class="user-profile-ov">
                                         <h3>Ver tudo</h3>
-                                        <p><?php echo $aViewVar['aVisao']['visao']; ?></p>
+                                        <p><?php echo $aViewVar['aAmigo'][0]['visao_geral']; ?></p>
                                     </div>
                                     <div class="user-profile-ov st2">
                                         <h3>Experiência</h3>
@@ -279,28 +279,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="user-profile-ov">
-                                        <h3>Localização</h3>
-                                        <?php
-                                        if(!count($aViewVar['aListaLocalizacao'])){
-                                            ?>
-                                            <div class="alert alert-danger" role="alert">Nenhuma localizacao cadastrada!</div>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <?php
-                                            foreach($aViewVar['aListaLocalizacao'] as $aLocalizacao) {
-                                                ?>
-                                                <h4><?php echo $aLocalizacao['titulo']; ?></h4>
-                                                <p><?php echo $aLocalizacao['texto']; ?></p>
-
-                                                <?php
-                                            }
-                                            ?>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
+                                    
                                     <div class="user-profile-ov">
                                         <h3>Habilidades</h3>
                                         <ul>
