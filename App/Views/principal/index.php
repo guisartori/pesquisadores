@@ -187,138 +187,18 @@
                                 <div class="posts-section">
 
                                     <?php
-                                    if(!count($aViewVar['aListaVagas'])){
-                                        ?>
-                                        <div class="alert alert-warning" role="alert">Você não publicou nada ainda...</div>
-                                        <?php
-                                    } else {
+                                        if(!count($aViewVar['posts'])){
                                     ?>
+                                        <div class="alert alert-warning" role="alert">Nada ainda foi publicado...</div>
                                     <?php
-                                    foreach($aViewVar['aListaVagas'] as $aListaVaga) {
-                                        ?>
-                                        <div class="post-bar content-vaga" data-id-vaga="<?php echo $aListaVaga['id']; ?>" data-id-usuario-vaga="<?php echo $aListaVaga['id_usuario']; ?>" data-titulo-vaga="<?php echo $aListaVaga['titulo']; ?>">
-                                            <div class="post_topbar">
-                                                <div class="usy-dt">
-                                                <!-- TODO: COLOCAR A FOTO DE PERFIL DO USUÁRIO -->
-                                                    <img src="http://via.placeholder.com/50x50" alt="">
-                                                    <div class="usy-name">
-                                                        <h3><?php echo $aListaVaga['nome']; ?></h3>
-                                                        <span><img src="/public/images/clock.png" alt=""><?php echo $aListaVaga['data_hora']; ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="ed-opts">
-                                                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                    <ul class="ed-options">
-                                                        <li class="li-editar-vaga" data-id-vaga="<?php echo $aListaVaga['id']; ?>" data-id-usuario-vaga="<?php echo $aListaVaga['id_usuario']; ?>" data-titulo-vaga="<?php echo $aListaVaga['titulo']; ?>" data-categoria-vaga="<?php echo $aListaVaga['categoria']; ?>" data-habilidade-vaga="<?php echo $aListaVaga['habilidade']; ?>" data-preco-vaga="<?php echo $aListaVaga['preco']; ?>" data-integral-vaga="<?php echo $aListaVaga['integral']; ?>" data-descricao-vaga="<?php echo $aListaVaga['descricao']; ?>"><a href="#" title="">Editar esta postagem</a></li>
-                                                        <li class="li-excluir-vaga" data-id-vaga="<?php echo $aListaVaga['id']; ?>" data-id-usuario-vaga="<?php echo $aListaVaga['id_usuario']; ?>" data-titulo-vaga="<?php echo $aListaVaga['titulo']; ?>"><a href="#" title="">Excluir postagem</a></li>
-                                                        <li class="li-esconder-vaga" data-id-vaga="<?php echo $aListaVaga['id']; ?>" data-id-usuario-vaga="<?php echo $aListaVaga['id_usuario']; ?>" data-titulo-vaga="<?php echo $aListaVaga['titulo']; ?>"></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="epi-sec">
-                                                <ul class="descp">
-                                                    <!-- TODO COLOCAR PUBLICAÇÃO OU POSTAGEM -->
-                                                    <!-- <li><img src="/public/images/icon8.png" alt=""><span><?php echo $aListaVaga['categoria']; ?></span></li> -->
-                                                    <li><img src="/public/images/icon9.png" alt=""><span>Brasil</span></li>
-                                                </ul>
-
-                                            </div>
-                                            <div class="job_descp">
-                                                <h3><?php echo $aListaVaga['titulo']; ?></h3>
-                                                <p><?php echo $aListaVaga['texto']; ?></p>
-                                            </div>
-                                            <div class="job-status-bar">
-                                                <ul class="like-com">
-                                                    <li>
-                                                        <a href="javascript:void(0)" class="curtir-postagem" data-id-postagem="<?php echo $aListaVaga['id']; ?>"><i class="la la-heart"></i>Curtir Postagem</a>
-                                                        <!-- <img src="/public/images/liked-img.png" alt=""> -->
-
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0)" title="CLIQUE PARA COMENTAR" data-id-postagem="<?php echo $aListaVaga['id']; ?>" class="comentar"><i class="la la-comments-o"></i>Fazer Comentário</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0)" title="VER COMENTARIOS" data-id-postagem="<?php echo $aListaVaga['id']; ?>" class="comentarios"><i class="la la-envelope-o"></i>Ver Comentário</a>
-                                                    </li>
-                                                </ul>
-                                                <a><i class="la la-eye"></i>Visualizações 0</a>
-                                                <br>
-                                                <form action="/principal/comentar" method="post" class="mr-3 d-none form-comentario" form-id="<?php echo $aListaVaga['id']; ?>">
-                                                    <input type="hidden" name="id_postagem" value="<?php echo $aListaVaga['id']; ?>">
-                                                    <input type="hidden" name="id_usuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
-                                                    <div class="form-group">
-                                                        <textarea name="comentario" class="form-control" rows="3"></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-sm btn-primary float-right" style="background-color: #8b87aa;border-color: transparent;box-shadow: 0 8px 16px -8px black;">Postar Comentário</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <?php
-                                    }
-                                        ?>
-                                        <?php
-                                    }
+                                        } else {
+                                            foreach($aViewVar['posts'] as $post) {
+                                                include __DIR__.'\..\components\post.php';
+                                            }
+                                        }
                                     ?>
 
 
-
-                                        <!-- template postagem -->
-                       <!--
-                                    <div class="post-bar">
-                                        <div class="post_topbar">
-                                            <div class="usy-dt">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
-                                                <div class="usy-name">
-                                                    <h3>John Doe</h3>
-                                                    <span><img src="/public/images/clock.png" alt="">3 minutos atrás</span>
-                                                </div>
-                                            </div>
-                                            <div class="ed-opts">
-                                                <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                <ul class="ed-options">
-                                                    <li><a href="#" title="">Editar uma postagem</a></li>
-                                                    <li><a href="#" title="">Não foi Salvo</a></li>
-                                                    <li><a href="#" title="">Liberar</a></li>
-                                                    <li><a href="#" title="">Fechar</a></li>
-                                                    <li></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="epi-sec">
-                                            <ul class="descp">
-                                                <li><img src="/public/images/icon8.png" alt=""><span>Codificador Épico</span></li>
-                                                <li><img src="/public/images/icon9.png" alt=""><span>India</span></li>
-                                            </ul>
-
-                                        </div>
-                                        <div class="job_descp">
-                                            <h3>Desenvolverdor Wordpress Senior</h3>
-                                            <ul class="job-dt">
-                                                <li><a href="#" title="">Integral</a></li>
-                                                <li><span>R$90 / hr</span></li>
-                                            </ul>
-
-                                            <ul class="skill-tags">
-                                                <li><a href="#" title="">HTML</a></li>
-                                                <li><a href="#" title="">PHP</a></li>
-                                                <li><a href="#" title="">CSS</a></li>
-                                                <li><a href="#" title="">Javascript</a></li>
-                                                <li><a href="#" title="">Wordpress</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="job-status-bar">
-                                            <ul class="like-com">
-                                                <li>
-                                                    <a href="#"><i class="la la-heart"></i>Curtir</a>
-                                                    <img src="/public/images/liked-img.png" alt="">
-
-                                                </li>
-                                                <li><a href="#" title="" class="com"><img src="/public/images/com.png" alt=""> Comentário 15</a></li>
-                                            </ul>
-                                            <a><i class="la la-eye"></i>Visualizações 50</a>
-                                        </div>
-                                    </div>
-                           -->
                                     <div class="top-profiles">
                                         <div class="pf-hd">
                                             <h3>Você deveria conhecer:</h3>

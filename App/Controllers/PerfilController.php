@@ -23,8 +23,8 @@ class PerfilController extends Controller {
 
         self::setViewParam('nameController',$this->app->getNameController());
 
-        $oListaVaga = Post::todos($idUsuario);
-        self::setViewParam('aListaVagas',$oListaVaga);
+        $posts = Post::todos($idUsuario);
+        self::setViewParam('posts',$posts);
 
         $oListaExperiencia = Experiencia::todos($idUsuario);
         $oListaEducacao = Formacao::todos($idUsuario);

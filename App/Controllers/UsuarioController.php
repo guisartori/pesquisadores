@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use App\Lib\DB;
 use App\Models\Usuario;
+use App\Models\Post;
+use App\Models\Experiencia;
+use App\Models\Formacao;
+use App\Models\Habilidade;
 
 
 class UsuarioController extends Controller
@@ -18,14 +22,27 @@ class UsuarioController extends Controller
 
     }
 
-    public function index()
+    public function perfil()
     {
+        
+        $idPerfil = $this->app->getParams()[0];
 
-        $oListaProduto = Usuario::listar();
+        self::setViewParam('aAmigo', Usuario::mostrar($idPerfil));
+        self::setViewParam('aListaExperiencia', Experiencia::todos($idPerfil));
+        self::setViewParam('aListaEducacao', Formacao::todos($idPerfil));
+        // self::setViewParam('aListaLocalizacao',Usuario::listarLocalizacao($this->app->getParams()[0]));
+        self::setViewParam('aListaHabilidades', Habilidade::todos($idPerfil));
+        self::setViewParam('posts', Post::todos($idPerfil));
 
-        self::setViewParam('aListaUsuario',$oListaProduto);
+        self::setViewCss('/public/css/pages/principal/principal.css');
 
-        $this->render('usuario/index');
+        self::setViewJs('/public/js/principal/principal.js');
+        self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
+        self::setViewJs('/public/js/perfil/perfil-amigo.js');
+
+        // echo var_dump();
+
+        $this->render('principal/amigo');
 
     }
 
@@ -42,15 +59,6 @@ class UsuarioController extends Controller
 
     }
 
-    public function salvar()
-    {
-
-        return 'teste';
-        // Usuario::salvar($_POST);
-
-        // $this->redirect('usuario/index');
-
-    }
 
     public function atualizar()
     {

@@ -24,4 +24,19 @@ class Seguidor{
         return $query->fetchAll();
     }
 
+    public static function seguir($idSeguidor, $idSeguindo){
+        $db = new DB();
+        try{
+            $db->insert('seguidores', 'id_seguidor, id_seguindo', "'".$idSeguidor."', '".$idSeguindo."'");
+            return true;
+        }catch (\Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public static function desseguir($idSeguidor, $idSeguindo){
+
+    }
+
 }

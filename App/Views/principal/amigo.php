@@ -162,53 +162,17 @@
                                     <div class="posts-section">
 
                                         <?php
-                                        if(!count($aViewVar['aListaVagas'])){
-                                            ?>
-                                            <div class="alert alert-warning" role="alert">Você não publicou nada ainda...</div>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <?php
-                                            foreach($aViewVar['aListaVagas'] as $aListaVaga) {
-                                                ?>
-                                                <div class="post-bar">
-                                                    <div class="post_topbar">
-                                                        <div class="usy-dt">
-                                                            <img src="http://via.placeholder.com/50x50" alt="">
-                                                            <div class="usy-name">
-                                                                <h3><?php echo $aListaVaga['nome']; ?></h3>
-                                                                <span><img src="/public/images/clock.png" alt=""><?php echo $aListaVaga['data_hora']; ?></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="epi-sec">
-                                                        <ul class="descp">
-                                                            <li><img src="/public/images/icon8.png" alt=""><span><?php echo $aListaVaga['categoria']; ?></span></li>
-                                                            <li><img src="/public/images/icon9.png" alt=""><span>Brasil</span></li>
-                                                        </ul>
-
-                                                    </div>
-                                                    <div class="job_descp">
-                                                        <h3><?php echo $aListaVaga['titulo']; ?></h3>
-                                                        <p><?php echo $aListaVaga['texto']; ?></p>
-                                                        </div>
-                                                    <div class="job-status-bar">
-                                                        <ul class="like-com">
-                                                            <li>
-                                                                <a href="#"><i class="la la-heart"></i>Curtir</a>
-                                                                <!-- <img src="/public/images/liked-img.png" alt=""> -->
-
-                                                            </li>
-                                                            <li><a href="#" title="" class="com"><img src="/public/images/com.png" alt=""> Comentário 0</a></li>
-                                                        </ul>
-                                                        <a><i class="la la-eye"></i>Visualizações 0</a>
-                                                    </div>
-                                                </div>
-                                                <?php
+                                            if(!count($aViewVar['posts'])){
+                                        ?>
+                                                <div class="alert alert-warning" role="alert">Nada ainda foi publicado...</div>
+                                        <?php
+                                            } else {
+                                            
+                                                foreach($aViewVar['posts'] as $post) {
+                                                    include __DIR__.'\..\components\post.php';
+                                                }
+                                           
                                             }
-                                            ?>
-                                            <?php
-                                        }
                                         ?>
 
                                         <div class="top-profiles">

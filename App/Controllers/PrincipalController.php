@@ -28,7 +28,7 @@ class PrincipalController extends Controller {
         $seguidores = Seguidor::getTotalSeguidores($idUsuario);
         $seguindo = Seguidor::getTotalSeguindo($idUsuario);
 
-        self::setViewParam('aListaVagas',$posts);
+        self::setViewParam('posts',$posts);
         self::setViewParam('totalSeguidores',$seguidores[0]["total"]);
         self::setViewParam('totalSeguindo',$seguindo[0]["total"]);
 
@@ -70,7 +70,7 @@ class PrincipalController extends Controller {
                                 <h4 class='text-capitalize' style='text-align: left !important;'>".$row['nome']."</h4>
                                 <span class='profissao-sidebar text-capitalize'>".$row['profissao']."</span>
                             </div>
-                            <span class='add-amigo' data-id-usuario='".$row['id']."' data-nome-usuario='".$row['nome']."'><i class='la la-plus'></i></span>
+                            <span class='add-amigo' data-id-usuario='".$row['id']."' ><i class='la la-plus'></i></span>
                         </div>
                     </div>  
                     ";
@@ -248,7 +248,7 @@ class PrincipalController extends Controller {
                             <h3>'.$row['nome'].'</h3>
                             <h4>'.$row['profissao'].'</h4>
                         </div>
-                        <a href="/principal/amigo/'.$row["id_seguindo"].'" data-id-search="'.$row["id_seguindo"].'" title="" class="view-more-pro">Ver Perfil</a>
+                        <a href="/usuario/perfil/'.$row["id_seguindo"].'" data-id-search="'.$row["id_seguindo"].'" title="" class="view-more-pro">Ver Perfil</a>
                     </div>
                 </div>    
                 ';
@@ -257,28 +257,6 @@ class PrincipalController extends Controller {
                 echo $row["listagem"];
             }
         }
-    }
-
-    public function amigo(){
-
-        $idPerfil = $this->app->getParams()[0];
-
-        self::setViewParam('aAmigo', Usuario::mostrar($idPerfil));
-        self::setViewParam('aListaExperiencia', Experiencia::todos($idPerfil));
-        self::setViewParam('aListaEducacao', Formacao::todos($idPerfil));
-        // self::setViewParam('aListaLocalizacao',Usuario::listarLocalizacao($this->app->getParams()[0]));
-        self::setViewParam('aListaHabilidades', Habilidade::todos($idPerfil));
-        self::setViewParam('aListaVagas', Post::todos($idPerfil));
-
-        self::setViewCss('/public/css/pages/principal/principal.css');
-
-        self::setViewJs('/public/js/principal/principal.js');
-        self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
-        self::setViewJs('/public/js/perfil/perfil-amigo.js');
-
-        // echo var_dump();
-
-        $this->render('principal/amigo');
     }
 
     public function getDeveriaConhecer() {
@@ -307,7 +285,7 @@ class PrincipalController extends Controller {
                         <ul>
                             <li><a title="Adicionar Amigo" data-id-usuario="'.$row['id'].'" data-nome-usuario="'.$row['nome'].'"  class="add-amigo btn btn-block btn-success" style="background-color: #8b87aa;border: 1px solid #6153ce;height: 35px;padding-top: 0.22em;padding-left: 1em;padding-right: 1em;font-size: 15px;cursor: pointer;border-radius: 50px;"><i class="la la-plus"></i> Seguir</a></li>
                         </ul>
-                        <a href="/principal/amigo/'.$row['id'].'" title="">Visualizar Perfil</a>
+                        <a href="/usuario/perfil/'.$row['id'].'" title="">Visualizar Perfil</a>
                     </div>  
                     ';
                 ?>
@@ -343,31 +321,7 @@ class PrincipalController extends Controller {
         }
     }
 
-    public function getAmigosEmComum() {
-        if(isset($_POST['de']) && isset($_POST['para'])) {
-            $de = $_POST['de'];
-            $para = $_POST['para'];
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-            $result = mysqli_query($conn, "select * from amizade where id_solicitante = '$para' and id_requisitado in( select id_requisitado from amizade where id_solicitante = '$de' or id_requisitado = '$de' GROUP BY id_solicitante) and id_requisitado != '$de' or id_solicitante = '$para' and id_requisitado in( select id_solicitante from amizade where id_solicitante = '$de' or id_requisitado = '$de' GROUP BY id_solicitante) and id_requisitado != '$de' LIMIT 10");
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    $row["listagem"] = '
-
-                    <li><a href="/principal/amigo/'.$row['id_requisitado'].'" title="'.$row['nome_requisitado'].'" alt="'.$row['nome_requisitado'].'"><img src="/public/uploads/fotoPerfil/profile-default.png" style="width: 70px;height: 70px;" alt=""></a></li>
-                    ';
-                    ?>
-                    <?php
-                    echo $row["listagem"];
-                }
-            } else {
-
-            }
-        }
-    }
-
+   
     public function curtir() {
         if(isset($_POST['idUser']) && isset($_POST['idPublicacao'])) {
             $idUser = $_POST['idUser'];

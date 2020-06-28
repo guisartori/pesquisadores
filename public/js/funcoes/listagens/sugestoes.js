@@ -24,63 +24,63 @@ $(document).ready(function () {
     //ao clicar em add amigo - SUGESTOES
 
     setTimeout(function () {
-        var idUserLogado = $('#id-logado').val();
+        var idSeguidor = $('#id-logado').val();
         $('.add-amigo').on('click', function () {
-            //alert('clique aqui');
-            var idLogado = $('#id-logado').val();
-            var idAmigo = $(this).attr('data-id-usuario');
-            $('#id-amigo').val(idAmigo);
-            var nome = $(this).attr('data-nome-usuario');
-            $('#nome-amigo').val(nome);
+            
+            var idSeguindo = $(this).attr('data-id-usuario');
 
             var item = $(this).parent().parent().addClass('animated zoomOut');
 
             setTimeout(function () {
                 $.ajax({
-                    url:"/principal/getDadosAmizade/",
+                    url:"/seguidor/seguir/",
                     method:"POST",
-                    data:{idSolicitante: idUserLogado, idRequisitado: $('#id-amigo').val(), nome: $('#nome-amigo').val(), nomeSolicitante: $('#nome-logado').val()},
+                    data:{id_seguidor: idSeguidor, id_seguindo: idSeguindo},
                     success:function(s){
+                        console.log(s)
                         setTimeout(function () {
                             $(item).remove();
                         },300);
+                        setTimeout(function () {
+                            window.location.reload()
+                        },1500);
                         Swal.fire({
                             position: 'center',
                             type: 'success',
                             title: 'Agora você segue este usuário!',
                             showConfirmButton: false,
                             timer: 1500
-                        });
+                        })
                     }
                 });
             },100);
         });
 
         $('.add-amigo-perfil').on('click', function () {
-            var idLogado = $('#id-logado').val();
-            var idAmigo = $(this).attr('data-id-usuario');
-            $('#id-amigo').val(idAmigo);
-            var nome = $(this).attr('data-nome-usuario');
-            $('#nome-amigo').val(nome);
-
-            var item = $(this).addClass('animated zoomOut');
+            
+            var idSeguindo = $(this).attr('data-id-usuario');
+            var item = $(this).parent().parent().addClass('animated zoomOut');
 
             setTimeout(function () {
                 $.ajax({
-                    url:"/principal/getDadosAmizade/",
+                    url:"/seguidor/seguir/",
                     method:"POST",
-                    data:{idSolicitante: idLogado, idRequisitado: idAmigo, nome: nome, nomeSolicitante: $('#nome-logado').val()},
+                    data:{id_seguidor: idSeguidor, id_seguindo: idSeguindo},
                     success:function(s){
+                        console.log(s)
                         setTimeout(function () {
                             $(item).remove();
                         },300);
+                        setTimeout(function () {
+                            window.location.reload()
+                        },1500);
                         Swal.fire({
                             position: 'center',
                             type: 'success',
                             title: 'Agora você segue este usuário!',
                             showConfirmButton: false,
                             timer: 1500
-                        });
+                        })
                     }
                 });
             },100);
