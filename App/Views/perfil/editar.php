@@ -29,9 +29,31 @@
             </div>
             <form class="" method="post" action="/perfil/uploadFoto" enctype="multipart/form-data">
             <div class="modal-body">
-                        <input id="id_user2" name="usuario" type="hidden" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
-                        <input type="file" id="upload-" name="save-foto-user" class="">
-
+                <input id="id_user2" name="usuario" type="hidden" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
+                <input type="file" id="upload-" name="save-foto-user" class="">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="save-foto">Salvar Foto</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- MODAL UPLOAD FOTO DE CAPA -->
+<div id="chama-modal-upload-foto-capa" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alterar Foto de Capa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="" method="post" action="/perfil/uploadCapaPerfil" enctype="multipart/form-data">
+            <div class="modal-body">
+                    <input id="id_user2" name="usuario" type="hidden" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
+                    <input type="file" id="upload-" name="save-foto-capa" class="">
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" name="save-foto">Salvar Foto</button>
@@ -201,13 +223,11 @@
     <form class="form-upload-capa-perfil" method="post" action="/perfil/uploadCapaPerfil" enctype="multipart/form-data">
         <section class="cover-sec">
             <button class="btn btn-lg btn-danger btn-block btn-upload d-none" name="save-capa" type="submit" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;height: 70px;cursor: alias;"><i class="la la-check" style="font-size: 1.2em;margin-right: 0.3em;"></i> CLIQUE PARA CARREGAR A FOTO SELECIONADA!</button>
-            <div class="lds-facebook loader-capa" style="position: absolute !important; top: 0 !important; z-index: 999 !important; bottom: 0 !important; right: 0 !important; left: 0 !important; margin: auto !important;">
-                <div></div><div></div><div></div>
-            </div>
+            
             <input id="id_user" name="id_user" type="hidden" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
-            <img id="img-capa" src="/public/images/capa-default2.png" alt="CAPA DO PERFIL DO USUÁRIO" title="CAPA DO PERFIL DO USUÁRIO" style="width: 1600px !important; max-width: 1600px !important; height: 400px !important; max-height: 400px !important;">
-            <label for="upload-capa" class="upload-capa"><i class="fa fa-camera" style="margin-right: 0.3em;"></i>Alterar Imagem</label>
-            <input type="file" id="upload-capa" name="save-capa-user" class="d-none">
+            <img id="img-capa" src="<?php echo ($aViewVar['aUsuario']['foto_capa']) ? $aViewVar['aUsuario']['foto_capa'] : "/public/images/capa-default2.png"; ?>" alt="CAPA DO PERFIL DO USUÁRIO" title="CAPA DO PERFIL DO USUÁRIO" style="width: 1600px !important; max-width: 1600px !important; height: 400px !important; max-height: 400px !important;">
+            <label for="upload-capa" class="upload-capa"  data-toggle="modal" data-target="#chama-modal-upload-foto-capa"><i class="fa fa-camera" style="margin-right: 0.3em;"></i>Alterar Imagem</label>
+            <!-- <input type="file" id="upload-capa" name="save-capa-user" class="d-none"> -->
         </section>
     </form>
 
@@ -221,19 +241,22 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img chama-modal-upload-foto-perfil" data-toggle="modal" data-target="#chama-modal-upload-foto-perfil">
-                                        <img id="img-usuario-foto-perfil" src="http://via.placeholder.com/170x170" alt="" style="width: 170px !important; max-width: 170px !important; height: 170px !important; max-height: 170px !important;">
+                                        <img id="img-usuario-foto-perfil" src="<?php echo ($aViewVar['aUsuario']['foto_perfil']) ? $aViewVar['aUsuario']['foto_perfil'] : "http://via.placeholder.com/170x170"; ?>" alt="" style="width: 170px !important; max-width: 170px !important; height: 170px !important; max-height: 170px !important;">
                                         <a href="#" title=""><i class="fa fa-camera"></i></a>
                                     </div>
                                     <div class="user_pro_status">
-
                                         <ul class="flw-status">
                                             <li>
                                                 <span>Seguindo</span>
-                                                <b class="qtdSeguidoresUser">0</b>
+                                                <b class="qtdSeguidoresUser">
+                                                    <?php echo \App\Models\Seguidor::getTotalSeguindo(\App\Lib\Auth::usuario()->id)[0]['total']; ?>
+                                                </b>
                                             </li>
                                             <li>
                                                 <span>Seguidores</span>
-                                                <b class="seguindoVolta">0</b>
+                                                <b class="seguindoVolta">
+                                                <?php echo \App\Models\Seguidor::getTotalSeguidores(\App\Lib\Auth::usuario()->id)[0]['total']; ?>
+                                                </b>
                                             </li>
                                         </ul>
                                     </div>

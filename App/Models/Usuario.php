@@ -92,6 +92,18 @@ class Usuario
 
     }
 
+    public static function inserirFotoPerfil($target, $idUsuario){
+        $db = new DB();
+        $db->update('usuarios', "foto_perfil = '/".$target."'", "id = '".$idUsuario."'");
+        return true;
+    }
+
+    public static function inserirFotoCapa($target, $idUsuario){
+        $db = new DB();
+        $db->update('usuarios', "foto_capa = '/".$target."'", "id = '".$idUsuario."'");
+        return true;
+    }
+
     //TODO: ACERTAR MÉTODO
     public static function atualizar($data)  {
         try {
