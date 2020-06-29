@@ -104,6 +104,18 @@ class Usuario
         return true;
     }
 
+    public static function removerFotoPerfil($idUsuario){
+        $db = new DB();
+        $db->update('usuarios', "foto_perfil = ''", "id = '".$idUsuario."'");
+        return true;
+    }
+
+    public static function removerFotoCapa($idUsuario){
+        $db = new DB();
+        $db->update('usuarios', "foto_capa = ''", "id = '".$idUsuario."'");
+        return true;
+    }
+
     //TODO: ACERTAR MÉTODO
     public static function atualizar($data)  {
         try {

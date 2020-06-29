@@ -133,7 +133,7 @@
                                     <div class="user-profile">
                                         <div class="username-dt">
                                             <div class="usr-pic">
-                                                <div class="lds-facebook" style="background: #0d6120;border-radius: 50%;margin-top: 2em;"><div></div><div></div><div></div></div>
+                                                <img style="width: 110px; height: 110px" src="<?php echo ($aViewVar['usuario']['foto_perfil']) ? $aViewVar['usuario']['foto_perfil'] : "http://via.placeholder.com/110x110"; ?>"   alt="">
                                             </div>
                                         </div>
                                         <div class="user-specs">
@@ -175,11 +175,11 @@
                             <div class="main-ws-sec">
                                 <div class="post-topbar">
                                     <div class="user-picy">
-                                        <div class="lds-facebook" style="background: #ffffff;border-radius: 50%;"><div></div><div></div><div></div></div>
+                                        <img style="width: 50px; height: 50px" src="<?php echo ($aViewVar['usuario']['foto_perfil']) ? $aViewVar['usuario']['foto_perfil'] : "http://via.placeholder.com/50x50"; ?>"   alt="">
                                     </div>
                                     <div class="post-st">
                                         <ul>
-                                            <li class="d-none hidden"><a class="post_project" href="#" title="">Postar um Projeto</a></li>
+                                            <!-- <li class="d-none hidden"><a class="post_project" href="#" title="">Postar um Projeto</a></li> -->
                                             <li><a class="post-jb active" href="#" title="">Compartilhar Publicação</a></li>
                                         </ul>
                                     </div>

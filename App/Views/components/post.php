@@ -8,7 +8,7 @@
                 style="cursor: pointer" 
                 onClick="javascript: abrirPerfilUsuario(<?php echo $post['id_usuario']; ?>)">
         <!-- TODO: COLOCAR A FOTO DE PERFIL DO USUÁRIO -->
-            <img src="http://via.placeholder.com/50x50" alt="">
+            <img style="width: 50px; height: 50px" src="<?php echo ($post['foto_perfil']) ? $post['foto_perfil'] : "http://via.placeholder.com/50x50"; ?>"   alt="">
             <div class="usy-name">
                 <h3><?php echo $post['nome']; ?></h3>
                 <span><img src="/public/images/clock.png" alt=""><?php echo $post['data_hora']; ?></span>

@@ -27,10 +27,12 @@ class PrincipalController extends Controller {
         $posts = Post::feed($idUsuario);
         $seguidores = Seguidor::getTotalSeguidores($idUsuario);
         $seguindo = Seguidor::getTotalSeguindo($idUsuario);
+        $usuario = Usuario::mostrar($idUsuario);
 
         self::setViewParam('posts',$posts);
         self::setViewParam('totalSeguidores',$seguidores[0]["total"]);
         self::setViewParam('totalSeguindo',$seguindo[0]["total"]);
+        self::setViewParam('usuario',$usuario[0]);
 
 
         self::setViewCss('/public/css/pages/principal/principal.css');

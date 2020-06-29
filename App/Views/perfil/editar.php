@@ -17,6 +17,30 @@
 
 <body>
 
+<script>
+function removerFotoPerfil(idUsuario){
+    $.ajax({
+        url: '/perfil/removerFotoPerfil',
+        method: 'POST',
+        data: {idUsuario},
+        success: function (d) {
+            window.location.reload()
+        }
+    });
+}
+
+function removerFotoCapa(idUsuario){
+    $.ajax({
+        url: '/perfil/removerFotoCapa',
+        method: 'POST',
+        data: {idUsuario},
+        success: function (d) {
+            window.location.reload()
+        }
+    });
+}
+</script>
+
 <!-- MODAL UPLOAD FOTO DE PERFIL -->
 <div id="chama-modal-upload-foto-perfil" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -33,6 +57,7 @@
                 <input type="file" id="upload-" name="save-foto-user" class="">
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onClick="javascript:removerFotoPerfil(<?php  echo \App\Lib\Auth::usuario()->id; ?>)" data-dismiss="modal">Remover</button>
                 <button type="submit" class="btn btn-primary" name="save-foto">Salvar Foto</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
@@ -56,6 +81,7 @@
                     <input type="file" id="upload-" name="save-foto-capa" class="">
             </div>
             <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onClick="javascript:removerFotoCapa(<?php  echo \App\Lib\Auth::usuario()->id; ?>)" data-dismiss="modal">Remover</button>
                 <button type="submit" class="btn btn-primary" name="save-foto">Salvar Foto</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
@@ -199,7 +225,7 @@
                 <div class="user-account">
                     <div class="user-info">
                         <img class="foto-perfil-navbar" src="/public/images/perfil/profile-default.png" alt="">
-                        <a class="nomeUser" id="nomeUser" title=""></a>
+                        <a class="nomeUser" id="nomeUser" title=""><?php echo $aViewVar['aUsuario']['nome'] ?></a>
                         <i class="la la-sort-down"></i>
                     </div>
                     <div class="user-account-settingss">

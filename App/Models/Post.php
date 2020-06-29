@@ -37,7 +37,7 @@ class Post
 
         try {
             $query = $db->query(
-                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario
+                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario, u.foto_perfil
                  FROM posts p
                  LEFT JOIN usuarios u ON u.id = p.id_usuario
                  WHERE p.id_usuario IN 
@@ -58,11 +58,10 @@ class Post
     public static function todos($idUsuario) {
         $db = new DB();
 
-        //TODO: FAZER APARECER A POSTAGEM APENAS DE QUEM PUBLICOU E DE SEUS AMIGOS. ORDENAR POR DATA
         try {
 
             $query = $db->query(
-                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario
+                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario, u.foto_perfil
                     FROM posts p LEFT JOIN usuarios u ON u.id = p.id_usuario 
                     WHERE p.id_usuario = '".$idUsuario."'
                     ORDER BY data_hora DESC"

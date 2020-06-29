@@ -104,6 +104,20 @@ class PerfilController extends Controller {
         }
     }
 
+    public function removerFotoPerfil(){
+        $idUsuario = $_POST['idUsuario'];
+
+        Usuario::removerFotoPerfil($idUsuario);
+    }
+
+    public function removerFotoCapa(){
+        $idUsuario = $_POST['idUsuario'];
+
+        Usuario::removerFotoCapa($idUsuario);
+    }
+
+    //TODO DAQUI PRA BAIXO REVISAR
+
     public function atualizarInformacoes() {
         $nome = $_POST['nome'];
         $profissao = $_POST['profissao'];
