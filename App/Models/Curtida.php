@@ -35,11 +35,25 @@ class Curtida {
                             CASE WHEN EXISTS (SELECT id FROM curtidas c 
                                                 WHERE c.id_post = '".$idPost."' 
                                                 AND c.id_usuario = '".$idUsuario."')
-                                THEN 'TRUE' 
-                                ELSE 'FALSE'
+                            THEN 'TRUE' 
+                            ELSE 'FALSE'
                             END AS foi_curtido
                         FROM curtidas");
             return $query->fetchAll()[0]['foi_curtido'] == 'TRUE';
+        } catch (Exception $e){
+            return json_encode($e->getMessage());
+        }
+    }
+
+    public static function qtdCurtidas($idPost){
+        $db = new DB();
+
+        try{
+            $query = $db->query("SELECT 
+                                    COUNT(*) AS total
+                                    FROM curtidas c
+                                    WHERE c.id_post = '".$idPost."' ");
+            return $query->fetchAll()[0]['total'];
         } catch (Exception $e){
             return json_encode($e->getMessage());
         }

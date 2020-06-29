@@ -62,4 +62,8 @@ class Util
         $response = Curtida::check($idPost, $idUsuario);
         return $response;
     }
+
+    public static function qtdCurtidas($postId){
+        return Curtida::qtdCurtidas($postId);
+    }
 }
