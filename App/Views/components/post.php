@@ -67,3 +67,73 @@ function abrirPerfilUsuario(idUsuario){
     window.location.href = "/usuario/perfil/"+idUsuario;
 }
 </script>
+
+<div class="modal fade" id="modal-confirmacao-exluir-vaga" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-light">
+                <h5 class="modal-title" id="exampleModalLabel">Tem certeza?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="cursor: pointer !important;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <strong>Realmente deseja excluir o post?</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal" style="cursor: pointer !important;">Cancelar exclusão</button>
+                <button id="excluirPostagem" type="button" class="btn btn-danger" style="cursor: pointer !important;">Sim, quero excluir esta postagem!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-editar-vaga" tabindex="-1" role="dialog" aria-labelledby="modal-editar-vagaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Editar Publicação: <span id="titulo-editar-vaga" class="text-danger"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="titulo-editar-vaga" class="col-form-label">Titulo:</label>
+                        <input type="text" class="form-control titulo-editar-vaga" id="titulo-editar-vaga">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao-editar-vaga" class="col-form-label">Descrição:</label>
+                        <textarea class="form-control descricao-editar-vaga" id="descricao-editar-vaga"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar Edição</button>
+                <button id="btn-editar-vaga" type="button" class="btn btn-secondary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-comentarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="content-coments"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

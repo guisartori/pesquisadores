@@ -69,7 +69,7 @@
 
 
     <section class="cover-sec">
-        <img id="img-capa" src="http://via.placeholder.com/1600x400" alt="CAPA DO PERFIL DO USUÁRIO" title="CAPA DO PERFIL DO USUÁRIO" style="width: 1600px !important; max-width: 1600px !important; height: 400px !important; max-height: 400px !important;">
+        <img id="img-capa" src="<?php echo ($aViewVar['usuario'][0]['foto_capa']) ? $aViewVar['usuario'][0]['foto_capa'] : "http://via.placeholder.com/1600x400"; ?>" alt="CAPA DO PERFIL DO USUÁRIO" title="CAPA DO PERFIL DO USUÁRIO" style="width: 1600px !important; max-width: 1600px !important; height: 400px !important; max-height: 400px !important;">
     </section>
 
 
@@ -82,7 +82,7 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="http://via.placeholder.com/170x170" alt="" style="width: 170px !important; max-width: 170px !important; height: 170px !important; max-height: 170px !important;">
+                                        <img src="<?php echo ($aViewVar['usuario'][0]['foto_perfil']) ? $aViewVar['usuario'][0]['foto_perfil'] : "http://via.placeholder.com/170x170"; ?>" alt="" style="width: 170px !important; max-width: 170px !important; height: 170px !important; max-height: 170px !important;">
                                     </div>
                                     <div class="user_pro_status">
 

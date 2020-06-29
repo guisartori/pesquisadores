@@ -33,7 +33,7 @@ $(document).ready(function () {
 
             setTimeout(function () {
                 $.ajax({
-                    url:"/seguidor/seguir/",
+                    url:"/seguidor/mudarSeguir/",
                     method:"POST",
                     data:{id_seguidor: idSeguidor, id_seguindo: idSeguindo},
                     success:function(s){

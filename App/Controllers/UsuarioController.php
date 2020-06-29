@@ -28,7 +28,6 @@ class UsuarioController extends Controller
         self::setViewParam('aAmigo', Usuario::mostrar($idPerfil));
         self::setViewParam('aListaExperiencia', Experiencia::todos($idPerfil));
         self::setViewParam('aListaEducacao', Formacao::todos($idPerfil));
-        // self::setViewParam('aListaLocalizacao',Usuario::listarLocalizacao($this->app->getParams()[0]));
         self::setViewParam('aListaHabilidades', Habilidade::todos($idPerfil));
         self::setViewParam('posts', Post::todos($idPerfil));
 
@@ -36,6 +35,7 @@ class UsuarioController extends Controller
 
         self::setViewJs('/public/js/principal/principal.js');
         self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
+        self::setViewJs('/public/js/funcoes/curtidasEcomentarios.js');
         self::setViewJs('/public/js/perfil/perfil-amigo.js');
 
         // echo var_dump();

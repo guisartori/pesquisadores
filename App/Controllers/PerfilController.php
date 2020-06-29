@@ -23,6 +23,8 @@ class PerfilController extends Controller {
 
         self::setViewParam('nameController',$this->app->getNameController());
 
+        $usuario = Usuario::mostrar($idUsuario);
+
         $posts = Post::todos($idUsuario);
         self::setViewParam('posts',$posts);
 
@@ -31,6 +33,7 @@ class PerfilController extends Controller {
         // $oListaLocalizacao = Usuario::listarLocalizacao();
         $oListaHabilidades = Habilidade::todos($idUsuario);
 
+        self::setViewParam('usuario',$usuario);
         self::setViewParam('aListaExperiencia',$oListaExperiencia);
         self::setViewParam('aListaEducacao',$oListaEducacao);
         // self::setViewParam('aListaLocalizacao',$oListaLocalizacao);
@@ -40,6 +43,7 @@ class PerfilController extends Controller {
 
         self::setViewJs('/public/js/principal/principal.js');
         self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
+        self::setViewJs('/public/js/funcoes/curtidasEcomentarios.js');
         self::setViewJs('/public/js/perfil/perfil.js');
 
         $this->render('perfil/index');
