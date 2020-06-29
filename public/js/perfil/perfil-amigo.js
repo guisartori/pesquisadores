@@ -1,44 +1,6 @@
 $(document).ready(function () {
     var idUsuario = $('#idUsuario').val();
 
-    var getVisaoGeral = function() {
-        $.ajax({
-            url: '/perfil/getVisao',
-            method: 'POST',
-            data: {idUser: idUsuario},
-            success: function (v) {
-                $('#texto-visao-geral').text(v.visao);
-            }
-        });
-    };
-
-    setTimeout(function () {
-        $.ajax({
-            url: '/principal/verificaSeEhAmigo',
-            method: 'POST',
-            data: {de: $('#idUsuario').val(), para: $('#id-do-amigo').val()},
-            success: function (v) {
-                if(v.amigo == '1') {
-                    $('#li-do-amigo').remove();
-                } else if(v.amigo == '0') {
-
-                }
-            }
-        });
-    },500);
-
-
-    setTimeout(function () {
-        $.ajax({
-            url: '/principal/getAmigosEmComum',
-            method: 'POST',
-            data: {de: $('#idUsuario').val(), para: $('#id-do-amigo').val()},
-            success: function (v) {
-               $('#amigosEmComum').html(v);
-            }
-        });
-    },500);
-
     var verificaSeJaRecomendou = function (getIdPerfil, idUsuario) {
         $.ajax({
             url: '/perfil/verificarRecomendacao',

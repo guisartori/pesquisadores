@@ -35,8 +35,33 @@ class Seguidor{
         }
     }
 
-    public static function desseguir($idSeguidor, $idSeguindo){
+    public static function eSeguidor($idSeguidor, $idSeguindo){
+        $db = new DB();
 
+        try{
+            $query = $db->query("SELECT 
+                            CASE WHEN EXISTS (SELECT id FROM seguidores s 
+                                                WHERE s.id_seguidor = '".$idSeguidor."' 
+                                                AND s.id_seguindo = '".$idSeguindo."')
+                            THEN 'TRUE' 
+                            ELSE 'FALSE'
+                            END AS segue
+                        FROM seguidores");
+            return $query->fetchAll()[0]['segue'] == 'TRUE';
+        } catch (Exception $e){
+            return json_encode($e->getMessage());
+        }
+    }
+
+    public static function deixarDeSeguir($idSeguidor, $idSeguindo){
+        $db = new DB();
+
+        try{
+            $db->delete('seguidores', "id_seguidor = '".$idSeguidor."' AND id_seguindo = '".$idSeguindo."'" );
+            return true;
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 
 }

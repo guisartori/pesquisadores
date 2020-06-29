@@ -4,7 +4,9 @@
 ?>
 <div class="post-bar content-vaga" data-id-vaga="<?php echo $post['id']; ?>" data-id-usuario-vaga="<?php echo $post['id_usuario']; ?>" data-titulo-vaga="<?php echo $post['titulo']; ?>">
     <div class="post_topbar">
-        <div class="usy-dt">
+        <div    class="usy-dt" 
+                style="cursor: pointer" 
+                onClick="javascript: abrirPerfilUsuario(<?php echo $post['id_usuario']; ?>)">
         <!-- TODO: COLOCAR A FOTO DE PERFIL DO USUÁRIO -->
             <img src="http://via.placeholder.com/50x50" alt="">
             <div class="usy-name">
@@ -35,10 +37,12 @@
     <div class="job-status-bar">
         <ul class="like-com">
             <li>
-                
-                <a href="javascript:void(0)" class="curtir-postagem <?php echo (App\Lib\Util::taCurtido($post['id'], $idUsuarioLogado)) ? 'text-danger' : ''; ?>" data-id-postagem="<?php echo $post['id']; ?>">  <?php echo App\Lib\Util::qtdCurtidas($post['id']); ?> &nbsp; <i class="la la-heart"></i>Curtir Postagem</a>
-                <!-- <img src="/public/images/liked-img.png" alt=""> -->
-
+                <a  href="javascript:void(0)" 
+                    class="curtir-postagem <?php echo (App\Lib\Util::taCurtido($post['id'], $idUsuarioLogado)) ? 'text-danger' : ''; ?>" 
+                    data-id-postagem="<?php echo $post['id']; ?>">  
+                        <?php echo App\Lib\Util::qtdCurtidas($post['id']); ?> &nbsp; 
+                        <i class="la la-heart"></i>Curtir Postagem
+                </a>
             </li>
             <li>
                 <a href="javascript:void(0)" title="CLIQUE PARA COMENTAR" data-id-postagem="<?php echo $post['id']; ?>" class="comentar"><i class="la la-comments-o"></i>Fazer Comentário</a>
@@ -57,3 +61,9 @@
         </form>
     </div>
 </div>
+
+<script>
+function abrirPerfilUsuario(idUsuario){
+    window.location.href = "/usuario/perfil/"+idUsuario;
+}
+</script>

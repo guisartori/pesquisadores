@@ -142,19 +142,38 @@
                                                     <span>Informações</span>
                                                 </a>
                                             </li>
-                                            <li data-tab="feed-dd">
+                                            <li data-tab="feed-dd" class="x">
                                                 <a class="recomendarPerfil" data-id-perfil="<?php echo $aViewVar['aAmigo'][0]['id']; ?>" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
                                                     <span id="qtd-likes" class="badge badge-pill badge-danger" style="position: absolute;color: #FFFFFF;font-size: 14px;line-height: 0.98;padding-top: 0.4em;padding-bottom: 0.4em;margin-left: 74px;margin-top: -9px;">0</span>
                                                     <i class="la la-thumbs-o-up" style="font-size: 34px;"></i>
                                                     <span data-toggle="tooltip" data-placement="bottom" title="RECOMENDAR USUÁRIO">Recomendar</span>
                                                 </a>
                                             </li>
-                                            <li id="li-do-amigo" data-tab="feed-dd">
-                                                <a data-id-usuario="<?php echo $aViewVar['aAmigo'][0]['id']; ?>" data-nome-usuario="<?php echo $aViewVar['aAmigo'][0]['nome']; ?>" class="add-amigo-perfil" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
-                                                    <i class="la la-user-plus" style="font-size: 34px;"></i>
-                                                    <span>Seguir <i><?php echo $aViewVar['aAmigo'][0]['nome']; ?></i></span>
-                                                </a>
-                                            </li>
+                                            <?php if($aViewVar['aAmigo'][0]['id'] != \App\Lib\Auth::usuario()->id){ ?>
+                                                <?php if (!App\Lib\Util::segue(\App\Lib\Auth::usuario()->id, $aViewVar['aAmigo'][0]['id'])){ ?>
+                                                    <li class="x" data-tab="feed-dd">
+                                                        <a  data-id-usuario="<?php echo $aViewVar['aAmigo'][0]['id']; ?>" 
+                                                            data-nome-usuario="<?php echo $aViewVar['aAmigo'][0]['nome']; ?>" 
+                                                            class="add-amigo-perfil" 
+                                                            title="" 
+                                                            style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
+                                                                <i class="la la-user-plus" style="font-size: 34px;"></i>
+                                                                <span>Seguir</span>
+                                                        </a>
+                                                    </li>
+                                                <?php } else { ?>
+                                                    <li  data-tab="feed-dd" class="x">
+                                                        <a  data-id-usuario="<?php echo $aViewVar['aAmigo'][0]['id']; ?>" 
+                                                            data-nome-usuario="<?php echo $aViewVar['aAmigo'][0]['nome']; ?>" 
+                                                            class="add-amigo-perfil" 
+                                                            title="" 
+                                                            style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
+                                                                <i class="la la-user-plus" style="font-size: 34px;"></i>
+                                                            <span>Parar de seguir </span>
+                                                        </a>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>

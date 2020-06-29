@@ -44,6 +44,7 @@ class PrincipalController extends Controller {
 
     }
 
+    //TODO: COLOCAR NO LUGAR CERTO DAQUI PRA BAIXO
     public function getSugestoes() {
 
         $idUsuario =  \App\Lib\Auth::usuario()->id;
@@ -81,64 +82,6 @@ class PrincipalController extends Controller {
         }
     }
 
-    public function getDadosAmizade() {
-        // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-        //TODO: COLOCAR CONEXÃO PADRÃO 
-        $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-        $idSolicitante = $_POST['idSolicitante'];
-        $idRequisitado = $_POST['idRequisitado'];
-        $nome = $_POST['nome'];
-        $nomeSolicitante = $_POST['nomeSolicitante'];
-
-        $result = mysqli_query($conn, "INSERT INTO amizade (id_solicitante, id_requisitado, nome_requisitado, nome_solicitado, status) VALUES ('$idSolicitante', '$idRequisitado', '$nome', '$nomeSolicitante', '0')");
-    }
-
-    public function getFotoPerfil() {
-        if(isset($_POST['idUser'])) {
-            $idLogado = $_POST['idUser'];
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-            $result = mysqli_query($conn, "SELECT * FROM fotoPerfil WHERE id_usuario = '$idLogado' ORDER BY id DESC LIMIT 1");
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    $row["listagem"] = " ".$row['imagem']." ";
-                    ?>
-                    <?php
-                    header('Content-Type: application/json');
-                    echo json_encode(array('foto' => ' '.$row["listagem"].' '));
-                }
-            } else {
-                header('Content-Type: application/json');
-                echo json_encode(array('foto' => 'profile-default.png'));
-            }
-        }
-    }
-
-    public function getSolicitacoesAmizades() {
-        if(isset($_POST['idUser'])) {
-            $idLogado = $_POST['idUser'];
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-            $result = mysqli_query($conn, "SELECT COUNT(*) FROM amizade WHERE id_requisitado = '$idLogado' AND status = 0 LIMIT 999");
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    $row["listagem"] = " ".$row['COUNT(*)']." ";
-                    ?>
-                    <?php
-                    header('Content-Type: application/json');
-                    echo json_encode(array('qtdSolicitacoesAmizade' => ' '.$row["listagem"].' '));
-                }
-            } else {
-                header('Content-Type: application/json');
-                echo json_encode(array('qtdSolicitacoesAmizade' => '0'));
-            }
-        }
-    }
 
     public function amigos() {
         self::setViewParam('nameController',$this->app->getNameController());
@@ -182,50 +125,6 @@ class PrincipalController extends Controller {
                 <?php
                 echo $row["listagem"];
             }
-        }
-    }
-
-    public function processaAceitacaoAmizade() {
-        if(isset($_POST['idAceitado']) && isset($_POST['idLogado'])) {
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-            $idAceitado = $_POST['idAceitado'];
-            $nomeAceitado = $_POST['nomeAceitado'];
-            $idLogado = $_POST['idLogado'];
-            $nomeLogado = $_POST['nomeLogado'];
-
-            $result = mysqli_query($conn, "INSERT INTO lista_amigos (id_solicitante, id_requisitado, nome_requisitado, nome_solicitante) VALUES ('$idLogado', '$idAceitado', '$nomeAceitado', '$nomeLogado')");
-            $result3 = mysqli_query($conn, "INSERT INTO lista_amigos (id_solicitante, id_requisitado, nome_requisitado, nome_solicitante) VALUES ('$idAceitado', '$idLogado', '$nomeLogado', '$nomeAceitado')");
-            $result2 = mysqli_query($conn, "UPDATE amizade SET status = '1' WHERE id_solicitante = '$idAceitado' AND id_requisitado = '$idLogado'");
-        }
-    }
-
-    public function atualizaStatusAceitacaoAmizade() {
-        if(isset($_POST['idAceitado']) && isset($_POST['idLogado'])) {
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-            $idAceitado = $_POST['idAceitado'];
-            $idLogado = $_POST['idLogado'];
-
-            $result2 = mysqli_query($conn, "UPDATE amizade SET status = 1 WHERE id_solicitante = '$idLogado' AND id_requisitado = '$idAceitado'");
-        }
-    }
-
-    public function atualizaStatusNegacaoAmizade() {
-        if(isset($_POST['idAceitado']) && isset($_POST['idLogado'])) {
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-            $idAceitado = $_POST['idAceitado'];
-            $idLogado = $_POST['idLogado'];
-
-            $result2 = mysqli_query($conn, "UPDATE amizade SET status = 1 WHERE id_solicitante = '$idLogado' AND id_requisitado = '$idAceitado'");
-            $result2 = mysqli_query($conn, "UPDATE amizade SET status = '1' WHERE id_solicitante = '$idAceitado' AND id_requisitado = '$idLogado'");
         }
     }
 
@@ -322,30 +221,4 @@ class PrincipalController extends Controller {
     }
 
    
-    public function curtir() {
-        if(isset($_POST['idUser']) && isset($_POST['idPublicacao'])) {
-            $idUser = $_POST['idUser'];
-            $idPublicacao = $_POST['idPublicacao'];
-
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $conn = mysqli_connect("localhost:3306", "root", "", "pesquisadores");
-
-            $result = mysqli_query($conn, "SELECT * FROM curtidas WHERE id_publicacao = '".$idPublicacao."' AND id_user = '".$idUser."'");
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    mysqli_query($conn, "DELETE FROM curtidas WHERE id_user = '".$idUser."' AND id_publicacao = '".$idPublicacao."'");
-                    header('Content-Type: application/json');
-                    echo json_encode(array('curtir'=> '0', 'pb' => $idPublicacao));
-                }
-            } else {
-                mysqli_query($conn, "INSERT INTO curtidas (id_user, id_publicacao) VALUES ('".$idUser."', '".$idPublicacao."')");
-                header('Content-Type: application/json');
-                echo json_encode(array('curtir'=> '1', 'pb' => $idPublicacao));
-            }
-        } else {
-            $this->render('error/usuario');
-        }
-    }
 }

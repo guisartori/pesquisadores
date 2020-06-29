@@ -18,11 +18,15 @@ class SeguidorController extends Controller
 
     }
 
-    public function seguir() {
+    public function mudarSeguir() {
         $idSeguidor = $_POST['id_seguidor'];
         $idSeguindo = $_POST['id_seguindo'];
 
+        if(Seguidor::eSeguidor($idSeguidor, $idSeguindo)){
+            return Seguidor::deixarDeSeguir($idSeguidor, $idSeguindo);
+        } else {
+            return Seguidor::seguir($idSeguidor, $idSeguindo);
+        }
         // echo json_encode('testando');
-        return Seguidor::seguir($idSeguidor, $idSeguindo);
     }
 }

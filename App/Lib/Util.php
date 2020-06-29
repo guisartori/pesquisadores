@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use App\Models\Curtida;
+use App\Models\Seguidor;
 
 class Util
 {
@@ -65,5 +66,9 @@ class Util
 
     public static function qtdCurtidas($postId){
         return Curtida::qtdCurtidas($postId);
+    }
+
+    public static function segue($idSeguidor, $idSeguindo){
+        return Seguidor::eSeguidor($idSeguidor, $idSeguindo);
     }
 }
