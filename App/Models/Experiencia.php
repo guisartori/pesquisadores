@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Lib\DB;
+use Exception;
 
 class Experiencia
 {
@@ -19,12 +20,22 @@ class Experiencia
                 '".$data['titulo']."',
                 '".$data['texto']."'"
             );
-            // TODO: ROTA DINAMICA
-            // header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            header("Location: http://localhost/perfil/editar");
+            
+            return true;
             
         }catch (\Exception $e){
             echo $e->getMessage();
+        }
+    }
+
+    public static function deletar($idExperiencia){
+        $db = new DB();
+
+        try{
+            $db->delete('experiencias', "id = '".$idExperiencia."'");
+            return true;
+        } catch(Exception $e){
+            return $e->getMessage();
         }
     }
 

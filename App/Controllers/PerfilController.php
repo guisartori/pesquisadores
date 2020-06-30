@@ -69,6 +69,7 @@ class PerfilController extends Controller {
 
         self::setViewJs('/public/js/principal/principal.js');
         self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
+        self::setViewJs('/public/js/jquery.mask.min.js');
         self::setViewJs('/public/js/perfil/editar.js');
 
         $this->render('perfil/editar');
@@ -178,46 +179,6 @@ class PerfilController extends Controller {
         } else {
             $this->render('error/usuario');
         }
-    }
-
-    public function salvarExperiencia() {
-        if($oUser = Usuario::salvarExperiencia($_POST)){
-
-            header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            $this->render('perfil/editar');
-        }
-
-        $this->render('error/usuario');
-    }
-
-    public function salvarEducacao() {
-        if($oUser = Usuario::salvarEducacao($_POST)){
-
-            header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            $this->render('perfil/editar');
-        }
-
-        $this->render('error/usuario');
-    }
-
-    public function salvarLocalizacao() {
-        if($oUser = Usuario::salvarLocalizacao($_POST)){
-
-            header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            $this->render('perfil/editar');
-        }
-
-        $this->render('error/usuario');
-    }
-
-    public function salvarHabilidade() {
-        if($oUser = Usuario::salvarHabilidade($_POST)){
-
-            header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            $this->render('perfil/editar');
-        }
-
-        $this->render('error/usuario');
     }
 
     public function salvarVaga() {

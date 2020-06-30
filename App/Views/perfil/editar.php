@@ -13,6 +13,11 @@
         margin-right: 15px;
         cursor: pointer !important;
     }
+
+    .deletar-habilidade:hover{
+        color:#e44d3a;
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -351,7 +356,9 @@ function removerFotoCapa(idUsuario){
                                         <p id="content-visao-geral"><?php echo $aViewVar['aUsuario']['visao_geral']; ?></p>
                                     </div>
                                     <div class="user-profile-ov st2">
-                                        <h3><a href="#" title="" class="exp-bx-open">Experiência</a><a href="#" title="" class="exp-bx-open"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a> <a href="#" title="" class="exp-bx-open"><i class="fa fa-plus-square"></i></a></h3>
+                                        <h3><a href="#" title="" class="exp-bx-open">Experiência</a>
+                                        
+                                        </a> <a href="#" title="" class="exp-bx-open"><i class="fa fa-plus-square"></i></a></h3>
 
                                         <?php
                                         if(!count($aViewVar['aListaExperiencia'])){
@@ -363,7 +370,7 @@ function removerFotoCapa(idUsuario){
                                                 <?php
                                                 foreach($aViewVar['aListaExperiencia'] as $aExperiencia) {
                                                     ?>
-                                                    <h4><?php echo $aExperiencia['titulo']; ?> <a data-id-experiencia="<?php echo $aExperiencia['id']; ?>" title=""><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a></h4>
+                                                    <h4><?php echo $aExperiencia['titulo']; ?> <a data-id-experiencia="<?php echo $aExperiencia['id']; ?>" title=""><button class="btn btn-danger btn-sm" onClick="javascript: window.location.href = '/experiencia/deletar/<?php echo $aExperiencia['id']; ?>'">REMOVER</button></a></h4>
                                                        <p><?php echo $aExperiencia['texto']; ?></p>
 
                                                     <?php
@@ -375,7 +382,7 @@ function removerFotoCapa(idUsuario){
                                         <p class="no-margin">  </p>
                                     </div>
                                     <div class="user-profile-ov">
-                                        <h3><a href="#" title="" class="ed-box-open">Educação</a> <a href="#" title="" class="ed-box-open"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a> <a href="#" title=""><i class="fa fa-plus-square"></i></a></h3>
+                                        <h3><a href="#" title="" class="ed-box-open">Educação</a> <a href="#" title="" class="ed-box-open"><i class="fa fa-plus-square"></i></a></h3>
 
                                         <?php
                                         if(!count($aViewVar['aListaEducacao'])){
@@ -387,7 +394,7 @@ function removerFotoCapa(idUsuario){
                                             <?php
                                             foreach($aViewVar['aListaEducacao'] as $aEducacao) {
                                                 ?>
-                                                <h4><?php echo $aEducacao['titulo']; ?> <a data-id-educacao="<?php echo $aEducacao['id']; ?>" title=""><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a></h4>
+                                                <h4><?php echo $aEducacao['titulo']; ?> <a data-id-educacao="<?php echo $aEducacao['id']; ?>" title=""><button class="btn btn-danger btn-sm" onClick="javascript: window.location.href = '/formacao/deletar/<?php echo $aEducacao['id']; ?>'">REMOVER</button></a></h4>
                                                 <span> <?php echo $aEducacao['ano_inicio']; ?> - <?php echo $aEducacao['ano_fim']; ?> </span>
                                                 <p><?php echo $aEducacao['texto']; ?></p>
 
@@ -400,7 +407,7 @@ function removerFotoCapa(idUsuario){
                                     </div>
                                     
                                     <div class="user-profile-ov">
-                                        <h3><a href="#" title="" class="skills-open">Habilidades</a> <a href="#" title="" class="skills-open"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></a> <a href="#"><i class="fa fa-plus-square"></i></a></h3>
+                                        <h3><a href="#" title="" class="skills-open">Habilidades</a> <a href="#" title="" class="skills-open"><i class="fa fa-plus-square"></i></a></h3>
                                         <ul>
                                             <?php
                                             if(!count($aViewVar['aListaHabilidades'])){
@@ -414,7 +421,7 @@ function removerFotoCapa(idUsuario){
                                                 foreach($aViewVar['aListaHabilidades'] as $aHabilidades) {
                                                     ?>
 
-                                                    <li><a data-id-habilidade="<?php echo $aHabilidades['id']; ?>" href="#" title="<?php echo $aHabilidades['habilidade']; ?>" alt="<?php echo $aHabilidades['habilidade']; ?>"><?php echo $aHabilidades['habilidade']; ?></a></li>
+                                                    <li><a><?php echo $aHabilidades['nome']; ?><i class="fa fa-trash deletar-habilidade" onClick="javascript: window.location.href = '/habilidade/deletar/<?php echo $aHabilidades['id']; ?>'" ></i></a></li>
 
                                                     <?php
                                                 }
@@ -1132,12 +1139,11 @@ function removerFotoCapa(idUsuario){
     <div class="overview-box" id="experience-box">
         <div class="overview-edit">
             <h3>Experiência</h3>
-            <form method="post" action="/perfil/salvarExperiencia">
+            <form method="post" action="/experiencia/salvar">
                 <input type="text" name="titulo" placeholder="Título">
                 <input type="hidden" name="id_usuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
                 <textarea name="texto"></textarea>
                 <button type="submit" class="save">Salvar</button>
-                <!-- <button type="submit" class="save-add">Save & adicionar mais</button> -->
                 <button type="button" class="cancel">Cancelar</button>
             </form>
             <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
@@ -1147,20 +1153,20 @@ function removerFotoCapa(idUsuario){
     <div class="overview-box" id="education-box">
         <div class="overview-edit">
             <h3>Educação</h3>
-            <form method="post" action="/perfil/salvarEducacao">
+            <form method="post" action="/formacao/novo">
                 <input type="hidden" name="id_usuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
                 <input type="text" name="titulo" placeholder="Escola / Universidade">
                 <div class="datepicky">
                     <div class="row">
                         <div class="col-lg-9 no-left-pd">
                             <div class="datefm">
-                                <input type="text" name="ano_inicio" placeholder="Data de Entrada (ex: dd/mm/aaaa)" class="datepicker">
+                                <input type="text" class="data-formacao" name="ano_inicio" placeholder="Início (ex: mm/aaaa)" >
                                 <i class="fa fa-calendar"></i>
                             </div>
                         </div>
-                        <div class="col-lg-9 no-righ-pd">
+                        <div class="col-lg-9 no-left-pd">
                             <div class="datefm">
-                                <input type="text" name="ano_fim" placeholder="Data de Saída (ex: dd/mm/aaaa)" class="datepicker">
+                                <input type="text" name="ano_fim" class="data-formacao" placeholder="Conclusão (ex: mm/aaaa)" class="datepicker">
                                 <i class="fa fa-calendar"></i>
                             </div>
                         </div>
@@ -1224,8 +1230,8 @@ function removerFotoCapa(idUsuario){
                 <li><a href="#" title="" class="skl-name">php</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
                 <li><a href="#" title="" class="skl-name">css</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
             </ul>
-            <form method="post" action="/perfil/salvarHabilidade">
-                <input type="text" name="habilidade" placeholder="ex: HTML ou PHP...">
+            <form method="post" action="/habilidade/salvar">
+                <input type="text" name="nome" placeholder="ex: PHP, Administração, Negociação...">
                 <input type="hidden" name="id_usuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
                 <button type="submit" class="save">Salvar</button>
                 <!-- <button type="submit" class="save-add">Save & adicionar mais</button> -->
@@ -1269,5 +1275,9 @@ function removerFotoCapa(idUsuario){
         </div>
     </div>
 </div>
-
+<script>
+    window.onload = () => {
+        $('.data-formacao').mask('00/0000')
+    }
+</script>
 </body>

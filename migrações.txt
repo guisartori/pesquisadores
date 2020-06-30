@@ -94,4 +94,10 @@ CREATE TABLE recomendacoes (
     FOREIGN KEY (id_recomendador) REFERENCES usuarios(id),
     FOREIGN KEY (id_recomendado) REFERENCES usuarios(id)
 );
+
+ALTER TABLE formacoes
+MODIFY COLUMN ano_inicio VARCHAR(7);
+
+ALTER TABLE formacoes
+MODIFY COLUMN ano_fim VARCHAR(7);
 ########################### TABELAS ###########################

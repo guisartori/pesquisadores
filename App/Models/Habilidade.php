@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Lib\DB;
+use Exception;
 
 class Habilidade
 {
@@ -14,7 +15,8 @@ class Habilidade
 
             $db->insert('habilidades',
                 "id_usuario,
-                nome", "'".$data['id_usuario']."',
+                nome", 
+                "'".$data['id_usuario']."',
                 '".$data['nome']."'"
             );
             // TODO: ROTA DINAMICA
@@ -43,6 +45,17 @@ class Habilidade
             echo $e->getMessage();
         }
 
+    }
+
+    public static function deletar($idHabilidade){
+        $db = new DB();
+
+        try{
+            $db->delete('habilidades', "id = '".$idHabilidade."'");
+            return true;
+        } catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 
 }
