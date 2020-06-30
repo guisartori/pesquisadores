@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use App\Models\Curtida;
+use App\Models\Recomendacao;
 use App\Models\Seguidor;
 
 class Util
@@ -70,5 +71,13 @@ class Util
 
     public static function segue($idSeguidor, $idSeguindo){
         return Seguidor::eSeguidor($idSeguidor, $idSeguindo);
+    }
+
+    public static function jaRecomendado($idRecomendador, $idRecomendado){
+        return Recomendacao::jaRecomendou($idRecomendador, $idRecomendado);
+    }
+
+    public static function qtdRecomendacoes($idUsuario){
+        return Recomendacao::qtdRecomendacoes($idUsuario);
     }
 }

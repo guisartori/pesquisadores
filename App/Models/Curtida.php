@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Lib\DB;
+use Exception;
+
 class Curtida {
 
     public static function curtir($idUsuario, $idPost){

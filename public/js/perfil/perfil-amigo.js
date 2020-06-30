@@ -83,47 +83,50 @@ $(document).ready(function () {
     };
 
     $('.recomendarPerfil').on('click', function () {
-       getIdPerfil = $(this).attr('data-id-perfil');
+       const getIdPerfil = $(this).attr('data-id-perfil');
 
        $.ajax({
-          url: '/perfil/recomendarPerfil',
+          url: '/recomendacao/recomendar',
           method: 'POST',
-          data: {idPerfil: getIdPerfil, idUser: idUsuario},
+          data: {idRecomendador: idUsuario, idRecomendado: getIdPerfil},
           success: function (r) {
-              if(r.curtiu == '1') {
-                $('.la-thumbs-o-up').css('color', '#dc3545');
-                  $('.recomendarPerfil').addClass('removerRecomendacao');
-                  //$('.recomendarPerfil').removeAttr('data-id-perfil');
-                  $('.recomendarPerfil').removeClass('recomendarPerfil');
-
-                  $('.removerRecomendacao').on('click', function () {
-                      getIdPerfil = $(this).attr('data-id-perfil');
-
-                      $.ajax({
-                          url: '/perfil/removerRecomendacao',
-                          method: 'POST',
-                          data: {idPerfil: getIdPerfil, idUser: idUsuario},
-                          success: function (r) {
-                              if(r.curtiu == '1') {
-                                  $('.la-thumbs-o-up').css('color', '#dc3545');
-                              } else if(r.curtiu == '0') {
-                                  $('.la-thumbs-o-up').css('color', '#b2b2b2');
-                                  $('.removerRecomendacao').addClass('recomendarPerfil');
-                                  $('.removerRecomendacao').removeClass('removerRecomendacao');
-                                  location.reload();
-                                  stop();
-                              }
-                              refreshContadorLikes(getIdPerfil, idUsuario);
-                              verificaSeJaRecomendou(getIdPerfil, idUsuario);
-                          }
-                      });
-                  });
-
-              } else if(r.curtiu == '0') {
-
-              }
-              refreshContadorLikes(getIdPerfil, idUsuario);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Perfil recomendado',
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(()=> window.location.reload(), 1500)
+                
           }
        });
     });
+
+    $('.desRecomendarPerfil').on('click', function () {
+        const getIdPerfil = $(this).attr('data-id-perfil');
+ 
+        $.ajax({
+           url: '/recomendacao/desRecomendar',
+           method: 'POST',
+           data: {idRecomendador: idUsuario, idRecomendado: getIdPerfil},
+           success: function (r) {
+                 Swal.fire({
+                     icon: 'success',
+                     title: 'Recomendação removida',
+                     showCloseButton: false,
+                     showCancelButton: false,
+                     focusConfirm: false,
+                     position: 'top-end',
+                     showConfirmButton: false,
+                     timer: 1500
+                 });
+                 setTimeout(()=> window.location.reload(), 1500)
+                 
+           }
+        });
+     });
 });
