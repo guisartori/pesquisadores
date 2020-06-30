@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
-                                                <button type="submit" value="submit">Entrar</button>
+                                                <button type="submit" value="submitBt">Entrar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -67,7 +67,7 @@
                                         </ul>
                                     </div>
                                     <div class="dff-tab current" id="tab-3">
-                                        <form action="/login/salvar" method="post">
+                                        <form action="/login/salvar" method="post" id="formNovoUsuario">
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
@@ -82,6 +82,12 @@
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input id="data-nascimento" type="date" name="data_nascimento" placeholder="Data de Nascimento (dd/mm/aaaa)" required>
+                                                        <i class="la la-globe"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="cpf" type="text" name="cpf" placeholder="CPF " required>
                                                         <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
@@ -145,10 +151,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd d-none" style="display: none;">
-                                                    <!-- <div class="sn-field">
-                                                        <input type="text" name="salario" placeholder="URL Currículo Lattes" required>
-                                                        <i class="la la-globe"></i>
-                                                    </div> -->
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
@@ -177,9 +179,21 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <button class="disabled" id="btn-cad-form" type="submit" value="submit" disabled>Vamos começar!</button>
+                                                    <div class="checky-sec st2">
+                                                        <div class="fgt-sec">
+                                                            <input type="checkbox" name="ccbr" id="check-br">
+                                                            <label for="check-br">
+                                                                <span></span>
+                                                            </label>
+                                                            <small>Declaro que sou brasileiro &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <button class="disabled" id="btn-cad-form" type="submit" value="submitBt" disabled>Vamos começar!</button>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="send" id="send" value="0">
                                         </form>
                                     </div>
                                     <div class="dff-tab invisivel" id="tab-4">
@@ -221,7 +235,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <button id="btn-cad-form-empresa"  type="submit" value="submit">Vamos começar!</button>
+                                                    <button id="btn-cad-form-empresa"  type="submit" value="submitBt">Vamos começar!</button>
                                                 </div>
                                             </div>
                                         </form>

@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\Comentario;
 
 class ComentarioController extends Controller {
-    private $app;
 
     public function __construct($app) {
         $this->app = $app;

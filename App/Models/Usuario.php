@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Lib\DB;
 use App\Lib\Util;
+use Exception;
 
 class Usuario
 {
@@ -36,6 +37,7 @@ class Usuario
             $inicio_trabalho = $data['inicio_trabalho'];
             $cidade = $data['cidade'];
             $estado = $data['estado'];
+            $cpf = $data['cpf'];
             $profissao = $data['profissao'];
             $tipo = $data['tipo'];
             $nivel_instrucao = $data['nivel_instrucao'];
@@ -47,6 +49,7 @@ class Usuario
                         data_nascimento,
                         inicio_trabalho,
                         cidade,
+                        cpf,
                         estado,
                         profissao,
                         tipo,
@@ -58,6 +61,7 @@ class Usuario
                         '".$inicio_trabalho."', 
                         '".$cidade."', 
                         '".$estado."', 
+                        '".$cpf."', 
                         '".$profissao."', 
                         '".$tipo."', 
                         '".$nivel_instrucao."'"
@@ -69,7 +73,7 @@ class Usuario
 
             return $query->fetch();
 
-        }catch (\Exception $e){
+        }catch (Exception $e){
             echo $e->getMessage();
 
         }
@@ -125,10 +129,10 @@ class Usuario
 
             $data['senha'] = base64_encode($data['senha']);
 
-            $db->update('usuario',
-                "usuario = '".$data['usuario']."',senha = '".$data['senha']."',
-                 perfil = '".$data['perfil']."' 
-                 WHERE id = $id");
+        //     $db->update('usuario',
+        //         "usuario = '".$data['usuario']."',senha = '".$data['senha']."',
+        //          perfil = '".$data['perfil']."' 
+        //          WHERE id = $id");
 
         }catch (Exception $e){
             echo $e->getMessage();

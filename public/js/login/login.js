@@ -1,12 +1,29 @@
 $(document).ready(function () {
-   setTimeout(function () {
-       //$('#data-nascimento').mask('00/00/0000');
-       $('#data_validade_cartao').mask('00/0000')
-   },250);
 
+    
+    $('#cpf').mask('000.000.000-00')
+   
+    $('#formNovoUsuario').on('submit', (e) => {
+        if($('#teste').val() == 0){
+            e.preventDefault()
+            let nascimento = $('#data-nascimento').val()
+            nascimento = nascimento.split("-")
+            const idadeTotal = idade(nascimento[0], nascimento[1], nascimento[2])
+
+            if(idadeTotal < 18){
+                alert('Somente permitido maiores de 18 anos.')
+            } else {
+                console.log(idadeTotal)
+                $('#send').val(1)
+                $("#formNovoUsuario").submit()
+            }
+        } else {
+            return true;
+        }
+    })
 
     $('body').on('click', function () {
-        if ($('input#check-condicoes').is(':checked')) {
+        if ($('input#check-condicoes').is(':checked') && $('input#check-br').is(':checked')) {
             $('#btn-cad-form').prop('disabled', false);
             $('#btn-cad-form').removeClass('disabled');
         } else {
@@ -32,4 +49,23 @@ $(document).ready(function () {
            $('#cvc_cartao').prop('required', true);
        }
     });
+    
+    function idade(ano_aniversario, mes_aniversario, dia_aniversario) {
+        var d = new Date,
+        ano_atual = d.getFullYear(),
+        mes_atual = d.getMonth() + 1,
+        dia_atual = d.getDate(),
+        
+        ano_aniversario = +ano_aniversario,
+        mes_aniversario = +mes_aniversario,
+        dia_aniversario = +dia_aniversario,
+        
+        quantos_anos = ano_atual - ano_aniversario;
+        
+        if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
+            quantos_anos--;
+        }
+        
+        return quantos_anos < 0 ? 0 : quantos_anos;
+    }
 });
