@@ -175,4 +175,26 @@ class Usuario
 
     }
 
+    public static function sugestoes($idUsuario){
+
+        $db = new DB();
+
+        $sql = "SELECT * 
+        FROM usuarios u 
+        WHERE u.id NOT IN 
+            (SELECT s.id_seguindo 
+            FROM seguidores s 
+            WHERE s.id_seguidor = '".$idUsuario."') 
+        AND u.id != '".$idUsuario."'
+        LIMIT 10";
+
+        try{
+            $query = $db->query($sql);
+            return $query->fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+
+    }
+
 }
