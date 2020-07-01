@@ -5,9 +5,6 @@ namespace App\Controllers;
 use App\Models\Usuario;
 use App\Models\Post;
 use App\Models\Seguidor;
-use App\Models\Experiencia;
-use App\Models\Formacao;
-use App\Models\Habilidade;
 
 class PrincipalController extends Controller {
     private $app;
@@ -74,6 +71,17 @@ class PrincipalController extends Controller {
     public function amigos() {
         self::setViewParam('nameController',$this->app->getNameController());
 
+        $idUsuario =  \App\Lib\Auth::usuario()->id;
+        $seguidores = Usuario::seguidores($idUsuario);
+        $qtdSeguidores = Seguidor::getTotalSeguidores($idUsuario);
+        $qtdSeguindo = Seguidor::getTotalSeguindo($idUsuario);
+        $usuario = Usuario::mostrar($idUsuario);
+
+        self::setViewParam('seguidores', $seguidores);
+        self::setViewParam('totalSeguidores',$qtdSeguidores[0]["total"]);
+        self::setViewParam('totalSeguindo',$qtdSeguindo[0]["total"]);
+        self::setViewParam('usuario',$usuario[0]);
+        
         self::setViewCss('/public/css/pages/principal/principal.css');
         self::setViewCss('/public/css/pages/principal/amigos.css');
 
@@ -82,37 +90,6 @@ class PrincipalController extends Controller {
         self::setViewJs('/public/js/principal/amigos.js');
 
         $this->render('principal/amigos');
-    }
-
-
-    public function refreshListagemAmigos() {
-        if(isset($_POST['idProprio'])) {
-            $idLogado = $_POST['idProprio'];
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
-            $idUsuario =  \App\Lib\Auth::usuario()->id;
-            $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
-            $query = "SELECT * FROM usuarios u LEFT JOIN seguidores s ON s.id_seguidor = '".$idUsuario."' WHERE u.id != '".$idUsuario."'";
-            $result = mysqli_query($conn, $query);
-
-            while($row = mysqli_fetch_assoc($result)) {
-                $row["listagem"] = '
-                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                    <div class="company_profile_info">
-                        <div class="company-up-info card-item-amigos">
-                            <img src="/public/uploads/fotoPerfil/profile-default.png" alt="Foto do Usuário Solicitante">
-                            <h3>'.$row['nome'].'</h3>
-                            <h4>'.$row['profissao'].'</h4>
-                        </div>
-                        <a href="/usuario/perfil/'.$row["id_seguindo"].'" data-id-search="'.$row["id_seguindo"].'" title="" class="view-more-pro">Ver Perfil</a>
-                    </div>
-                </div>    
-                ';
-                ?>
-                <?php
-                echo $row["listagem"];
-            }
-        }
     }
 
     public function getDeveriaConhecer() {

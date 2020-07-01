@@ -13,19 +13,5 @@ $(document).ready(function () {
         }
     });
 
-    $.ajax({
-        url:"/principal/refreshListagemAmigos/",
-        method:"POST",
-        data:{idProprio: userLogado},
-        success:function(r){
-            $('#content-amigos').html(r);
-        }
-    });
-
-    //ao clicar em aceitar solicitação de amizade...
-    setTimeout(function () {
-
-    },1000);
-
     
 });

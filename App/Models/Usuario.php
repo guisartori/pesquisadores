@@ -96,6 +96,25 @@ class Usuario
 
     }
 
+    public static function seguidores($idUsuario) {
+        $db = new DB();
+
+        try {
+            $query = $db->query(
+                "SELECT * 
+                FROM usuarios u 
+                LEFT JOIN seguidores s
+                ON s.id_seguidor = u.id
+                WHERE s.id_seguindo = '".$idUsuario."'"
+            );
+
+            return $query->fetchAll();
+
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
     public static function inserirFotoPerfil($target, $idUsuario){
         $db = new DB();
         $db->update('usuarios', "foto_perfil = '/".$target."'", "id = '".$idUsuario."'");

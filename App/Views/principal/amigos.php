@@ -41,7 +41,7 @@
                             </a>
                         </li>
 
-			<li>
+                        <li>
                             <a href="/perfil/editar" title="">
                                 Editar Perfil
                             </a>
@@ -91,26 +91,26 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 pd-left-none no-pd">
                             <div class="main-left-sidebar no-margin">
-                                <div class="user-data full-width">
+                            <div class="user-data full-width">
                                     <div class="user-profile">
                                         <div class="username-dt">
                                             <div class="usr-pic">
-                                                <div class="lds-facebook" style="background: #0d6120;border-radius: 50%;margin-top: 2em;"><div></div><div></div><div></div></div>
+                                                <img style="width: 110px; height: 110px" src="<?php echo ($aViewVar['usuario']['foto_perfil']) ? $aViewVar['usuario']['foto_perfil'] : "http://via.placeholder.com/110x110"; ?>"   alt="">
                                             </div>
                                         </div>
                                         <div class="user-specs">
-                                            <h3 id="nome-user-logado-titulo"><?php  echo \App\Lib\Auth::usuario()->usuario; ?></h3>
+                                            <h3><?php  echo \App\Lib\Auth::usuario()->usuario; ?></h3>
                                             <span><?php  echo \App\Lib\Auth::usuario()->profissao; ?></span>
                                         </div>
                                     </div>
                                     <ul class="user-fw-status">
                                         <li>
                                             <h4>Seguindo</h4>
-                                            <span class="qtdSeguidoresUser">0</span>
+                                            <span class="qtdSeguidoresUser"><?php echo $aViewVar['totalSeguindo'] ?></span>
                                         </li>
                                         <li>
                                             <h4>Seguidores</h4>
-                                            <span class="seguindoVolta">0</span>
+                                            <span class="seguindoVolta"><?php echo $aViewVar['totalSeguidores'] ?></span>
                                         </li>
                                         <li>
                                             <a href="/perfil/" title="">Ver Perfil</a>
@@ -145,7 +145,18 @@
                                     <div class="post-bar">
                                         <div class="companies-list">
                                             <div id="content-amigos" class="row">
-
+                                                <?php foreach($aViewVar['seguidores'] as $seguidor) { ?>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                                        <div class="company_profile_info">
+                                                            <div class="company-up-info card-item-amigos">
+                                                                <img src="/public/uploads/fotoPerfil/profile-default.png" alt="Foto do Usuário Solicitante">
+                                                                <h3><?php echo $seguidor['nome']; ?></h3>
+                                                                <h4><?php echo $seguidor['profissao']; ?></h4>
+                                                            </div>
+                                                            <a href="/usuario/perfil/<?php echo $seguidor['id']; ?>" data-id-search="<?php echo $seguidor['id']; ?>" title="" class="view-more-pro">Ver Perfil</a>
+                                                        </div>
+                                                    </div> 
+                                                <?php } ?>
                                             </div>
                                         </div>
 
