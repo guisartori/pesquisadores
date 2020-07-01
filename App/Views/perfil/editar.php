@@ -95,94 +95,6 @@ function removerFotoCapa(idUsuario){
     </div>
 </div>
 
-<!-- MODAL EDITAR NOME & PROFISSAO -->
-<div id="modal-edit-nome-profissao" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Atualizar Informações Pessoais</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="nome-sobrenome" class="col-form-label">Nome e Sobrenome:</label>
-                        <input type="text" class="form-control" id="nome-sobrenome" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="col-form-label">E-mail:</label>
-                        <input type="email" class="form-control" id="email" placeholder="seu-email@pesquisadores.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataNasc" class="col-form-label">Data de Nascimento:</label>
-                        <input type="date" class="form-control" id="dataNasc" placeholder="dd/mm/aaaa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-profissao" class="col-form-label">Profissão:</label>
-                        <input type="text" class="form-control" id="edit-profissao" placeholder="Analista..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nivel-instrucao" class="col-form-label">Nível de Instrução:</label>
-                        <input type="text" class="form-control" id="nivel-instrucao" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inicio-area" class="col-form-label">Quando iniciou na Área:</label>
-                        <input type="text" class="form-control" id="inicio-area" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cidade" class="col-form-label">Cidade:</label>
-                        <input type="text" class="form-control" id="cidade" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="estado" class="col-form-label">Estado:</label>
-                        <select class="form-control" id="estado" required="">
-                            <option>Selecione o Estado...</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="salario" class="col-form-label">URL Currículo Lattes:</label>
-                        <input type="text" class="form-control" id="salario" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="btn-atualizarInformacoes" type="button" class="btn btn-primary">Atualizar Informações</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="wrapper">
     <header>
         <div class="container">
@@ -206,7 +118,7 @@ function removerFotoCapa(idUsuario){
                             </a>
                         </li>
 
-			<li>
+			            <li>
                             <a href="/perfil/editar" title="">
                                 Editar Perfil
                             </a>
@@ -291,40 +203,22 @@ function removerFotoCapa(idUsuario){
                                             </li>
                                         </ul>
                                     </div>
-
                                 </div>
-                                <div class="suggestions full-width">
-                                    <div class="sd-title">
-                                        <h3>Visualizações do seu perfil</h3>
-                                        <i class="la la-ellipsis-v"></i>
-                                    </div>
-                                    <div class="suggestions-list">
-                                        <div class="suggestion-usd" style="display: none !important;visibility: hidden !important;">
-                                            <img src="http://via.placeholder.com/35x35" alt="">
-                                            <div class="sgt-text">
-                                                <h4>Daniel</h4>
-                                                <span>Pesquisador</span>
-                                            </div>
-                                            <span><i class="la la-plus"></i></span>
-                                        </div>
-                                        <div class="view-more">
-                                            <a href="#" title="">Ver Mais</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
                         </div>
-                        <div class="col-lg-">
+                        <div class="container">
                             <div class="main-ws-sec">
                                 <div class="user-tab-sec">
+                                    <h3><?php echo $aViewVar['aUsuario']['nome']; ?></h3>
+                                    <p>  </p>
+                                    <div class="star-descp" style="margin-bottom: 0px;">
+                                    <span><?php echo $aViewVar['aUsuario']['profissao']; ?></span>
                                     <h3><span class="nomeUser"></span> <span class="badge badge-danger chama-modal-editar-nome" style="cursor: pointer;font-size: 15px;"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></span></h3>
-                                    <div class="star-descp">
-                                        <span id="profissaoUser"></span>
-
-
-                                    </div>
-                                    <div class="tab-feed st2">
-                                        <ul>
+                                    
+                                    <div class="tab-feed st2" style="">
+                                        <ul style="padding-top: 40px;">
 
                                             <li data-tab="info-dd">
                                                 <a href="#" title="">
@@ -332,7 +226,6 @@ function removerFotoCapa(idUsuario){
                                                     <span>Informações</span>
                                                 </a>
                                             </li>
-
 
                                             <li data-tab="portfolio-dd" style="display:none;visibility: hidden;">
                                                 <a href="#" title="">
@@ -1280,4 +1173,94 @@ function removerFotoCapa(idUsuario){
         $('.data-formacao').mask('00/0000')
     }
 </script>
+
+
+<!-- MODAL EDITAR NOME & PROFISSAO -->
+<div id="modal-edit-nome-profissao" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualizar Informações Pessoais</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nome-sobrenome" class="col-form-label">Nome e Sobrenome:</label>
+                        <input type="text" class="form-control" value="<?php echo $aViewVar['aUsuario']['nome']; ?>" id="nome-sobrenome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">E-mail:</label>
+                        <input type="email" class="form-control" value="<?php echo $aViewVar['aUsuario']['email']; ?>" id="email" placeholder="seu-email@pesquisadores.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNasc" class="col-form-label">Data de Nascimento:</label>
+                        <input type="date" class="form-control"  value="<?php echo $aViewVar['aUsuario']['data_nascimento']; ?>" id="dataNasc" placeholder="dd/mm/aaaa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-profissao" class="col-form-label">Profissão:</label>
+                        <input type="text" class="form-control" value="<?php echo $aViewVar['aUsuario']['profissao']; ?>" id="edit-profissao" placeholder="Analista..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nivel-instrucao" class="col-form-label">Nível de Instrução:</label>
+                        <input type="text" class="form-control" id="nivel-instrucao" value="<?php echo $aViewVar['aUsuario']['nivel_instrucao']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inicio-area" class="col-form-label">Quando iniciou na Área:</label>
+                        <input type="text" class="form-control" id="inicio-area" value="<?php echo $aViewVar['aUsuario']['inicio_trabalho']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cidade" class="col-form-label">Cidade:</label>
+                        <input type="text" class="form-control" id="cidade" value="<?php echo $aViewVar['aUsuario']['cidade']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado" class="col-form-label">Estado:</label>
+                        <select class="form-control" id="estado" required="">
+                            <option>Selecione o Estado...</option>
+                            <option value="AC" <?php echo $aViewVar['aUsuario']['estado'] == "AC" ? 'selected' : ''; ?> >Acre</option>
+                            <option value="AL" <?php echo $aViewVar['aUsuario']['estado'] == "AL" ? 'selected' : ''; ?>>Alagoas</option>
+                            <option value="AP" <?php echo $aViewVar['aUsuario']['estado'] == "AP" ? 'selected' : ''; ?>>Amapá</option>
+                            <option value="AM" <?php echo $aViewVar['aUsuario']['estado'] == "AM" ? 'selected' : ''; ?>>Amazonas</option>
+                            <option value="BA" <?php echo $aViewVar['aUsuario']['estado'] == "BA" ? 'selected' : ''; ?>>Bahia</option>
+                            <option value="CE" <?php echo $aViewVar['aUsuario']['estado'] == "CE" ? 'selected' : ''; ?>>Ceará</option>
+                            <option value="DF" <?php echo $aViewVar['aUsuario']['estado'] == "DF" ? 'selected' : ''; ?>>Distrito Federal</option>
+                            <option value="ES" <?php echo $aViewVar['aUsuario']['estado'] == "ES" ? 'selected' : ''; ?>>Espírito Santo</option>
+                            <option value="GO" <?php echo $aViewVar['aUsuario']['estado'] == "GO" ? 'selected' : ''; ?>>Goiás</option>
+                            <option value="MA" <?php echo $aViewVar['aUsuario']['estado'] == "MA" ? 'selected' : ''; ?>>Maranhão</option>
+                            <option value="MT" <?php echo $aViewVar['aUsuario']['estado'] == "MT" ? 'selected' : ''; ?>>Mato Grosso</option>
+                            <option value="MS" <?php echo $aViewVar['aUsuario']['estado'] == "MS" ? 'selected' : ''; ?>>Mato Grosso do Sul</option>
+                            <option value="MG" <?php echo $aViewVar['aUsuario']['estado'] == "MG" ? 'selected' : ''; ?>>Minas Gerais</option>
+                            <option value="PA" <?php echo $aViewVar['aUsuario']['estado'] == "PA" ? 'selected' : ''; ?>>Pará</option>
+                            <option value="PB" <?php echo $aViewVar['aUsuario']['estado'] == "PB" ? 'selected' : ''; ?>>Paraíba</option>
+                            <option value="PR" <?php echo $aViewVar['aUsuario']['estado'] == "PR" ? 'selected' : ''; ?>>Paraná</option>
+                            <option value="PE" <?php echo $aViewVar['aUsuario']['estado'] == "PE" ? 'selected' : ''; ?>>Pernambuco</option>
+                            <option value="PI" <?php echo $aViewVar['aUsuario']['estado'] == "PI" ? 'selected' : ''; ?>>Piauí</option>
+                            <option value="RJ" <?php echo $aViewVar['aUsuario']['estado'] == "RJ" ? 'selected' : ''; ?>>Rio de Janeiro</option>
+                            <option value="RN" <?php echo $aViewVar['aUsuario']['estado'] == "RN" ? 'selected' : ''; ?>>Rio Grande do Norte</option>
+                            <option value="RS" <?php echo $aViewVar['aUsuario']['estado'] == "RS" ? 'selected' : ''; ?>>Rio Grande do Sul</option>
+                            <option value="RO" <?php echo $aViewVar['aUsuario']['estado'] == "RO" ? 'selected' : ''; ?>>Rondônia</option>
+                            <option value="RR" <?php echo $aViewVar['aUsuario']['estado'] == "RR" ? 'selected' : ''; ?>>Roraima</option>
+                            <option value="SC" <?php echo $aViewVar['aUsuario']['estado'] == "SC" ? 'selected' : ''; ?>>Santa Catarina</option>
+                            <option value="SP" <?php echo $aViewVar['aUsuario']['estado'] == "SP" ? 'selected' : ''; ?>>São Paulo</option>
+                            <option value="SE" <?php echo $aViewVar['aUsuario']['estado'] == "SE" ? 'selected' : ''; ?>>Sergipe</option>
+                            <option value="TO" <?php echo $aViewVar['aUsuario']['estado'] == "TO" ? 'selected' : ''; ?>>Tocantins</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="salario" class="col-form-label">URL Currículo Lattes:</label>
+                        <input type="text" class="form-control" id="salario" required>
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="btn-atualizarInformacoes" type="button" class="btn btn-primary">Atualizar Informações</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>

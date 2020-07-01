@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Lib\DB;
 use App\Models\Usuario;
 use App\Models\Post;
 use App\Models\Experiencia;
@@ -65,27 +64,5 @@ class UsuarioController extends Controller
 
     }
 
-    public function editar(){
-
-        self::setViewJs('/public/js/jquery.maskMoney.min.js');
-        self::setViewJs('/public/js/jquery-ui.js');
-        self::setViewJs('/public/js/main.datepicker.js');
-        self::setViewJs('/public/js/main.mask.money.js');
-        self::setViewCss('/public/css/jquery-ui.min.css');
-
-        self::setViewParam('aUsuario',Usuario::listar($this->app->getParams()[0]));
-
-        $this->render('usuario/editar');
-
-    }
-
-    public function excluir($param){
-        $id = $param[0];
-
-        Usuario::excluir($id);
-
-        $this->redirect('usuario/index');
-
-    }
 
 }

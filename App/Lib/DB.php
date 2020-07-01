@@ -18,19 +18,18 @@ class DB
     private $driver;
     private $pdo;
 
-    public function __construct()
-    {
+    public function __construct() {
         $oConfigDb = $_SESSION['oConfig']->getConfig()->db;
 
-        // $this->host         = (!empty($oConfigDb->host))        ? $oConfigDb->host      : "";
-        $this->host         = "127.0.0.1";
+        $this->host         = "sql10.freemysqlhosting.net";
+        // $this->host         = "127.0.0.1";
+        $this->name         = "sql10351862";
+        // $this->name         = "projeto_pesquisadores";
+        $this->username     = "sql10351862";
+        // $this->username     = "root";
+        $this->password    = "qqvH5ZyaGB";
+        // $this->password    = "";
 
-        // $this->name         = (!empty($oConfigDb->name))        ? $oConfigDb->name      : "";
-        $this->name         = "projeto_pesquisadores";
-        // $this->username     = (!empty($oConfigDb->username))    ? $oConfigDb->username  : "";
-        $this->username     = "root";
-        // $this->password    = (!empty($oConfigDb->password))   ? $oConfigDb->password : "";
-        $this->password    = "";
         $this->driver       = (!empty($oConfigDb->driver))      ? $oConfigDb->driver    : "";
 
         $this->pdo = $this->connect();

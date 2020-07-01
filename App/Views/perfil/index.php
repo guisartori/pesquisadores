@@ -138,13 +138,27 @@
                                                     <span>Informações</span>
                                                 </a>
                                             </li>
-                                            <li data-tab="feed-dd">
-                                                <a class="#" href="#" title="" style="text-decoration: none !important;color: #b2b2b2;">
-                                                    <span id="qtd-likes" class="badge badge-pill badge-danger" style="position: absolute;color: #FFFFFF;font-size: 14px;line-height: 0.98;padding-top: 0.4em;padding-bottom: 0.4em;margin-left: 74px;margin-top: -9px;">0</span>
-                                                    <i class="la la-thumbs-o-up" style="font-size: 34px;"></i>
-                                                    <span>Recomendações</span>
-                                                </a>
-                                            </li>
+                                            <?php if(!App\Lib\Util::jaRecomendado(\App\Lib\Auth::usuario()->id, $aViewVar['usuario'][0]['id'])) { ?>
+                                                <li data-tab="feed-dd" class="x">
+                                                    <a class="recomendarPerfil" data-id-perfil="<?php echo $aViewVar['usuario'][0]['id']; ?>" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
+                                                        <span id="qtd-likes" class="badge badge-pill badge-danger" style="position: absolute;color: #FFFFFF;font-size: 14px;line-height: 0.98;padding-top: 0.4em;padding-bottom: 0.4em;margin-left: 74px;margin-top: -9px;">
+                                                            <?php echo App\Lib\Util::qtdRecomendacoes($aViewVar['usuario'][0]['id']) ?>
+                                                        </span>
+                                                        <i class="la la-thumbs-o-up" style="font-size: 34px;"></i>
+                                                        <span data-toggle="tooltip" data-placement="bottom" title="RECOMENDAR USUÁRIO">Recomendar</span>
+                                                    </a>
+                                                </li>
+                                            <?php } else { ?>
+                                                <li data-tab="feed-dd" class="x active">
+                                                    <a class="desRecomendarPerfil" data-id-perfil="<?php echo $aViewVar['usuario'][0]['id']; ?>" title="" style="text-decoration: none !important;color: #b2b2b2;cursor: pointer;">
+                                                        <span id="qtd-likes" class="badge badge-pill badge-danger" style="position: absolute;color: #FFFFFF;font-size: 14px;line-height: 0.98;padding-top: 0.4em;padding-bottom: 0.4em;margin-left: 110px;margin-top: -9px;">
+                                                            <?php echo App\Lib\Util::qtdRecomendacoes($aViewVar['usuario'][0]['id']) ?>
+                                                        </span>
+                                                        <i class="la la-thumbs-o-up" style="font-size: 34px;"></i>
+                                                        <span data-toggle="tooltip" data-placement="bottom" title="Desfazer recomendação">Remover recomendação</span>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -183,8 +197,10 @@
                                 </div>
                                 <div class="product-feed-tab" id="info-dd">
                                     <div class="user-profile-ov">
-                                        <h3>Ver tudo</h3>
-                                        <p id="texto-visao-geral"></p>
+                                        <h3>Visão geral</h3>
+                                        <p id="texto-visao-geral">
+                                            <?php echo $aViewVar['usuario'][0]['visao_geral'] ?>
+                                        </p>
                                     </div>
                                     <div class="user-profile-ov st2">
                                         <h3>Experiência</h3>
@@ -248,7 +264,7 @@
                                                     foreach($aViewVar['aListaHabilidades'] as $aHabilidades) {
                                                         ?>
 
-                                                        <li><a data-id-habilidade="<?php echo $aHabilidades['id']; ?>" href="#" title="<?php echo $aHabilidades['habilidade']; ?>" alt="<?php echo $aHabilidades['habilidade']; ?>"><?php echo $aHabilidades['habilidade']; ?></a></li>
+                                                        <li><a data-id-habilidade="<?php echo $aHabilidades['id']; ?>" href="#" title="<?php echo $aHabilidades['nome']; ?>" alt="<?php echo $aHabilidades['nome']; ?>"><?php echo $aHabilidades['nome']; ?></a></li>
 
                                                         <?php
                                                     }
