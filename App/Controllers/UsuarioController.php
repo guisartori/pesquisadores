@@ -58,10 +58,24 @@ class UsuarioController extends Controller
 
     public function atualizar(){
 
-        Usuario::atualizar($_POST);
+        $response = Usuario::atualizar($_POST);
 
-        $this->redirect('usuario/index');
+        if($response){
+            header("Location: http://localhost/perfil/editar");
+        } else {
+            echo $response;
+        }
 
+    }
+
+    public function atualizarVisaoGeral(){
+        $response = Usuario::atualizarVisaoGeral($_POST);
+
+        if($response){
+            header("Location: http://localhost/perfil/editar");
+        } else {
+            echo $response;
+        }
     }
 
 

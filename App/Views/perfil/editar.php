@@ -217,7 +217,7 @@ function removerFotoCapa(idUsuario){
                                     <span><?php echo $aViewVar['aUsuario']['profissao']; ?></span>
                                     <h3><span class="nomeUser"></span> <span class="badge badge-danger chama-modal-editar-nome" style="cursor: pointer;font-size: 15px;"><button class="btn btn-editar btn-sm">EDITAR INFORMAÇÕES</button></span></h3>
                                     
-                                    <div class="tab-feed st2" style="">
+                                    <div class="tab-feed st2" >
                                         <ul style="padding-top: 40px;">
 
                                             <li data-tab="info-dd">
@@ -1019,10 +1019,11 @@ function removerFotoCapa(idUsuario){
         <div class="overview-edit">
             <h3>Visão geral</h3>
             <!-- <span>5000 caracteres restantes</span> -->
-            <form>
-                <textarea id="edit-visao-geral"></textarea>
-                <button id="btn-salvar-visao-geral" type="button" class="save">Salvar</button>
+            <form method="POST" action="/usuario/atualizarVisaoGeral">
+                <textarea id="edit-visao-geral" name="visao_geral"><?php echo $aViewVar['aUsuario']['visao_geral']; ?></textarea>
+                <button id="btn-salvar-visao-geral" type="submit" class="save">Salvar</button>
                 <button type="submit" class="cancel">Cancelar</button>
+                <input type="hidden" name="id" value="<?php echo App\Lib\Auth::usuario()->id; ?>">
             </form>
             <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
         </div>
@@ -1178,87 +1179,86 @@ function removerFotoCapa(idUsuario){
 <!-- MODAL EDITAR NOME & PROFISSAO -->
 <div id="modal-edit-nome-profissao" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Atualizar Informações Pessoais</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <form method="POST" action="/usuario/atualizar">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Atualizar Informações Pessoais</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        
+                        <div class="form-group">
+                            <label for="nome-sobrenome" class="col-form-label">Nome e Sobrenome:</label>
+                            <input type="text" class="form-control" value="<?php echo $aViewVar['aUsuario']['nome']; ?>" name="nome" id="nome-sobrenome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-form-label">E-mail:</label>
+                            <input type="email" class="form-control" value="<?php echo $aViewVar['aUsuario']['email']; ?>" name="email" id="email" placeholder="seu-email@pesquisadores.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataNasc" class="col-form-label">Data de Nascimento:</label>
+                            <input type="date" class="form-control"  value="<?php echo $aViewVar['aUsuario']['data_nascimento']; ?>" name="data_nascimento" id="dataNasc" placeholder="dd/mm/aaaa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-profissao" class="col-form-label">Profissão:</label>
+                            <input type="text" class="form-control" value="<?php echo $aViewVar['aUsuario']['profissao']; ?>" name="profissao" id="edit-profissao" placeholder="Analista..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nivel-instrucao" class="col-form-label">Nível de Instrução:</label>
+                            <input type="text" class="form-control" id="nivel-instrucao" name="nivel_instrucao" value="<?php echo $aViewVar['aUsuario']['nivel_instrucao']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inicio-area" class="col-form-label">Quando iniciou na Área:</label>
+                            <input type="text" class="form-control" id="inicio-area" name="inicio_trabalho" value="<?php echo $aViewVar['aUsuario']['inicio_trabalho']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade" class="col-form-label">Cidade:</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade" value="<?php echo $aViewVar['aUsuario']['cidade']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado" class="col-form-label">Estado:</label>
+                            <select class="form-control" name="estado" id="estado" required="">
+                                <option>Selecione o Estado...</option>
+                                <option value="AC" <?php echo $aViewVar['aUsuario']['estado'] == "AC" ? 'selected' : ''; ?> >Acre</option>
+                                <option value="AL" <?php echo $aViewVar['aUsuario']['estado'] == "AL" ? 'selected' : ''; ?>>Alagoas</option>
+                                <option value="AP" <?php echo $aViewVar['aUsuario']['estado'] == "AP" ? 'selected' : ''; ?>>Amapá</option>
+                                <option value="AM" <?php echo $aViewVar['aUsuario']['estado'] == "AM" ? 'selected' : ''; ?>>Amazonas</option>
+                                <option value="BA" <?php echo $aViewVar['aUsuario']['estado'] == "BA" ? 'selected' : ''; ?>>Bahia</option>
+                                <option value="CE" <?php echo $aViewVar['aUsuario']['estado'] == "CE" ? 'selected' : ''; ?>>Ceará</option>
+                                <option value="DF" <?php echo $aViewVar['aUsuario']['estado'] == "DF" ? 'selected' : ''; ?>>Distrito Federal</option>
+                                <option value="ES" <?php echo $aViewVar['aUsuario']['estado'] == "ES" ? 'selected' : ''; ?>>Espírito Santo</option>
+                                <option value="GO" <?php echo $aViewVar['aUsuario']['estado'] == "GO" ? 'selected' : ''; ?>>Goiás</option>
+                                <option value="MA" <?php echo $aViewVar['aUsuario']['estado'] == "MA" ? 'selected' : ''; ?>>Maranhão</option>
+                                <option value="MT" <?php echo $aViewVar['aUsuario']['estado'] == "MT" ? 'selected' : ''; ?>>Mato Grosso</option>
+                                <option value="MS" <?php echo $aViewVar['aUsuario']['estado'] == "MS" ? 'selected' : ''; ?>>Mato Grosso do Sul</option>
+                                <option value="MG" <?php echo $aViewVar['aUsuario']['estado'] == "MG" ? 'selected' : ''; ?>>Minas Gerais</option>
+                                <option value="PA" <?php echo $aViewVar['aUsuario']['estado'] == "PA" ? 'selected' : ''; ?>>Pará</option>
+                                <option value="PB" <?php echo $aViewVar['aUsuario']['estado'] == "PB" ? 'selected' : ''; ?>>Paraíba</option>
+                                <option value="PR" <?php echo $aViewVar['aUsuario']['estado'] == "PR" ? 'selected' : ''; ?>>Paraná</option>
+                                <option value="PE" <?php echo $aViewVar['aUsuario']['estado'] == "PE" ? 'selected' : ''; ?>>Pernambuco</option>
+                                <option value="PI" <?php echo $aViewVar['aUsuario']['estado'] == "PI" ? 'selected' : ''; ?>>Piauí</option>
+                                <option value="RJ" <?php echo $aViewVar['aUsuario']['estado'] == "RJ" ? 'selected' : ''; ?>>Rio de Janeiro</option>
+                                <option value="RN" <?php echo $aViewVar['aUsuario']['estado'] == "RN" ? 'selected' : ''; ?>>Rio Grande do Norte</option>
+                                <option value="RS" <?php echo $aViewVar['aUsuario']['estado'] == "RS" ? 'selected' : ''; ?>>Rio Grande do Sul</option>
+                                <option value="RO" <?php echo $aViewVar['aUsuario']['estado'] == "RO" ? 'selected' : ''; ?>>Rondônia</option>
+                                <option value="RR" <?php echo $aViewVar['aUsuario']['estado'] == "RR" ? 'selected' : ''; ?>>Roraima</option>
+                                <option value="SC" <?php echo $aViewVar['aUsuario']['estado'] == "SC" ? 'selected' : ''; ?>>Santa Catarina</option>
+                                <option value="SP" <?php echo $aViewVar['aUsuario']['estado'] == "SP" ? 'selected' : ''; ?>>São Paulo</option>
+                                <option value="SE" <?php echo $aViewVar['aUsuario']['estado'] == "SE" ? 'selected' : ''; ?>>Sergipe</option>
+                                <option value="TO" <?php echo $aViewVar['aUsuario']['estado'] == "TO" ? 'selected' : ''; ?>>Tocantins</option>
+                            </select>
+                        </div>
+                    
+                </div>
+                <input type="hidden" name="id" value="<?php echo App\Lib\Auth::usuario()->id; ?>">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button id="btn-atualizarInformacoes" type="submit" class="btn btn-primary">Atualizar Informações</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="nome-sobrenome" class="col-form-label">Nome e Sobrenome:</label>
-                        <input type="text" class="form-control" value="<?php echo $aViewVar['aUsuario']['nome']; ?>" id="nome-sobrenome" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="col-form-label">E-mail:</label>
-                        <input type="email" class="form-control" value="<?php echo $aViewVar['aUsuario']['email']; ?>" id="email" placeholder="seu-email@pesquisadores.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataNasc" class="col-form-label">Data de Nascimento:</label>
-                        <input type="date" class="form-control"  value="<?php echo $aViewVar['aUsuario']['data_nascimento']; ?>" id="dataNasc" placeholder="dd/mm/aaaa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-profissao" class="col-form-label">Profissão:</label>
-                        <input type="text" class="form-control" value="<?php echo $aViewVar['aUsuario']['profissao']; ?>" id="edit-profissao" placeholder="Analista..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nivel-instrucao" class="col-form-label">Nível de Instrução:</label>
-                        <input type="text" class="form-control" id="nivel-instrucao" value="<?php echo $aViewVar['aUsuario']['nivel_instrucao']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inicio-area" class="col-form-label">Quando iniciou na Área:</label>
-                        <input type="text" class="form-control" id="inicio-area" value="<?php echo $aViewVar['aUsuario']['inicio_trabalho']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cidade" class="col-form-label">Cidade:</label>
-                        <input type="text" class="form-control" id="cidade" value="<?php echo $aViewVar['aUsuario']['cidade']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="estado" class="col-form-label">Estado:</label>
-                        <select class="form-control" id="estado" required="">
-                            <option>Selecione o Estado...</option>
-                            <option value="AC" <?php echo $aViewVar['aUsuario']['estado'] == "AC" ? 'selected' : ''; ?> >Acre</option>
-                            <option value="AL" <?php echo $aViewVar['aUsuario']['estado'] == "AL" ? 'selected' : ''; ?>>Alagoas</option>
-                            <option value="AP" <?php echo $aViewVar['aUsuario']['estado'] == "AP" ? 'selected' : ''; ?>>Amapá</option>
-                            <option value="AM" <?php echo $aViewVar['aUsuario']['estado'] == "AM" ? 'selected' : ''; ?>>Amazonas</option>
-                            <option value="BA" <?php echo $aViewVar['aUsuario']['estado'] == "BA" ? 'selected' : ''; ?>>Bahia</option>
-                            <option value="CE" <?php echo $aViewVar['aUsuario']['estado'] == "CE" ? 'selected' : ''; ?>>Ceará</option>
-                            <option value="DF" <?php echo $aViewVar['aUsuario']['estado'] == "DF" ? 'selected' : ''; ?>>Distrito Federal</option>
-                            <option value="ES" <?php echo $aViewVar['aUsuario']['estado'] == "ES" ? 'selected' : ''; ?>>Espírito Santo</option>
-                            <option value="GO" <?php echo $aViewVar['aUsuario']['estado'] == "GO" ? 'selected' : ''; ?>>Goiás</option>
-                            <option value="MA" <?php echo $aViewVar['aUsuario']['estado'] == "MA" ? 'selected' : ''; ?>>Maranhão</option>
-                            <option value="MT" <?php echo $aViewVar['aUsuario']['estado'] == "MT" ? 'selected' : ''; ?>>Mato Grosso</option>
-                            <option value="MS" <?php echo $aViewVar['aUsuario']['estado'] == "MS" ? 'selected' : ''; ?>>Mato Grosso do Sul</option>
-                            <option value="MG" <?php echo $aViewVar['aUsuario']['estado'] == "MG" ? 'selected' : ''; ?>>Minas Gerais</option>
-                            <option value="PA" <?php echo $aViewVar['aUsuario']['estado'] == "PA" ? 'selected' : ''; ?>>Pará</option>
-                            <option value="PB" <?php echo $aViewVar['aUsuario']['estado'] == "PB" ? 'selected' : ''; ?>>Paraíba</option>
-                            <option value="PR" <?php echo $aViewVar['aUsuario']['estado'] == "PR" ? 'selected' : ''; ?>>Paraná</option>
-                            <option value="PE" <?php echo $aViewVar['aUsuario']['estado'] == "PE" ? 'selected' : ''; ?>>Pernambuco</option>
-                            <option value="PI" <?php echo $aViewVar['aUsuario']['estado'] == "PI" ? 'selected' : ''; ?>>Piauí</option>
-                            <option value="RJ" <?php echo $aViewVar['aUsuario']['estado'] == "RJ" ? 'selected' : ''; ?>>Rio de Janeiro</option>
-                            <option value="RN" <?php echo $aViewVar['aUsuario']['estado'] == "RN" ? 'selected' : ''; ?>>Rio Grande do Norte</option>
-                            <option value="RS" <?php echo $aViewVar['aUsuario']['estado'] == "RS" ? 'selected' : ''; ?>>Rio Grande do Sul</option>
-                            <option value="RO" <?php echo $aViewVar['aUsuario']['estado'] == "RO" ? 'selected' : ''; ?>>Rondônia</option>
-                            <option value="RR" <?php echo $aViewVar['aUsuario']['estado'] == "RR" ? 'selected' : ''; ?>>Roraima</option>
-                            <option value="SC" <?php echo $aViewVar['aUsuario']['estado'] == "SC" ? 'selected' : ''; ?>>Santa Catarina</option>
-                            <option value="SP" <?php echo $aViewVar['aUsuario']['estado'] == "SP" ? 'selected' : ''; ?>>São Paulo</option>
-                            <option value="SE" <?php echo $aViewVar['aUsuario']['estado'] == "SE" ? 'selected' : ''; ?>>Sergipe</option>
-                            <option value="TO" <?php echo $aViewVar['aUsuario']['estado'] == "TO" ? 'selected' : ''; ?>>Tocantins</option>
-                        </select>
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="salario" class="col-form-label">URL Currículo Lattes:</label>
-                        <input type="text" class="form-control" id="salario" required>
-                    </div> -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="btn-atualizarInformacoes" type="button" class="btn btn-primary">Atualizar Informações</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 

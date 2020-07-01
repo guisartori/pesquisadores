@@ -51,9 +51,9 @@ class PrincipalController extends Controller {
 
         $idUsuario =  \App\Lib\Auth::usuario()->id;
         if(isset($_POST['idProprio'])) {
-            $idLogado = $_POST['idProprio'];
-            // $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-            //TODO: COLOCAR CONEXÃO PADRÃO 
+            
+            
+
             $conn = mysqli_connect("localhost:3306", "root", "", "projeto_pesquisadores");
             $result = mysqli_query($conn, "SELECT * 
                                             FROM usuarios u 

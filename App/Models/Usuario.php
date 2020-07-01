@@ -120,19 +120,40 @@ class Usuario
         return true;
     }
 
-    //TODO: ACERTAR MÉTODO
     public static function atualizar($data)  {
         try {
             $db = new DB();
 
             $id = $data['id'];
 
-            $data['senha'] = base64_encode($data['senha']);
+            $db->update('usuarios',
+                        "nome = '".$data['nome']."',
+                         email = '".$data['email']."',
+                         data_nascimento = '".$data['data_nascimento']."',
+                         profissao = '".$data['profissao']."',
+                         nivel_instrucao = '".$data['nivel_instrucao']."',
+                         inicio_trabalho = '".$data['inicio_trabalho']."',
+                         cidade = '".$data['cidade']."',
+                         estado = '".$data['estado']."'",
+                        "id = $id");
+            return true;
 
-        //     $db->update('usuario',
-        //         "usuario = '".$data['usuario']."',senha = '".$data['senha']."',
-        //          perfil = '".$data['perfil']."' 
-        //          WHERE id = $id");
+        }catch (Exception $e){
+            echo $e->getMessage();
+
+        }
+    }
+
+    public static function atualizarVisaoGeral($data)  {
+        try {
+            $db = new DB();
+
+            $id = $data['id'];
+
+            $db->update('usuarios',
+                        "visao_geral = '".$data['visao_geral']."'",
+                        "id = $id");
+            return true;
 
         }catch (Exception $e){
             echo $e->getMessage();
