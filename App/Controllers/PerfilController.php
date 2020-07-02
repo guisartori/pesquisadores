@@ -193,27 +193,11 @@ class PerfilController extends Controller {
     }
 
     public function buscarUsuario() {
-        $connect = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
-        if(isset($_POST["query"]))
-        {
-            $output = '';
-            $query = "SELECT * FROM usuario WHERE titulo LIKE '%".$_POST["query"]."%'";
-            $result = mysqli_query($connect, $query);
-            $output = '<ul class="list-unstyled">';
-            if(mysqli_num_rows($result) > 0)
-            {
-                while($row = mysqli_fetch_array($result))
-                {
-                    $output .= '<li><a href="/principal/amigo/'.$row["id"].'" data-id-search="'.$row["id"].'">'.$row["titulo"].'</a></li>';
-                }
-            }
-            else
-            {
-                $output .= '<li>Nenhum usuario encontrado!</li>';
-            }
-            $output .= '</ul>';
-            echo $output;
-        }
+
+        $resultado = Usuario::buscar($_POST['query']);
+
+        echo $resultado;
+        
     }
 
     public function recomendarPerfil() {

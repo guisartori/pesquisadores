@@ -25,6 +25,42 @@ class Usuario
 
     }
 
+    public static function buscar($query){
+        $db = new DB();
+
+        try {
+            $query = $db->query(
+                "SELECT DISTINCT * FROM usuarios u
+                LEFT JOIN formacoes f
+                ON f.id_usuario = u.id
+                WHERE u.nome LIKE '%".$query."%' 
+                OR u.email LIKE '%".$query."%'
+                OR f.titulo LIKE '%".$query."%'"
+            );
+
+            $usuarios = $query->fetchAll();
+            $output = '<ul class="list-unstyled">';
+            if(count($usuarios) > 0){
+                foreach($usuarios as $usuario){
+                    $output .= '<li>
+                                    <a href="/principal/amigo/'.$usuario["id"].'" data-id-search="'.$usuario["id"].'">'
+                                        .$usuario["nome"]. '<br/>'
+                                        .$usuario['email'].
+                                    '</a>
+                                </li>';
+                }
+            } else {
+                $output .= '<li>Nenhum usuario encontrado!</li>';
+            }
+            $output .= '</ul>';
+            return $output;
+
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+
+    }
+
     public static function salvar($data)  {
         try {
 
