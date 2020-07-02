@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Curtida;
+use App\Models\Post;
+use App\Models\Usuario;
 
 class CurtirController extends Controller {
     private $app;
@@ -16,7 +18,9 @@ class CurtirController extends Controller {
     public function index(){
         $idUsuario = $_POST['idUsuario'];
         $idPost = $_POST['idPost'];
-
+        $usuario = Usuario::mostrar($idUsuario)[0];
+        $post = Post::mostrar($idPost)[0];
+        NotificacaoController::novaCurtida($usuario['nome'], $post['titulo'], $post['id_usuario']);
         echo json_encode(Curtida::curtir($idUsuario, $idPost));
     }
 

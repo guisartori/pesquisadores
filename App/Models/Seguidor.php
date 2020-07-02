@@ -15,6 +15,15 @@ class Seguidor{
         return $query->fetchAll();
     }
 
+    public static function getSeguidores($idSeguido){
+        $db = new DB();
+        $query = $db->query("SELECT *
+                                FROM seguidores s 
+                                WHERE s.id_seguindo = '".$idSeguido."'");
+        
+        return $query->fetchAll();
+    }
+
     public static function getTotalSeguindo($idUsuario) {
         $db = new DB();
         $query = $db->query("SELECT COUNT(*) total 

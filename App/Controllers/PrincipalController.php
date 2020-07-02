@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Notificacao;
 use App\Models\Usuario;
 use App\Models\Post;
 use App\Models\Seguidor;
@@ -25,11 +26,16 @@ class PrincipalController extends Controller {
         $seguidores = Seguidor::getTotalSeguidores($idUsuario);
         $seguindo = Seguidor::getTotalSeguindo($idUsuario);
         $usuario = Usuario::mostrar($idUsuario);
+        $notificacoes = Notificacao::ultimasDez($idUsuario);
+        $qtdNovas = Notificacao::qtdNovas($idUsuario);
 
         self::setViewParam('posts',$posts);
         self::setViewParam('totalSeguidores',$seguidores[0]["total"]);
         self::setViewParam('totalSeguindo',$seguindo[0]["total"]);
         self::setViewParam('usuario',$usuario[0]);
+
+        self::setViewParam('notificacoes',$notificacoes);
+        self::setViewParam('qtdNovasNotificacoes',$qtdNovas[0]['total']);
 
 
         self::setViewCss('/public/css/pages/principal/principal.css');

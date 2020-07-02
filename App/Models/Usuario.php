@@ -43,7 +43,7 @@ class Usuario
             if(count($usuarios) > 0){
                 foreach($usuarios as $usuario){
                     $output .= '<li>
-                                    <a href="/principal/amigo/'.$usuario["id"].'" data-id-search="'.$usuario["id"].'">'
+                                    <a href="/usuario/perfil/'.$usuario["id"].'" data-id-search="'.$usuario["id"].'">'
                                         .$usuario["nome"]. '<br/>'
                                         .$usuario['email'].
                                     '</a>

@@ -26,10 +26,21 @@ class Post
             );
             // TODO: ROTA DINAMICA
             // header("Location: https://app-pesquisadores.herokuapp.com/principal");
-            header("Location: http://localhost/principal");
+            // header("Location: http://localhost/principal");
+            return true;
             
         }catch (\Exception $e){
             echo $e->getMessage();
+        }
+    }
+
+    public static function mostrar($idPost){
+        try{
+            $db = new DB();
+            $query = $db->query("SELECT * FROM posts WHERE id = '".$idPost."'");
+            return $query->fetchAll();
+        }catch(Exception $e){
+            return $e->getMessage();
         }
     }
 

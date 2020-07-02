@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Comentario;
+use App\Models\Post;
+use App\Models\Usuario;
 
 class ComentarioController extends Controller {
 
@@ -19,6 +21,9 @@ class ComentarioController extends Controller {
         $result = Comentario::novo($texto, $dataHora, $idPost, $idUsuario);
 
         if($result){
+            $post = Post::mostrar($idPost)[0];
+            $usuario = Usuario::mostrar($idUsuario)[0];
+            NotificacaoController::novoComentario($usuario['nome'], $texto, $post['id_usuario']);
             header("Location: /principal");
         }
 

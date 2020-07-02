@@ -33,10 +33,61 @@
         background-color: #79965a !important;
         color: #fff;
     }
+
+    .notificacoes {
+        position: relative;
+    }
+
+    .notificacoes .badge{
+        position: absolute;
+        background: #33aa33;
+        color: #fff;
+        width: 16px;
+        height: 16px;
+        right: 20px;
+        top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box-notificacoes {
+        position: absolute;
+        background: #ffffff;
+        width: 450px;
+        z-index: 99;
+        min-height: 80px;
+        box-shadow: 0px 9px 19px -8px rgba(0,0,0,0.75);
+        border-radius: 4px;
+        right: 0px;
+    }
+
+    .divider{
+        border-bottom: 1px solid #dadada;
+    }
+
+    .hidden {
+        display: none !important;
+
+    }
 </style>
 
 <!-- Modal Confirmação Excluir -->
 
+<script>
+    function abrirNotificacoes(){
+        idNotificado = $("#id-logado").val();
+        // alert(idNotificado)
+        $.ajax({
+            url:"/notificacao/visualizarNotificacao/",
+            method:"POST",
+            data:{idNotificado},
+            success: (a) => {
+                console.log(a)
+            }
+        });
+    }
+</script>
 
 <div class="wrapper">
     <header>
@@ -61,10 +112,28 @@
                             </a>
                         </li>
 
-			<li>
+                        <li>
                             <a href="/perfil/editar" title="">
                                 Editar Perfil
                             </a>
+                        </li>
+
+                        <li class="notificacoes">
+                            <span class="badge <?php echo $aViewVar['qtdNovasNotificacoes'] == 0 ? 'hidden' : ''; ?>"><?php echo $aViewVar['qtdNovasNotificacoes'] ?></span>
+                            <a href="#" title="" onmouseover="javascript: abrirNotificacoes()" >
+                                <span><i class="fa fa-bell" aria-hidden="true"></i></span>
+                                Notificações
+                            </a>
+                            <ul class="box-notificacoes " id="boxNotificacoes">
+                                <?php if(count($aViewVar['notificacoes']) > 0) { ?>
+                                    <?php foreach($aViewVar['notificacoes'] as $notificacao){ ?>
+                                        <li class="divider"><?php echo $notificacao['texto']; ?></li>
+                                        
+                                    <?php } ?>
+                                <?php } else { ?>
+                                    <li>Nenhuma notificação</li>
+                                <?php } ?>
+                            </ul>
                         </li>
 
                         <li>

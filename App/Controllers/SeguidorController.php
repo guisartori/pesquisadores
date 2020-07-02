@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Lib\DB;
 use App\Models\Seguidor;
-
+use App\Models\Usuario;
 
 class SeguidorController extends Controller
 {
@@ -25,7 +25,10 @@ class SeguidorController extends Controller
         if(Seguidor::eSeguidor($idSeguidor, $idSeguindo)){
             return Seguidor::deixarDeSeguir($idSeguidor, $idSeguindo);
         } else {
+            $usuario = Usuario::mostrar($idSeguidor)[0];
+            NotificacaoController::novoSeguidor($usuario['nome'], $idSeguindo);
             return Seguidor::seguir($idSeguidor, $idSeguindo);
+
         }
         // echo json_encode('testando');
     }

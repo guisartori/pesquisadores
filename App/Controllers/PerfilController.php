@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\Experiencia;
 use App\Models\Formacao;
 use App\Models\Habilidade;
+use App\Models\Notificacao;
+use App\Models\Seguidor;
 
 class PerfilController extends Controller {
     private $app;
@@ -183,10 +185,16 @@ class PerfilController extends Controller {
     }
 
     public function salvarVaga() {
-        if($oUser = Post::novo($_POST)){
+        if(Post::novo($_POST)){
+            $usuario = Usuario::mostrar($_POST['id_usuario'])[0];
+            $seguidores = Seguidor::getSeguidores($_POST['id_usuario']);
+            foreach($seguidores as $seguidor){
+                NotificacaoController::novoPostDeAmigoSeguido($usuario['nome'], $_POST['titulo'], $seguidor['id']);
+            }
 
-            header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            $this->render('perfil/editar');
+            // header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
+            // $this->render('principal');
+            header("Location: http://localhost/principal");
         }
 
         $this->render('error/usuario');

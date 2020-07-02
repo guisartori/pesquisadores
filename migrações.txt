@@ -100,4 +100,13 @@ MODIFY COLUMN ano_inicio VARCHAR(7);
 
 ALTER TABLE formacoes
 MODIFY COLUMN ano_fim VARCHAR(7);
+
+CREATE TABLE notificacoes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    texto TEXT,
+    data_hora DATETIME,
+    status TINYINT,
+    id_notificado INT,
+    FOREIGN KEY (id_notificado) REFERENCES usuarios(id)
+);
 ########################### TABELAS ###########################
