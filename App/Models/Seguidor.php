@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Lib\DB;
+use Exception;
 
 class Seguidor{
 
