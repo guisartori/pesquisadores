@@ -24,7 +24,10 @@ class Notificacao {
 
         try {
             $query = $db->query(
-                "SELECT * FROM notificacoes n WHERE n.id_notificado = '".$idNotificado."' LIMIT 10"
+                "SELECT * 
+                FROM notificacoes n 
+                WHERE n.id_notificado = '".$idNotificado."' 
+                ORDER BY data_hora DESC LIMIT 10"
             );
             return $query->fetchAll();
         

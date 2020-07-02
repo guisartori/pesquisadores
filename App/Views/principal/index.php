@@ -70,6 +70,10 @@
         display: none !important;
 
     }
+
+    .new {
+        background: #dadada;
+    }
 </style>
 
 <!-- Modal Confirmação Excluir -->
@@ -127,7 +131,7 @@
                             <ul class="box-notificacoes " id="boxNotificacoes">
                                 <?php if(count($aViewVar['notificacoes']) > 0) { ?>
                                     <?php foreach($aViewVar['notificacoes'] as $notificacao){ ?>
-                                        <li class="divider"><?php echo $notificacao['texto']; ?></li>
+                                        <li class="divider <?php echo $notificacao['status'] == 0 ? 'new' : ''; ?>"><?php echo $notificacao['texto']; ?></li>
                                         
                                     <?php } ?>
                                 <?php } else { ?>
