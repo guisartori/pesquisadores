@@ -1,3 +1,23 @@
+<style>
+    .topicos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .topicos li{
+        height: 40px;
+        border: #444 1px solid;
+        background: #dadada;
+        border-radius: 2px;
+        display: flex !important;
+        padding: 8px !important;
+        margin: 4px;
+        justify-content: center;
+        align-items: center;
+        /* cursor: pointer; */
+    }
+</style>
 <body>
 <input id="idUsuario" type="hidden" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
 <input type="hidden" id="id-logado" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
@@ -273,6 +293,15 @@
                                                 <?php
                                             }
                                             ?>
+                                        </ul>
+                                    </div>
+
+                                    <div class="user-profile-ov">
+                                    <h3>Tópicos de interesse</h3>
+                                        <ul class="topicos">
+                                            <?php foreach($aViewVar['topicos'] as $topico){ ?>
+                                                <li ><?php echo $topico['nome']; ?></li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>

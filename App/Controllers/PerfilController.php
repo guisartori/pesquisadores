@@ -2,14 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Lib\Auth;
 use App\Models\Usuario;
 use App\Models\Post;
 use App\Models\Experiencia;
 use App\Models\Formacao;
 use App\Models\Habilidade;
-use App\Models\Notificacao;
 use App\Models\Seguidor;
+use App\Models\Topico;
 
 class PerfilController extends Controller {
     private $app;
@@ -32,14 +31,14 @@ class PerfilController extends Controller {
 
         $oListaExperiencia = Experiencia::todos($idUsuario);
         $oListaEducacao = Formacao::todos($idUsuario);
-        // $oListaLocalizacao = Usuario::listarLocalizacao();
         $oListaHabilidades = Habilidade::todos($idUsuario);
+        $topicos = Topico::getTopicosInteressado($idUsuario);
 
         self::setViewParam('usuario',$usuario);
         self::setViewParam('aListaExperiencia',$oListaExperiencia);
         self::setViewParam('aListaEducacao',$oListaEducacao);
-        // self::setViewParam('aListaLocalizacao',$oListaLocalizacao);
         self::setViewParam('aListaHabilidades',$oListaHabilidades);
+        self::setViewParam('topicos',$topicos);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
 
@@ -62,11 +61,13 @@ class PerfilController extends Controller {
         $oListaExperiencia = Experiencia::todos($idUsuario);
         $oListaEducacao = Formacao::todos($idUsuario);
         $oListaHabilidades = Habilidade::todos($idUsuario);
+        $topicos = Topico::todos();
 
         self::setViewParam('aUsuario',$oUsuario);
         self::setViewParam('aListaExperiencia',$oListaExperiencia);
         self::setViewParam('aListaEducacao',$oListaEducacao);
         self::setViewParam('aListaHabilidades',$oListaHabilidades);
+        self::setViewParam('topicos',$topicos);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
 

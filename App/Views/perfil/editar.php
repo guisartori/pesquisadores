@@ -18,6 +18,31 @@
         color:#e44d3a;
         cursor: pointer;
     }
+
+    .topicos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .topicos li{
+        height: 40px;
+        border: #444 1px solid;
+        background: #dadada;
+        border-radius: 2px;
+        display: flex !important;
+        padding: 8px !important;
+        margin: 4px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .topicos li.selected{
+        background: #728062;
+        border: green 1px solid;
+        color: white;
+    }
 </style>
 
 <body>
@@ -43,6 +68,25 @@ function removerFotoCapa(idUsuario){
             window.location.reload()
         }
     });
+}
+
+function toggleTopicoInteresse(element, idTopico){
+    const idUsuario = $("#idUsuario").val();
+    if($(element).hasClass('selected')){
+        $(element).removeClass('selected')
+        $.ajax({
+            url: '/topico/remove',
+            method: 'POST',
+            data: {idUsuario, idTopico},
+        });
+    } else {
+        $(element).addClass('selected')
+        $.ajax({
+            url: '/topico/add',
+            method: 'POST',
+            data: {idUsuario, idTopico},
+        });
+    }
 }
 </script>
 
@@ -94,7 +138,7 @@ function removerFotoCapa(idUsuario){
         </div>
     </div>
 </div>
-
+<input type="hidden" id="idUsuario" value="<?php  echo \App\Lib\Auth::usuario()->id; ?>">
 <div class="wrapper">
     <header>
         <div class="container">
@@ -323,6 +367,16 @@ function removerFotoCapa(idUsuario){
                                                 <?php
                                             }
                                             ?>
+                                        </ul>
+                                    </div>
+
+                                    <div class="user-profile-ov">
+                                        <h3>Tópicos de interesse</h3>
+                                        <ul class="topicos">
+                                            <?php foreach($aViewVar['topicos'] as $topico){ ?>
+                                                <li class="<?php echo App\Lib\Util::verificaInteresse(App\Lib\Auth::usuario()->id, $topico['id']) ? 'selected' : ''; ?>"
+                                                    onclick="javascript: toggleTopicoInteresse(this, <?php echo $topico['id']; ?>)"><?php echo $topico['nome']; ?></li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>

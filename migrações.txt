@@ -125,4 +125,132 @@ ADD url VARCHAR(200);
 ALTER TABLE posts
 ADD tipo TINYINT;
 
+CREATE TABLE topicos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100)
+);
+
+CREATE TABLE usuarios_topicos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT,
+    id_topico INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_topico) REFERENCES topicos(id)
+);
+
+INSERT INTO topicos (nome) VALUES ('algorithm');
+INSERT INTO topicos (nome) VALUES ('AngularJS');
+INSERT INTO topicos (nome) VALUES ('artificial intelligence');
+INSERT INTO topicos (nome) VALUES ('backpropagation');
+INSERT INTO topicos (nome) VALUES ("Bayes' Theorem");
+INSERT INTO topicos (nome) VALUES ('Bayesian network');
+INSERT INTO topicos (nome) VALUES ('bias');
+INSERT INTO topicos (nome) VALUES ('Big Data');
+INSERT INTO topicos (nome) VALUES ('binomial distribution');
+INSERT INTO topicos (nome) VALUES ('chi-square test');
+INSERT INTO topicos (nome) VALUES ('classification');
+INSERT INTO topicos (nome) VALUES ('clustering');
+INSERT INTO topicos (nome) VALUES ('coefficient');
+INSERT INTO topicos (nome) VALUES ('computational linguistics');
+INSERT INTO topicos (nome) VALUES ('confidence interval');
+INSERT INTO topicos (nome) VALUES ('continuous variable');
+INSERT INTO topicos (nome) VALUES ('correlation');
+INSERT INTO topicos (nome) VALUES ('covariance');
+INSERT INTO topicos (nome) VALUES ('cross-validation');
+INSERT INTO topicos (nome) VALUES ('D3');
+INSERT INTO topicos (nome) VALUES ('data engineer');
+INSERT INTO topicos (nome) VALUES ('data mining');
+INSERT INTO topicos (nome) VALUES ('data science');
+INSERT INTO topicos (nome) VALUES ('data structure');
+INSERT INTO topicos (nome) VALUES ('data wrangling');
+INSERT INTO topicos (nome) VALUES ('decision trees');
+INSERT INTO topicos (nome) VALUES ('deep learning');
+INSERT INTO topicos (nome) VALUES ('dependent variable');
+INSERT INTO topicos (nome) VALUES ('dimension reduction');
+INSERT INTO topicos (nome) VALUES ('discrete variable');
+INSERT INTO topicos (nome) VALUES ('econometrics');
+INSERT INTO topicos (nome) VALUES ('feature');
+INSERT INTO topicos (nome) VALUES ('feature engineering');
+INSERT INTO topicos (nome) VALUES ('GATE');
+INSERT INTO topicos (nome) VALUES ('gradient boosting');
+INSERT INTO topicos (nome) VALUES ('gradient descent');
+INSERT INTO topicos (nome) VALUES ('histogram');
+INSERT INTO topicos (nome) VALUES ('independent variable');
+INSERT INTO topicos (nome) VALUES ('JavaScript');
+INSERT INTO topicos (nome) VALUES ('k-means clustering');
+INSERT INTO topicos (nome) VALUES ('k-nearest neighbors');
+INSERT INTO topicos (nome) VALUES ('latent variable');
+INSERT INTO topicos (nome) VALUES ('lift');
+INSERT INTO topicos (nome) VALUES ('linear algebra');
+INSERT INTO topicos (nome) VALUES ('linear regression');
+INSERT INTO topicos (nome) VALUES ('logarithm');
+INSERT INTO topicos (nome) VALUES ('logistic regression');
+INSERT INTO topicos (nome) VALUES ('machine learning');
+INSERT INTO topicos (nome) VALUES ('machine learning model');
+INSERT INTO topicos (nome) VALUES ('Markov Chain');
+INSERT INTO topicos (nome) VALUES ('MATLAB');
+INSERT INTO topicos (nome) VALUES ('matrix');
+INSERT INTO topicos (nome) VALUES ('mean');
+INSERT INTO topicos (nome) VALUES ('Mean Absolute Error');
+INSERT INTO topicos (nome) VALUES ('Mean Squared Error');
+INSERT INTO topicos (nome) VALUES ('median');
+INSERT INTO topicos (nome) VALUES ('mode');
+INSERT INTO topicos (nome) VALUES ('model');
+INSERT INTO topicos (nome) VALUES ('Monte Carlo method');
+INSERT INTO topicos (nome) VALUES ('moving average');
+INSERT INTO topicos (nome) VALUES ('n-gram');
+INSERT INTO topicos (nome) VALUES ('naive Bayes classifier');
+INSERT INTO topicos (nome) VALUES ('neural network');
+INSERT INTO topicos (nome) VALUES ('normal distribution');
+INSERT INTO topicos (nome) VALUES ('NoSQL');
+INSERT INTO topicos (nome) VALUES ('null hypothesis');
+INSERT INTO topicos (nome) VALUES ('objective function');
+INSERT INTO topicos (nome) VALUES ('outlier');
+INSERT INTO topicos (nome) VALUES ('overfitting');
+INSERT INTO topicos (nome) VALUES ('P value');
+INSERT INTO topicos (nome) VALUES ('PageRank');
+INSERT INTO topicos (nome) VALUES ('Pandas');
+INSERT INTO topicos (nome) VALUES ('perceptron');
+INSERT INTO topicos (nome) VALUES ('Perl');
+INSERT INTO topicos (nome) VALUES ('pivot table');
+INSERT INTO topicos (nome) VALUES ('Poisson distribution');
+INSERT INTO topicos (nome) VALUES ('posterior distribution');
+INSERT INTO topicos (nome) VALUES ('predictive analytics');
+INSERT INTO topicos (nome) VALUES ('predictive modeling');
+INSERT INTO topicos (nome) VALUES ('principal component analysis');
+INSERT INTO topicos (nome) VALUES ('prior distribution');
+INSERT INTO topicos (nome) VALUES ('probability distribution');
+INSERT INTO topicos (nome) VALUES ('Python');
+INSERT INTO topicos (nome) VALUES ('quantile, quartile');
+INSERT INTO topicos (nome) VALUES ('R');
+INSERT INTO topicos (nome) VALUES ('random forest');
+INSERT INTO topicos (nome) VALUES ('regression');
+INSERT INTO topicos (nome) VALUES ('reinforcement learning');
+INSERT INTO topicos (nome) VALUES ('Root Mean Squared Error');
+INSERT INTO topicos (nome) VALUES ('Ruby');
+INSERT INTO topicos (nome) VALUES ('S curve');
+INSERT INTO topicos (nome) VALUES ('SAS');
+INSERT INTO topicos (nome) VALUES ('scalar');
+INSERT INTO topicos (nome) VALUES ('scripting');
+INSERT INTO topicos (nome) VALUES ('serial correlation');
+INSERT INTO topicos (nome) VALUES ('shell');
+INSERT INTO topicos (nome) VALUES ('spatiotemporal data');
+INSERT INTO topicos (nome) VALUES ('SPSS');
+INSERT INTO topicos (nome) VALUES ('SQL');
+INSERT INTO topicos (nome) VALUES ('standard deviation');
+INSERT INTO topicos (nome) VALUES ('standard normal distribution');
+INSERT INTO topicos (nome) VALUES ('standardized score');
+INSERT INTO topicos (nome) VALUES ('Stata');
+INSERT INTO topicos (nome) VALUES ('strata, stratified sampling');
+INSERT INTO topicos (nome) VALUES ('supervised learning');
+INSERT INTO topicos (nome) VALUES ('support vector machine');
+INSERT INTO topicos (nome) VALUES ('t-distribution');
+INSERT INTO topicos (nome) VALUES ('Tableau');
+INSERT INTO topicos (nome) VALUES ('time series data');
+INSERT INTO topicos (nome) VALUES ('UIMA');
+INSERT INTO topicos (nome) VALUES ('unsupervised learning');
+INSERT INTO topicos (nome) VALUES ('variance');
+INSERT INTO topicos (nome) VALUES ('vector');
+INSERT INTO topicos (nome) VALUES ('vector space');
+INSERT INTO topicos (nome) VALUES ('Weka');
 ########################### TABELAS ###########################

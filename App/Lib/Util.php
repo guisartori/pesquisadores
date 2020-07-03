@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Models\Curtida;
 use App\Models\Recomendacao;
 use App\Models\Seguidor;
+use App\Models\Topico;
 
 class Util
 {
@@ -79,5 +80,9 @@ class Util
 
     public static function qtdRecomendacoes($idUsuario){
         return Recomendacao::qtdRecomendacoes($idUsuario);
+    }
+
+    public static function verificaInteresse($idUsuario, $idTopico){
+        return Topico::verificaInteresse($idUsuario, $idTopico);
     }
 }
