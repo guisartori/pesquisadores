@@ -76,6 +76,7 @@ class Usuario
             $cpf = $data['cpf'];
             $profissao = $data['profissao'];
             $tipo = $data['tipo'];
+            $urlCL = $data['url'];
             $nivel_instrucao = $data['nivel_instrucao'];
 
             $db->insert('usuarios',
@@ -89,6 +90,7 @@ class Usuario
                         cpf,
                         profissao,
                         tipo,
+                        url_cl,
                         nivel_instrucao",
                         "'".$nome."',
                         '".$senha."', 
@@ -100,6 +102,7 @@ class Usuario
                         '".$cpf."', 
                         '".$profissao."', 
                         '".$tipo."', 
+                        '".$urlCL."', 
                         '".$nivel_instrucao."'"
             );
 

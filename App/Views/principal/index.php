@@ -87,7 +87,7 @@
             method:"POST",
             data:{idNotificado},
             success: (a) => {
-                console.log(a)
+                // console.log(a)
             }
         });
     }

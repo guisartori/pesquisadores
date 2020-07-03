@@ -5,6 +5,7 @@
     }
 </style>
 <body class="sign-in">
+    
     <div class="wrapper">
         <div class="sign-in-page">
             <div class="signin-popup">
@@ -162,9 +163,16 @@
                                                     <div class="sn-field">
                                                         <select class="form-control" id="tipo-conta" name="tipo" required>
                                                             <option>Selecione o tipo de Conta...</option>
-                                                            <option value="GT">Apenas Membros</option>
-                                                            <option value="PG">Pesquisador</option>
+                                                            <option value="0">Membro comum</option>
+                                                            <option value="1">Pesquisador</option>
                                                         </select>
+                                                        <i class="la la-link"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd invisivel" id="CL">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="url" id="url" placeholder="Currículo Lattes">
+                                                        <i class="la la-link"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -248,3 +256,14 @@
             </div>
         </div>
     </div>
+    <script>
+        window.onload = () => {
+            $('#tipo-conta').on('change', (e)=> {
+                if(e.target.value == 1){
+                    $('#CL').removeClass("invisivel")
+                } else {
+                    !$('#CL').hasClass("invisivel") ? $('#CL').addClass("invisivel") : false
+                }
+            })
+        }
+    </script>
