@@ -19,14 +19,20 @@ class Post
                 "id_usuario,
                 titulo,
                 texto,
+                local,
+                ano_publicacao,
+                url,
+                tipo,
                 data_hora", "'".$data['id_usuario']."',
                 '".$data['titulo']."',
                 '".$data['texto']."',
+                '".$data['local']."',
+                '".$data['ano_publicacao']."',
+                '".$data['url']."',
+                '".$data['tipo']."',
                 '".$date."'"
             );
-            // TODO: ROTA DINAMICA
-            // header("Location: https://app-pesquisadores.herokuapp.com/principal");
-            // header("Location: http://localhost/principal");
+
             return true;
             
         }catch (\Exception $e){
@@ -49,7 +55,7 @@ class Post
 
         try {
             $query = $db->query(
-                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario, u.foto_perfil
+                "SELECT p.id, p.titulo, p.data_hora, p.texto, u.nome, p.id_usuario, u.foto_perfil, p.tipo, p.ano_publicacao, p.url, p.local
                  FROM posts p
                  LEFT JOIN usuarios u ON u.id = p.id_usuario
                  WHERE p.id_usuario IN 

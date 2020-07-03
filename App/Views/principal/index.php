@@ -234,8 +234,8 @@
                                     </div>
                                     <div class="post-st">
                                         <ul>
-                                            <!-- <li class="d-none hidden"><a class="post_project" href="#" title="">Postar um Projeto</a></li> -->
-                                            <li><a class="post-jb active" href="#" title="">Compartilhar Publicação</a></li>
+                                            <?php if($aViewVar['usuario']['tipo'] == 1) { ?><li><a class="publicacao-jb active" href="#" title="">Nova publicação</a></li><?php } ?>
+                                            <li><a class="post-jb active" href="#" title="">Novo post</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@
 
     <div class="post-popup job_post">
         <div class="post-project">
-            <h3>Compartilhar Publicação</h3>
+            <h3>Novo post</h3>
             <div class="post-project-fields">
                 <form method="post" action="/perfil/salvarVaga">
                     <input type="hidden" name="id_usuario" value="<?php echo \App\Lib\Auth::usuario()->id; ?>">
@@ -299,6 +299,43 @@
                             </ul>
                         </div>
                     </div>
+                    <input type="hidden" name="tipo" value="0">
+                </form>
+            </div>
+            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+        </div>
+    </div>
+
+    <div class="post-popup job_publicacao">
+        <div class="post-project">
+            <h3>Compartilhar Publicação</h3>
+            <div class="post-project-fields">
+                <form method="post" action="/perfil/salvarVaga">
+                    <input type="hidden" name="id_usuario" value="<?php echo \App\Lib\Auth::usuario()->id; ?>">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <input type="text" name="titulo" placeholder="Título">
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="text" name="local" placeholder="Local/intituição de publicação">
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="text" name="ano_publicacao" placeholder="Ano da publicação">
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="text" name="url" placeholder="URL do artigo">
+                        </div>
+                        <div class="col-lg-12">
+                            <textarea name="texto" placeholder="Escreva um resumo"></textarea>
+                        </div>
+                        <div class="col-lg-12">
+                            <ul>
+                                <li><button class="active" type="submit" value="post">Compartilhar Publicação</button></li>
+                                <li><a href="#" title="">Cancelar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="hidden" name="tipo" value="1">
                 </form>
             </div>
             <a href="#" title=""><i class="la la-times-circle-o"></i></a>

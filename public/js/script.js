@@ -29,6 +29,17 @@ $(window).on("load", function() {
         return false;
     });
 
+    $(".publicacao-jb").on("click", function(){
+        $(".post-popup.job_publicacao").addClass("active");
+        $(".wrapper").addClass("overlay");
+        return false;
+    });
+    $(".post-project > a").on("click", function(){
+        $(".post-popup.job_publicacao").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
+
     //  ============= SIGNIN CONTROL FUNCTION =========
 
     $('.sign-control li').on("click", function(){

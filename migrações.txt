@@ -112,4 +112,17 @@ CREATE TABLE notificacoes (
 
 ALTER TABLE usuarios
 ADD url_cl VARCHAR(200);
+
+ALTER TABLE posts
+ADD local VARCHAR(200);
+
+ALTER TABLE posts
+ADD ano_publicacao VARCHAR(4);
+
+ALTER TABLE posts
+ADD url VARCHAR(200);
+
+ALTER TABLE posts
+ADD tipo TINYINT;
+
 ########################### TABELAS ###########################
