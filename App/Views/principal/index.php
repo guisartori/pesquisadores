@@ -293,6 +293,9 @@
                             <textarea name="texto" placeholder="O que você está pensando?"></textarea>
                         </div>
                         <div class="col-lg-12">
+                            <input type="text" name="palavras_chave" placeholder="Palavras chave: separe por (;)">
+                        </div>  
+                        <div class="col-lg-12">
                             <ul>
                                 <li><button class="active" type="submit" value="post">Compartilhar Publicação</button></li>
                                 <li><a href="#" title="">Cancelar</a></li>
@@ -327,6 +330,9 @@
                         </div>
                         <div class="col-lg-12">
                             <textarea name="texto" placeholder="Escreva um resumo"></textarea>
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="text" name="palavras_chave" placeholder="Palavras chave: separe por (;)">
                         </div>
                         <div class="col-lg-12">
                             <ul>

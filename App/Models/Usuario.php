@@ -30,12 +30,20 @@ class Usuario
 
         try {
             $query = $db->query(
-                "SELECT DISTINCT * FROM usuarios u
+                "SELECT DISTINCT u.nome, u.email, u.id FROM usuarios u
                 LEFT JOIN formacoes f
                 ON f.id_usuario = u.id
+                LEFT JOIN posts p
+                ON p.id_usuario = u.id
+                LEFT JOIN usuarios_topicos ut
+                ON ut.id_usuario = u.id
+                LEFT JOIN topicos t
+                ON ut.id_topico = t.id
                 WHERE u.nome LIKE '%".$query."%' 
                 OR u.email LIKE '%".$query."%'
-                OR f.titulo LIKE '%".$query."%'"
+                OR f.titulo LIKE '%".$query."%'
+                OR p.palavras_chave LIKE '%".$query."%'
+                OR t.nome LIKE '%".$query."%'"
             );
 
             $usuarios = $query->fetchAll();

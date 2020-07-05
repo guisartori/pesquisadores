@@ -253,4 +253,7 @@ INSERT INTO topicos (nome) VALUES ('variance');
 INSERT INTO topicos (nome) VALUES ('vector');
 INSERT INTO topicos (nome) VALUES ('vector space');
 INSERT INTO topicos (nome) VALUES ('Weka');
+
+ALTER TABLE posts
+ADD palavras_chave VARCHAR(500);
 ########################### TABELAS ###########################

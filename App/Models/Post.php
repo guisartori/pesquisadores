@@ -23,6 +23,7 @@ class Post
                 ano_publicacao,
                 url,
                 tipo,
+                palavras_chave,
                 data_hora", "'".$data['id_usuario']."',
                 '".$data['titulo']."',
                 '".$data['texto']."',
@@ -30,6 +31,7 @@ class Post
                 '".$data['ano_publicacao']."',
                 '".$data['url']."',
                 '".$data['tipo']."',
+                '".$data['palavras_chave']."',
                 '".$date."'"
             );
 
