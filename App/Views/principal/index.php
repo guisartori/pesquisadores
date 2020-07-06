@@ -98,7 +98,7 @@
                                     <?php
                                     } else {
                                         foreach ($aViewVar['posts'] as $post) {
-                                            include __DIR__ . '\..\components\post.php';
+                                            include __DIR__ . '/../components/post.php';
                                         }
                                     }
                                     ?>
