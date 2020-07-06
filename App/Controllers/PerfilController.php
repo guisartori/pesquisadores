@@ -7,10 +7,12 @@ use App\Models\Post;
 use App\Models\Experiencia;
 use App\Models\Formacao;
 use App\Models\Habilidade;
+use App\Models\Notificacao;
 use App\Models\Seguidor;
 use App\Models\Topico;
 
-class PerfilController extends Controller {
+class PerfilController extends Controller
+{
     private $app;
     public $isAuth;
 
@@ -19,26 +21,29 @@ class PerfilController extends Controller {
         $this->app = $app;
     }
 
-    public function index() {
+    public function index()
+    {
         $idUsuario =  \App\Lib\Auth::usuario()->id;
 
-        self::setViewParam('nameController',$this->app->getNameController());
+        self::setViewParam('nameController', $this->app->getNameController());
 
         $usuario = Usuario::mostrar($idUsuario);
 
         $posts = Post::todos($idUsuario);
-        self::setViewParam('posts',$posts);
+        self::setViewParam('posts', $posts);
 
         $oListaExperiencia = Experiencia::todos($idUsuario);
         $oListaEducacao = Formacao::todos($idUsuario);
         $oListaHabilidades = Habilidade::todos($idUsuario);
         $topicos = Topico::getTopicosInteressado($idUsuario);
+        $notificacoes = Notificacao::ultimasDez($idUsuario);
 
-        self::setViewParam('usuario',$usuario);
-        self::setViewParam('aListaExperiencia',$oListaExperiencia);
-        self::setViewParam('aListaEducacao',$oListaEducacao);
-        self::setViewParam('aListaHabilidades',$oListaHabilidades);
-        self::setViewParam('topicos',$topicos);
+        self::setViewParam('usuario', $usuario);
+        self::setViewParam('aListaExperiencia', $oListaExperiencia);
+        self::setViewParam('aListaEducacao', $oListaEducacao);
+        self::setViewParam('aListaHabilidades', $oListaHabilidades);
+        self::setViewParam('topicos', $topicos);
+        self::setViewParam('notificacoes', $notificacoes);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
 
@@ -49,25 +54,27 @@ class PerfilController extends Controller {
         self::setViewJs('/public/js/perfil/perfil-amigo.js');
 
         $this->render('perfil/index');
-
     }
 
-    public function editar() {
+    public function editar()
+    {
 
         $idUsuario =  \App\Lib\Auth::usuario()->id;
-        self::setViewParam('nameController',$this->app->getNameController());
+        self::setViewParam('nameController', $this->app->getNameController());
 
         $oUsuario = Usuario::mostrar($idUsuario)[0];
         $oListaExperiencia = Experiencia::todos($idUsuario);
         $oListaEducacao = Formacao::todos($idUsuario);
         $oListaHabilidades = Habilidade::todos($idUsuario);
         $topicos = Topico::todos();
+        $notificacoes = Notificacao::ultimasDez($idUsuario);
 
-        self::setViewParam('aUsuario',$oUsuario);
-        self::setViewParam('aListaExperiencia',$oListaExperiencia);
-        self::setViewParam('aListaEducacao',$oListaEducacao);
-        self::setViewParam('aListaHabilidades',$oListaHabilidades);
-        self::setViewParam('topicos',$topicos);
+        self::setViewParam('aUsuario', $oUsuario);
+        self::setViewParam('aListaExperiencia', $oListaExperiencia);
+        self::setViewParam('aListaEducacao', $oListaEducacao);
+        self::setViewParam('aListaHabilidades', $oListaHabilidades);
+        self::setViewParam('topicos', $topicos);
+        self::setViewParam('notificacoes', $notificacoes);
 
         self::setViewCss('/public/css/pages/principal/principal.css');
 
@@ -77,49 +84,50 @@ class PerfilController extends Controller {
         self::setViewJs('/public/js/perfil/editar.js');
 
         $this->render('perfil/editar');
-
     }
 
-    public function uploadCapaPerfil() {
+    public function uploadCapaPerfil()
+    {
         // echo "opa";
         $idUsuario = $_POST['usuario'];
         $nomeImagemUpload = time() . '_' . $_FILES['save-foto-capa']['name'];
-        $target = 'public/uploads/capa/'.$nomeImagemUpload;
+        $target = 'public/uploads/capa/' . $nomeImagemUpload;
 
         if (move_uploaded_file($_FILES['save-foto-capa']['tmp_name'], $target)) {
-            
+
             Usuario::inserirFotoCapa($target, $idUsuario);
             $this->redirect('perfil/editar');
-            
         } else {
             echo "erro";
             // $this->render('error/usuario');
         }
     }
 
-    public function uploadFoto() {
+    public function uploadFoto()
+    {
 
         $idUsuario = $_POST['usuario'];
         $nomeImagemUpload = time() . '_' . $_FILES['save-foto-user']['name'];
-        $target = 'public/uploads/fotoPerfil/'.$nomeImagemUpload;
+        $target = 'public/uploads/fotoPerfil/' . $nomeImagemUpload;
 
         if (move_uploaded_file($_FILES['save-foto-user']['tmp_name'], $target)) {
-            
+
             Usuario::inserirFotoPerfil($target, $idUsuario);
             $this->redirect('perfil/editar/');
-            
         } else {
             $this->render('error/usuario');
         }
     }
 
-    public function removerFotoPerfil(){
+    public function removerFotoPerfil()
+    {
         $idUsuario = $_POST['idUsuario'];
 
         Usuario::removerFotoPerfil($idUsuario);
     }
 
-    public function removerFotoCapa(){
+    public function removerFotoCapa()
+    {
         $idUsuario = $_POST['idUsuario'];
 
         Usuario::removerFotoCapa($idUsuario);
@@ -127,7 +135,8 @@ class PerfilController extends Controller {
 
     //TODO DAQUI PRA BAIXO REVISAR
 
-    public function atualizarInformacoes() {
+    public function atualizarInformacoes()
+    {
         $nome = $_POST['nome'];
         $profissao = $_POST['profissao'];
         $idUser = $_POST['idUser'];
@@ -141,16 +150,17 @@ class PerfilController extends Controller {
 
         $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
 
-        $sql2 = "UPDATE usuario SET titulo = '".$nome."', profissao = '".$profissao."', email = '".$email."', data_nascimento = '".$dataNasc."', inicio_trabalho = '".$inicio."', cidade = '".$cidade."', estado = '".$estado."', salario = '".$salario."', nivel_instrucao = '".$instrucao."' WHERE id = '$idUser'";
-        if(mysqli_query($conn, $sql2)) {
+        $sql2 = "UPDATE usuario SET titulo = '" . $nome . "', profissao = '" . $profissao . "', email = '" . $email . "', data_nascimento = '" . $dataNasc . "', inicio_trabalho = '" . $inicio . "', cidade = '" . $cidade . "', estado = '" . $estado . "', salario = '" . $salario . "', nivel_instrucao = '" . $instrucao . "' WHERE id = '$idUser'";
+        if (mysqli_query($conn, $sql2)) {
             $this->redirect('perfil/editar/');
         } else {
             $this->render('error/usuario');
         }
     }
 
-    public function getInformacoesPerfil() {
-        if(isset($_POST['idUser'])) {
+    public function getInformacoesPerfil()
+    {
+        if (isset($_POST['idUser'])) {
 
             $idUser = $_POST['idUser'];
 
@@ -159,9 +169,9 @@ class PerfilController extends Controller {
             $result = mysqli_query($conn, "SELECT * FROM usuario WHERE id = '$idUser' ORDER BY id DESC LIMIT 1");
 
             if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     header('Content-Type: application/json');
-                    echo json_encode(array('titulo'=> $row['titulo'], 'profissao'=> $row['profissao'], 'email'=> $row['email'], 'dataNasc'=> $row['data_nascimento'], 'inicio'=> $row['inicio_trabalho'], 'cidade'=> $row['cidade'], 'estado'=> $row['estado'], 'instrucao'=> $row['nivel_instrucao'], 'salario' => $row['salario']));
+                    echo json_encode(array('titulo' => $row['titulo'], 'profissao' => $row['profissao'], 'email' => $row['email'], 'dataNasc' => $row['data_nascimento'], 'inicio' => $row['inicio_trabalho'], 'cidade' => $row['cidade'], 'estado' => $row['estado'], 'instrucao' => $row['nivel_instrucao'], 'salario' => $row['salario']));
                 }
             } else {
                 $this->render('error/usuario');
@@ -171,25 +181,27 @@ class PerfilController extends Controller {
         }
     }
 
-    public function inserirVisaoGeral() {
+    public function inserirVisaoGeral()
+    {
         $visao = $_POST['textar'];
         $idUser = $_POST['idUser'];
 
         $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
 
         $sql = "INSERT INTO visaoGeral (id_usuario, visao) VALUES ('$idUser', '$visao')";
-        if(mysqli_query($conn, $sql)) {
+        if (mysqli_query($conn, $sql)) {
             $this->redirect('perfil/editar/');
         } else {
             $this->render('error/usuario');
         }
     }
 
-    public function salvarVaga() {
-        if(Post::novo($_POST)){
+    public function salvarVaga()
+    {
+        if (Post::novo($_POST)) {
             $usuario = Usuario::mostrar($_POST['id_usuario'])[0];
             $seguidores = Seguidor::getSeguidores($_POST['id_usuario']);
-            foreach($seguidores as $seguidor){
+            foreach ($seguidores as $seguidor) {
                 NotificacaoController::novoPostDeAmigoSeguido($usuario['nome'], $_POST['titulo'], $seguidor['id']);
             }
 
@@ -201,16 +213,17 @@ class PerfilController extends Controller {
         $this->render('error/usuario');
     }
 
-    public function buscarUsuario() {
+    public function buscarUsuario()
+    {
 
         $resultado = Usuario::buscar($_POST['query']);
 
         echo $resultado;
-        
     }
 
-    public function recomendarPerfil() {
-        if(isset($_POST['idUser']) && isset($_POST['idPerfil'])) {
+    public function recomendarPerfil()
+    {
+        if (isset($_POST['idUser']) && isset($_POST['idPerfil'])) {
 
             $idUser = $_POST['idUser'];
             $idPerfil = $_POST['idPerfil'];
@@ -218,16 +231,16 @@ class PerfilController extends Controller {
             $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
 
             $sql = "INSERT INTO recomendacoes (id_amigo, id_pessoal) VALUES ('$idPerfil', '$idUser')";
-            if(mysqli_query($conn, $sql)) {
+            if (mysqli_query($conn, $sql)) {
                 $result = mysqli_query($conn, "SELECT * FROM recomendacoes WHERE id_amigo = '$idPerfil' AND id_pessoal = '$idUser' LIMIT 1");
                 if (mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
                         header('Content-Type: application/json');
-                        echo json_encode(array('curtiu'=> '1'));
+                        echo json_encode(array('curtiu' => '1'));
                     }
                 } else {
                     header('Content-Type: application/json');
-                    echo json_encode(array('curtiu'=> '0'));
+                    echo json_encode(array('curtiu' => '0'));
                 }
             } else {
                 $this->render('error/usuario');
@@ -237,8 +250,9 @@ class PerfilController extends Controller {
         }
     }
 
-    public function removerRecomendacao() {
-        if(isset($_POST['idUser']) && isset($_POST['idPerfil'])) {
+    public function removerRecomendacao()
+    {
+        if (isset($_POST['idUser']) && isset($_POST['idPerfil'])) {
 
             $idUser = $_POST['idUser'];
             $idPerfil = $_POST['idPerfil'];
@@ -246,16 +260,16 @@ class PerfilController extends Controller {
             $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
 
             $sql = "DELETE FROM recomendacoes WHERE id_amigo = '$idPerfil' AND id_pessoal = '$idUser'";
-            if(mysqli_query($conn, $sql)) {
+            if (mysqli_query($conn, $sql)) {
                 $result = mysqli_query($conn, "SELECT * FROM recomendacoes WHERE id_amigo = '$idPerfil' AND id_pessoal = '$idUser' LIMIT 1");
                 if (mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
                         header('Content-Type: application/json');
-                        echo json_encode(array('curtiu'=> '1'));
+                        echo json_encode(array('curtiu' => '1'));
                     }
                 } else {
                     header('Content-Type: application/json');
-                    echo json_encode(array('curtiu'=> '0'));
+                    echo json_encode(array('curtiu' => '0'));
                 }
             } else {
                 $this->render('error/usuario');
@@ -265,8 +279,9 @@ class PerfilController extends Controller {
         }
     }
 
-    public function getLikes() {
-        if(isset($_POST['idPerfil'])) {
+    public function getLikes()
+    {
+        if (isset($_POST['idPerfil'])) {
 
             $idPerfil = $_POST['idPerfil'];
 
@@ -275,9 +290,9 @@ class PerfilController extends Controller {
             $result = mysqli_query($conn, "SELECT COUNT(*) FROM recomendacoes WHERE id_amigo = '$idPerfil'");
 
             if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     header('Content-Type: application/json');
-                    echo json_encode(array('qtdRecomendacoes'=> $row['COUNT(*)']));
+                    echo json_encode(array('qtdRecomendacoes' => $row['COUNT(*)']));
                 }
             } else {
                 $this->render('error/usuario');
@@ -287,8 +302,9 @@ class PerfilController extends Controller {
         }
     }
 
-    public function verificarRecomendacao() {
-        if(isset($_POST['idPerfil']) && isset($_POST['idUser'])) {
+    public function verificarRecomendacao()
+    {
+        if (isset($_POST['idPerfil']) && isset($_POST['idUser'])) {
 
             $idPerfil = $_POST['idPerfil'];
             $idUser = $_POST['idUser'];
@@ -298,21 +314,22 @@ class PerfilController extends Controller {
             $result = mysqli_query($conn, "SELECT * FROM recomendacoes WHERE id_amigo = '$idPerfil' AND id_pessoal = '$idUser' LIMIT 1");
 
             if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     header('Content-Type: application/json');
-                    echo json_encode(array('curtiu'=> '1'));
+                    echo json_encode(array('curtiu' => '1'));
                 }
             } else {
                 header('Content-Type: application/json');
-                echo json_encode(array('curtiu'=> '0'));
+                echo json_encode(array('curtiu' => '0'));
             }
         } else {
             $this->render('error/usuario');
         }
     }
 
-    public function excluirVaga() {
-        if(isset($_POST['idUser']) && isset($_POST['idVaga'])) {
+    public function excluirVaga()
+    {
+        if (isset($_POST['idUser']) && isset($_POST['idVaga'])) {
 
             $idUser = $_POST['idUser'];
             $idVaga = $_POST['idVaga'];
@@ -320,7 +337,7 @@ class PerfilController extends Controller {
             $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
 
             $sql = "DELETE FROM vaga WHERE id = '$idVaga' AND id_usuario = '$idUser'";
-            if(mysqli_query($conn, $sql)) {
+            if (mysqli_query($conn, $sql)) {
                 $this->redirect('principal/');
             } else {
                 $this->render('error/usuario');
@@ -330,8 +347,9 @@ class PerfilController extends Controller {
         }
     }
 
-    public function editarVaga() {
-        if(isset($_POST['idVaga']) && isset($_POST['titulo']) && isset($_POST['categoria']) && isset($_POST['habilidade']) && isset($_POST['preco']) && isset($_POST['integral']) && isset($_POST['descricao']) && isset($_POST['idUser'])) {
+    public function editarVaga()
+    {
+        if (isset($_POST['idVaga']) && isset($_POST['titulo']) && isset($_POST['categoria']) && isset($_POST['habilidade']) && isset($_POST['preco']) && isset($_POST['integral']) && isset($_POST['descricao']) && isset($_POST['idUser'])) {
 
             $idUser = $_POST['idUser'];
             $idVaga = $_POST['idVaga'];
@@ -344,9 +362,8 @@ class PerfilController extends Controller {
 
             $conn = mysqli_connect("remotemysql.com", "xuzhvu3ZzJ", "neVSzrJgAW", "xuzhvu3ZzJ");
 
-            $sql = "UPDATE vaga SET titulo = '".$titulo."', categoria = '".$categoria."', habilidade = '".$habilidade."', preco = '".$preco."', integral = '".$integral."', descricao = '".$descricao."' WHERE id = '$idVaga' AND id_usuario = '$idUser'";
-            if(mysqli_query($conn, $sql)) {
-
+            $sql = "UPDATE vaga SET titulo = '" . $titulo . "', categoria = '" . $categoria . "', habilidade = '" . $habilidade . "', preco = '" . $preco . "', integral = '" . $integral . "', descricao = '" . $descricao . "' WHERE id = '$idVaga' AND id_usuario = '$idUser'";
+            if (mysqli_query($conn, $sql)) {
             } else {
                 $this->render('error/usuario');
             }
@@ -354,5 +371,4 @@ class PerfilController extends Controller {
             $this->render('error/usuario');
         }
     }
-
 }

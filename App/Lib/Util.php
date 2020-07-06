@@ -9,80 +9,88 @@ use App\Models\Topico;
 
 class Util
 {
-    public static function hash($senha,$revert=false){
-        if($revert){
+    public static function hash($senha, $revert = false)
+    {
+        if ($revert) {
             return base64_decode($senha);
-        }else{
+        } else {
             return base64_encode($senha);
         }
     }
-    public static function redirect($view) {
+    public static function redirect($view)
+    {
         header('Location: /' . $view);
     }
-    public static function convertDate($dt,$format){
+    public static function convertDate($dt, $format = null)
+    {
 
-        if($format == "Y-m-d"){
-            $aDate = explode("/",$dt);
+        if ($format == "Y-m-d") {
+            $aDate = explode("/", $dt);
 
-            $date = new \DateTime($aDate[2]."-".$aDate[1]."-".$aDate[0]);
+            $date = new \DateTime($aDate[2] . "-" . $aDate[1] . "-" . $aDate[0]);
 
             return $date->format('Y-m-d');
-
-        }else if($format == "d/m/Y"){
+        } else if ($format == "d/m/Y") {
             $date = new \DateTime($dt);
 
             return $date->format('d/m/Y');
-        }else{
+        } else {
 
             $date = new \DateTime($dt);
 
-            return $date->format('d/m/Y');
+            return $date->format('d/m/Y h:i');
         }
-
     }
 
-    public static function formatMoney($valor,$lang, $simbolo = false){
-        if($lang == "pt") {
-            if($simbolo) {
+    public static function formatMoney($valor, $lang, $simbolo = false)
+    {
+        if ($lang == "pt") {
+            if ($simbolo) {
                 $simbolo = "R$";
 
                 return $simbolo . " " . number_format($valor, 2, ',', '.');
-            }else{
+            } else {
                 return number_format($valor, 2, ',', '.');
             }
-        }else if($lang == "en") {
-            if($simbolo) {
+        } else if ($lang == "en") {
+            if ($simbolo) {
                 $simbolo = "US$";
 
                 return $simbolo . " " . number_format($valor, 2, '.', ',');
-            }else{
-                return str_replace(",", ".",str_replace(".", "",$valor));
+            } else {
+                return str_replace(",", ".", str_replace(".", "", $valor));
             }
         }
     }
 
-    public static function taCurtido($idPost, $idUsuario){
+    public static function taCurtido($idPost, $idUsuario)
+    {
         $response = Curtida::check($idPost, $idUsuario);
         return $response;
     }
 
-    public static function qtdCurtidas($postId){
+    public static function qtdCurtidas($postId)
+    {
         return Curtida::qtdCurtidas($postId);
     }
 
-    public static function segue($idSeguidor, $idSeguindo){
+    public static function segue($idSeguidor, $idSeguindo)
+    {
         return Seguidor::eSeguidor($idSeguidor, $idSeguindo);
     }
 
-    public static function jaRecomendado($idRecomendador, $idRecomendado){
+    public static function jaRecomendado($idRecomendador, $idRecomendado)
+    {
         return Recomendacao::jaRecomendou($idRecomendador, $idRecomendado);
     }
 
-    public static function qtdRecomendacoes($idUsuario){
+    public static function qtdRecomendacoes($idUsuario)
+    {
         return Recomendacao::qtdRecomendacoes($idUsuario);
     }
 
-    public static function verificaInteresse($idUsuario, $idTopico){
+    public static function verificaInteresse($idUsuario, $idTopico)
+    {
         return Topico::verificaInteresse($idUsuario, $idTopico);
     }
 }
