@@ -164,7 +164,7 @@
         <div class="post-project">
             <h3>Compartilhar Publicação</h3>
             <div class="post-project-fields">
-                <form method="post" action="/perfil/salvarVaga">
+                <form method="post" action="/perfil/salvarVaga" enctype="multipart/form-data">
                     <input type="hidden" name="id_usuario" value="<?php echo \App\Lib\Auth::usuario()->id; ?>">
                     <div class="row">
                         <div class="col-lg-12">
@@ -178,6 +178,10 @@
                         </div>
                         <div class="col-lg-12">
                             <input type="text" name="url" placeholder="URL do artigo">
+                        </div>
+                        <div class="col-lg-12">
+                            Selecione um artigo
+                            <input type="file" name="arquivo" style="border: none; padding-top: 8px; margin: 0">
                         </div>
                         <div class="col-lg-12">
                             <textarea name="texto" placeholder="Escreva um resumo"></textarea>

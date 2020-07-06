@@ -256,4 +256,7 @@ INSERT INTO topicos (nome) VALUES ('Weka');
 
 ALTER TABLE posts
 ADD palavras_chave VARCHAR(500);
+
+ALTER TABLE posts
+ADD arquivo VARCHAR(500);
 ########################### TABELAS ###########################

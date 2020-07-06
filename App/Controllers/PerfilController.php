@@ -198,15 +198,24 @@ class PerfilController extends Controller
 
     public function salvarVaga()
     {
+
+        if ($_FILES['arquivo']['name'] != NULL) {
+
+            $nomeUpload = time() . '_' . $_FILES['arquivo']['name'];
+            $target = 'public/uploads/arquivos/' . $nomeUpload;
+
+            if (move_uploaded_file($_FILES['arquivo']['tmp_name'], $target)) {
+                $_POST['endereco_arquivo'] = $target;
+            } else {
+                $this->render('error/usuario');
+            }
+        }
         if (Post::novo($_POST)) {
             $usuario = Usuario::mostrar($_POST['id_usuario'])[0];
             $seguidores = Seguidor::getSeguidores($_POST['id_usuario']);
             foreach ($seguidores as $seguidor) {
                 NotificacaoController::novoPostDeAmigoSeguido($usuario['nome'], $_POST['titulo'], $seguidor['id']);
             }
-
-            // header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            // $this->render('principal');
             header("Location: http://localhost/principal");
         }
 

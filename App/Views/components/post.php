@@ -82,6 +82,7 @@ $idUsuarioLogado = \App\Lib\Auth::usuario()->id;
                 <li><img src="/public/images/icon9.png" alt=""><span><?php echo $post['local']; ?></span></li>
                 <li><img src="/public/images/price1.png" alt=""><span><?php echo $post['ano_publicacao']; ?></span></li>
                 <?php if ($post['url'] != '') { ?><li><span><a target="_blank" href="//<?php echo $post['url']; ?>">Artigo</a></span></li> <?php } ?>
+                <?php if ($post['arquivo'] != '') { ?><li><span><a target="_blank" href="<?php echo $post['arquivo']; ?>" download>Download</a></span></li> <?php } ?>
             </ul>
 
         </div>
