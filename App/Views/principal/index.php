@@ -97,6 +97,7 @@
                                         <div class="alert alert-warning" role="alert">Nada ainda foi publicado...</div>
                                     <?php
                                     } else {
+                                        echo "teste";
                                         foreach ($aViewVar['posts'] as $post) {
                                             include __DIR__ . '/../components/post.php';
                                         }
