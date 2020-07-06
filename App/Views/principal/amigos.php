@@ -90,7 +90,8 @@
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                                 <div class="company_profile_info">
                                                     <div class="company-up-info card-item-amigos">
-                                                        <img src="/public/uploads/fotoPerfil/profile-default.png" alt="Foto do Usuário Solicitante">
+                                                        <img src="<?php echo ($seguidor['foto_perfil']) ? $seguidor['foto_perfil'] : "/public/uploads/fotoPerfil/profile-default.png"; ?>" alt="">
+
                                                         <h3><?php echo $seguidor['nome']; ?></h3>
                                                         <h4><?php echo $seguidor['profissao']; ?></h4>
                                                     </div>
