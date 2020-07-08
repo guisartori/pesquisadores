@@ -9,7 +9,8 @@ $idUsuarioLogado = \App\Lib\Auth::usuario()->id;
                 <img style="width: 50px; height: 50px" src="<?php echo ($post['foto_perfil']) ? $post['foto_perfil'] : "http://via.placeholder.com/50x50"; ?>" alt="">
                 <div class="usy-name">
                     <h3><?php echo $post['nome']; ?></h3>
-                    <span><img src="/public/images/clock.png" alt=""><?php echo \App\Lib\Util::convertDate($post['data_hora']); ?></span>
+                    <!-- <span><img src="/public/images/clock.png" alt=""><?php //echo \App\Lib\Util::convertDate($post['data_hora']); 
+                                                                            ?></span> -->
                 </div>
             </div>
             <div class="ed-opts" style="<?php echo $idUsuarioLogado == $post['id_usuario'] ? '' : 'display:none'; ?>">
@@ -64,7 +65,8 @@ $idUsuarioLogado = \App\Lib\Auth::usuario()->id;
                 <img style="width: 50px; height: 50px" src="<?php echo ($post['foto_perfil']) ? $post['foto_perfil'] : "http://via.placeholder.com/50x50"; ?>" alt="">
                 <div class="usy-name">
                     <h3><?php echo $post['nome']; ?></h3>
-                    <span><img src="/public/images/clock.png" alt=""><?php echo \App\Lib\Util::convertDate($post['data_hora']); ?></span>
+                    <!-- <span><img src="/public/images/clock.png" alt=""><?php //echo \App\Lib\Util::convertDate($post['data_hora']); 
+                                                                            ?></span> -->
                 </div>
             </div>
             <div class="ed-opts" style="<?php echo $idUsuarioLogado == $post['id_usuario'] ? '' : 'display:none'; ?>">

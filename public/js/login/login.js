@@ -1,17 +1,18 @@
 $(document).ready(function () {
 
-    
+
     $('#cpf').mask('000.000.000-00')
-   
+
     $('#formNovoUsuario').on('submit', (e) => {
-        if($('#teste').val() == 0){
+        if ($('#send').val() == 0) {
             e.preventDefault()
             let nascimento = $('#data-nascimento').val()
             nascimento = nascimento.split("-")
             const idadeTotal = idade(nascimento[0], nascimento[1], nascimento[2])
 
-            if(idadeTotal < 18){
+            if (idadeTotal < 18) {
                 alert('Somente permitido maiores de 18 anos.')
+                $('#data-nascimento').focus()
             } else {
                 console.log(idadeTotal)
                 $('#send').val(1)
@@ -35,37 +36,37 @@ $(document).ready(function () {
     });
 
     $('#tipo-conta').on('change', function () {
-       if($(this).val() == 'GT') {
-           $('.info-cartao').addClass('invisivel');
-           $('#numero_cartao').prop('required', false);
-           $('#nome_cartao').prop('required', false);
-           $('#data_validade_cartao').prop('required', false);
-           $('#cvc_cartao').prop('required', false);
-       } else if($(this).val() == 'PG') {
-           $('.info-cartao').removeClass('invisivel');
-           $('#numero_cartao').prop('required', true);
-           $('#nome_cartao').prop('required', true);
-           $('#data_validade_cartao').prop('required', true);
-           $('#cvc_cartao').prop('required', true);
-       }
+        if ($(this).val() == 'GT') {
+            $('.info-cartao').addClass('invisivel');
+            $('#numero_cartao').prop('required', false);
+            $('#nome_cartao').prop('required', false);
+            $('#data_validade_cartao').prop('required', false);
+            $('#cvc_cartao').prop('required', false);
+        } else if ($(this).val() == 'PG') {
+            $('.info-cartao').removeClass('invisivel');
+            $('#numero_cartao').prop('required', true);
+            $('#nome_cartao').prop('required', true);
+            $('#data_validade_cartao').prop('required', true);
+            $('#cvc_cartao').prop('required', true);
+        }
     });
-    
+
     function idade(ano_aniversario, mes_aniversario, dia_aniversario) {
         var d = new Date,
-        ano_atual = d.getFullYear(),
-        mes_atual = d.getMonth() + 1,
-        dia_atual = d.getDate(),
-        
-        ano_aniversario = +ano_aniversario,
-        mes_aniversario = +mes_aniversario,
-        dia_aniversario = +dia_aniversario,
-        
-        quantos_anos = ano_atual - ano_aniversario;
-        
+            ano_atual = d.getFullYear(),
+            mes_atual = d.getMonth() + 1,
+            dia_atual = d.getDate(),
+
+            ano_aniversario = +ano_aniversario,
+            mes_aniversario = +mes_aniversario,
+            dia_aniversario = +dia_aniversario,
+
+            quantos_anos = ano_atual - ano_aniversario;
+
         if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
             quantos_anos--;
         }
-        
+
         return quantos_anos < 0 ? 0 : quantos_anos;
     }
 });

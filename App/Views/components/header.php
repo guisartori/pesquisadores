@@ -143,7 +143,7 @@
                 <div class="user-account-settingss">
 
 
-                    <h3>Configurações</h3>
+                    <!-- <h3>Configurações</h3> -->
                     <ul class="us-links">
                         <li><a href="/perfil/" title="">Meu Perfil</a></li>
                         <li><a href="/perfil/editar" title="">Editar meu Perfil</a></li>

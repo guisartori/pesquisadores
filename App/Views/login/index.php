@@ -1,11 +1,12 @@
 <style>
-    .invisivel{
+    .invisivel {
         display: none !important;
         visibility: hidden !important;
     }
 </style>
+
 <body class="sign-in">
-    
+
     <div class="wrapper">
         <div class="sign-in-page">
             <div class="signin-popup">
@@ -42,15 +43,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
-                                                <div class="checky-sec">
+                                                <div class="checky-sec st2">
                                                     <div class="fgt-sec">
                                                         <input type="checkbox" name="cc" id="lembrar-de-mim">
                                                         <label for="lembrar-de-mim">
                                                             <span></span>
                                                         </label>
-                                                        <small>Lembrar de mim</small>
+                                                        <small>Lembrar de mim &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
                                                     </div>
-                                                    <a href="principal.html" title="">Esqueceu sua senha?</a>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
@@ -61,12 +61,6 @@
 
                                 </div>
                                 <div class="sign_in_sec" id="tab-2">
-                                    <div class="signup-tab">
-                                        <ul>
-                                            <li data-tab="tab-3" class="current invisivel"><a href="#" title="">Usuário</a></li>
-                                            <li class="invisivel" data-tab="tab-4"><a href="#" title="">Empresa</a></li>
-                                        </ul>
-                                    </div>
                                     <div class="dff-tab current" id="tab-3">
                                         <form action="/login/salvar" method="post" id="formNovoUsuario">
                                             <div class="row">
@@ -80,6 +74,7 @@
                                                         <i class="la la-mail-forward"></i>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input id="data-nascimento" type="date" name="data_nascimento" placeholder="Data de Nascimento (dd/mm/aaaa)" required>
@@ -92,6 +87,7 @@
                                                         <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="text" name="profissao" placeholder="Qual a sua profissão?" required>
@@ -100,25 +96,41 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="nivel_instrucao" placeholder="Nível de Instrução" required>
-                                                        <i class="la la-graduation-cap"></i>
+                                                        <input type="password" name="senha" placeholder="Senha" required>
+                                                        <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <select class="form-control" id="tipo-conta" name="tipo" required>
+                                                            <option>Selecione o tipo de Conta...</option>
+                                                            <option value="0">Membro comum</option>
+                                                            <option value="1">Pesquisador</option>
+                                                        </select>
+                                                        <i class="la la-link"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd invisivel">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="nivel_instrucao" placeholder="Nível de Instrução">
+                                                        <i class="la la-graduation-cap"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd invisivel">
                                                     <div class="sn-field">
                                                         <input type="text" name="inicio_trabalho" placeholder="Quando Iniciou na Area">
                                                         <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 no-pdd">
+                                                <div class="col-lg-12 no-pdd invisivel">
                                                     <div class="sn-field">
-                                                        <input type="text" name="cidade" placeholder="Cidade" required>
+                                                        <input type="text" name="cidade" placeholder="Cidade">
                                                         <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 no-pdd">
+                                                <div class="col-lg-12 no-pdd invisivel">
                                                     <div class="sn-field">
-                                                        <select class="form-control" id="estado" name="estado" required>
+                                                        <select class="form-control " id="estado" name="estado">
                                                             <option>Selecione o Estado...</option>
                                                             <option value="AC">Acre</option>
                                                             <option value="AL">Alagoas</option>
@@ -153,22 +165,8 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd d-none" style="display: none;">
                                                 </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="password" name="senha" placeholder="Senha" required>
-                                                        <i class="la la-lock"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <select class="form-control" id="tipo-conta" name="tipo" required>
-                                                            <option>Selecione o tipo de Conta...</option>
-                                                            <option value="0">Membro comum</option>
-                                                            <option value="1">Pesquisador</option>
-                                                        </select>
-                                                        <i class="la la-link"></i>
-                                                    </div>
-                                                </div>
+
+
                                                 <div class="col-lg-12 no-pdd invisivel" id="CL">
                                                     <div class="sn-field">
                                                         <input type="text" name="url" id="url" placeholder="Currículo Lattes">
@@ -204,50 +202,7 @@
                                             <input type="hidden" name="send" id="send" value="0">
                                         </form>
                                     </div>
-                                    <div class="dff-tab invisivel" id="tab-4">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="company-name" placeholder="Nome da Empresa">
-                                                        <i class="la la-building"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="country" placeholder="País">
-                                                        <i class="la la-globe"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Senha">
-                                                        <i class="la la-lock"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="password" name="repeat-password" placeholder="Repita a Senha">
-                                                        <i class="la la-lock"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="checky-sec st2">
-                                                        <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c1">
-                                                            <label for="c1">
-                                                                <span></span>
-                                                            </label>
-                                                            <small>Sim, eu li e concordo com os Termos de Uso do Pesquisadores.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <button id="btn-cad-form-empresa"  type="submit" value="submitBt">Vamos começar!</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -258,11 +213,11 @@
     </div>
     <script>
         window.onload = () => {
-            $('#tipo-conta').on('change', (e)=> {
-                if(e.target.value == 1){
-                    $('#CL').removeClass("invisivel")
+            $('#tipo-conta').on('change', (e) => {
+                if (e.target.value == 1) {
+                    $('.invisivel').removeClass("invisivel").addClass('marcacao')
                 } else {
-                    !$('#CL').hasClass("invisivel") ? $('#CL').addClass("invisivel") : false
+                    !$('.marcacao').hasClass("invisivel") ? $('.marcacao').addClass("invisivel") : false
                 }
             })
         }
