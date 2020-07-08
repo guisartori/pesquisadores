@@ -216,7 +216,7 @@ class PerfilController extends Controller
             foreach ($seguidores as $seguidor) {
                 NotificacaoController::novoPostDeAmigoSeguido($usuario['nome'], $_POST['titulo'], $seguidor['id']);
             }
-            header("Location: principal");
+            $this->redirect('principal/');
         }
 
         $this->render('error/usuario');
