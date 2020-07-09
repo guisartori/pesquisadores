@@ -88,7 +88,6 @@ class PerfilController extends Controller
 
     public function uploadCapaPerfil()
     {
-        // echo "opa";
         $idUsuario = $_POST['usuario'];
         $nomeImagemUpload = time() . '_' . $_FILES['save-foto-capa']['name'];
         $target = 'public/uploads/capa/' . $nomeImagemUpload;

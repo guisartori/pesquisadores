@@ -14,7 +14,8 @@ class LoginController extends Controller
         $this->app = $app;
     }
 
-    public function index() {
+    public function index()
+    {
 
         $this->existeLayout(false);
 
@@ -30,7 +31,6 @@ class LoginController extends Controller
         self::setViewParam('nameController', $this->app->getNameController());
 
         $this->render('login/index');
-
     }
 
     public function entrar()
@@ -61,7 +61,6 @@ class LoginController extends Controller
         Auth::deslogar();
 
         $this->redirect('login/');
-
     }
     public function cadastrar()
     {
@@ -71,21 +70,18 @@ class LoginController extends Controller
         self::setViewParam('nameController', $this->app->getNameController());
 
         $this->render('login/cadastrar');
-
     }
 
-    public function salvar() {
+    public function salvar()
+    {
         $this->existeLayout(false);
 
-        if($oUser = Usuario::salvar($_POST)){
+        if ($oUser = Usuario::salvar($_POST)) {
 
             Auth::gravaSessao($oUser);
-
-            $this->redirect('admin/');
         }
-
-        $this->redirect('principal/index');
+        $this->redirect('topico');
+        // $this->redirect('principal/index');
 
     }
-
 }
