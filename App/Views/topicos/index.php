@@ -55,7 +55,7 @@
                 });
                 countSelectedTopicos++
             }
-            if (countSelectedTopicos >= 3) {
+            if (countSelectedTopicos >= 2) {
                 $('#btContinue').attr("disabled", false);
             } else {
                 $('#btContinue').attr("disabled", true);
