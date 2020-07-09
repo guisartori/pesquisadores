@@ -67,7 +67,7 @@ class UsuarioController extends Controller
         $response = Usuario::atualizar($_POST);
 
         if ($response) {
-            header("Location: http://localhost/perfil/editar");
+            $this->redirect("perfil/editar");
         } else {
             echo $response;
         }
@@ -78,7 +78,7 @@ class UsuarioController extends Controller
         $response = Usuario::atualizarVisaoGeral($_POST);
 
         if ($response) {
-            header("Location: http://localhost/perfil/editar");
+            $this->redirect("perfil/editar");
         } else {
             echo $response;
         }

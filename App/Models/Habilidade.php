@@ -8,27 +8,27 @@ use Exception;
 class Habilidade
 {
 
-    public static function novo($data)  {
+    public static function novo($data)
+    {
         try {
 
             $db = new DB();
 
-            $db->insert('habilidades',
+            $db->insert(
+                'habilidades',
                 "id_usuario,
-                nome", 
-                "'".$data['id_usuario']."',
-                '".$data['nome']."'"
+                nome",
+                "'" . $data['id_usuario'] . "',
+                '" . $data['nome'] . "'"
             );
-            // TODO: ROTA DINAMICA
-            // header("Location: https://app-pesquisadores.herokuapp.com/perfil/editar");
-            header("Location: http://localhost/perfil/editar");
-            
-        }catch (\Exception $e){
+            return true;
+        } catch (\Exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public static function todos($idUsuario) {
+    public static function todos($idUsuario)
+    {
         $db = new DB();
 
         try {
@@ -36,26 +36,24 @@ class Habilidade
             $query = $db->query(
                 "SELECT h.id, h.nome
                     FROM habilidades h
-                    WHERE h.id_usuario = '". $idUsuario ."'
+                    WHERE h.id_usuario = '" . $idUsuario . "'
                     ORDER BY id DESC"
             );
             return $query->fetchAll();
-        
-        }catch (Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
-
     }
 
-    public static function deletar($idHabilidade){
+    public static function deletar($idHabilidade)
+    {
         $db = new DB();
 
-        try{
-            $db->delete('habilidades', "id = '".$idHabilidade."'");
+        try {
+            $db->delete('habilidades', "id = '" . $idHabilidade . "'");
             return true;
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
-
 }
