@@ -81,7 +81,5 @@ class LoginController extends Controller
             Auth::gravaSessao($oUser);
         }
         $this->redirect('topico');
-        // $this->redirect('principal/index');
-
     }
 }

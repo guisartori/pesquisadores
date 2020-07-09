@@ -62,6 +62,8 @@
             }
         }
     </script>
+
+    <input type="hidden" id="idUsuario" value="<?php echo \App\Lib\Auth::usuario()->id; ?>">
     <main>
         <div class="main-section">
             <div class="container">
@@ -75,7 +77,7 @@
                                     <li class="<?php echo App\Lib\Util::verificaInteresse(App\Lib\Auth::usuario()->id, $topico['id']) ? 'selected' : ''; ?>" onclick="javascript: toggleTopicoInteresse(this, <?php echo $topico['id']; ?>)"><?php echo $topico['nome']; ?></li>
                                 <?php } ?>
                             </ul>
-                            <button class="btn btn-editar btn-sm" disabled onclick="javascript: window.location.href= '/principal'">Continue</button>
+                            <button class="btn btn-editar btn-sm" id="btContinue" disabled onclick="javascript: window.location.href= '/principal'">Continue</button>
                         </div>
                     </div>
                 </div>
