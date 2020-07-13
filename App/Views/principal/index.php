@@ -103,20 +103,19 @@
                                         }
                                     }
                                     ?>
+                                </div>
 
-
-                                    <div class="top-profiles">
-                                        <div class="pf-hd">
-                                            <h3>Você deveria conhecer:</h3>
-                                            <i class="la la-ellipsis-v"></i>
-                                        </div>
-                                        <div class="profiles-slider" id="content-voce-deveria">
-                                            <div class="process-comm">
-                                                <div class="spinner">
-                                                    <div class="bounce1"></div>
-                                                    <div class="bounce2"></div>
-                                                    <div class="bounce3"></div>
-                                                </div>
+                                <div class="top-profiles">
+                                    <div class="pf-hd">
+                                        <h3>Você deveria conhecer:</h3>
+                                        <i class="la la-ellipsis-v"></i>
+                                    </div>
+                                    <div class="profiles-slider" id="content-voce-deveria">
+                                        <div class="process-comm">
+                                            <div class="spinner">
+                                                <div class="bounce1"></div>
+                                                <div class="bounce2"></div>
+                                                <div class="bounce3"></div>
                                             </div>
                                         </div>
                                     </div>
