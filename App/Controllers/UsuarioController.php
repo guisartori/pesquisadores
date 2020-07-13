@@ -30,8 +30,8 @@ class UsuarioController extends Controller
 
         $posts = Post::todos($idPerfil);
         self::setViewParam('posts', $posts);
-        echo var_dump($posts);
-        echo var_dump($idPerfil);
+        // echo var_dump($posts);
+        // echo var_dump($idPerfil);
 
 
 
@@ -53,7 +53,7 @@ class UsuarioController extends Controller
 
         // echo var_dump();
 
-        // $this->render('principal/amigo');
+        $this->render('principal/amigo');
     }
 
     public function cadastrar()
