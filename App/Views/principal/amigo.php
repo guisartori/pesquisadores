@@ -151,7 +151,7 @@
                                         <div class="posts-section">
 
                                             <?php
-                                            if (!count($aViewVar['posts']) || count($aViewVar['posts']) == 0) {
+                                            if (count($aViewVar['posts']) == 0) {
                                             ?>
                                                 <div class="alert alert-warning" role="alert">Nada ainda foi publicado...</div>
                                             <?php
