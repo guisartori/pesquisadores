@@ -247,7 +247,7 @@
                                                         foreach ($aViewVar['aListaHabilidades'] as $aHabilidades) {
                                                         ?>
 
-                                                            <li><a data-id-habilidade="<?php echo $aHabilidades['id']; ?>" href="#" title="<?php echo $aHabilidades['habilidade']; ?>" alt="<?php echo $aHabilidades['habilidade']; ?>"><?php echo $aHabilidades['habilidade']; ?></a></li>
+                                                            <li><a data-id-habilidade="<?php echo $aHabilidades['id']; ?>" href="#" title="<?php echo $aHabilidades['nome']; ?>" alt="<?php echo $aHabilidades['nome']; ?>"><?php echo $aHabilidades['nome']; ?></a></li>
 
                                                         <?php
                                                         }
