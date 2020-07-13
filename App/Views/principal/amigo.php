@@ -158,7 +158,7 @@
                                             } else {
 
                                                 foreach ($aViewVar['posts'] as $post) {
-                                                    include __DIR__ . '\..\components\post.php';
+                                                    require __DIR__ . '\..\components\post.php';
                                                 }
                                             }
                                             // echo var_dump($aViewVar['posts']);
