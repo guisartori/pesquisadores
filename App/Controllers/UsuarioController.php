@@ -28,8 +28,8 @@ class UsuarioController extends Controller
         $idUsuario =  \App\Lib\Auth::usuario()->id;
         $topicos = Topico::getTopicosInteressado($idPerfil);
 
-        $posts = Post::todos($idPerfil);
-        self::setViewParam('posts', $posts);
+        // $posts = Post::todos($idPerfil);
+        // self::setViewParam('posts', $posts);
         // echo var_dump($posts);
         // echo var_dump($idPerfil);
 
