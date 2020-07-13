@@ -47,7 +47,7 @@ class UsuarioController extends Controller
         self::setViewCss('/public/css/pages/principal/principal.css');
 
         self::setViewJs('/public/js/principal/principal.js');
-        self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
+        // self::setViewJs('/public/js/funcoes/listagens/sugestoes.js');
         self::setViewJs('/public/js/funcoes/curtidasEcomentarios.js');
         self::setViewJs('/public/js/perfil/perfil-amigo.js');
 
