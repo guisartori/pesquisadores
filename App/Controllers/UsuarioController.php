@@ -27,6 +27,12 @@ class UsuarioController extends Controller
         $idPerfil = $this->app->getParams()[0];
         $idUsuario =  \App\Lib\Auth::usuario()->id;
         $topicos = Topico::getTopicosInteressado($idPerfil);
+
+        $posts = Post::todos($idPerfil);
+        self::setViewParam('posts', $posts);
+
+
+
         self::setViewParam('aAmigo', Usuario::mostrar($idPerfil));
         self::setViewParam('aListaExperiencia', Experiencia::todos($idPerfil));
         self::setViewParam('aListaEducacao', Formacao::todos($idPerfil));
